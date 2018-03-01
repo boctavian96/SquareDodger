@@ -85,12 +85,12 @@ public class GameScreen extends ScreenAdapter {
     @Override
     public void show(){
 
-        Gdx.input.setCatchBackKey(true);
+        Gdx.input.setCatchBackKey(true); // Back from phone
 
-        camera = new OrthographicCamera(Config.WORLD_WIDTH, Config.WORLD_HEIGHT);
-        camera.position.set(Config.WORLD_WIDTH / 2, Config.WORLD_HEIGHT / 2, 0);
+        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        camera.position.set(Gdx.graphics.getWidth() / 2,  Gdx.graphics.getHeight() / 2, 0);
 
-        viewport = new FitViewport(Config.WORLD_WIDTH, Config.WORLD_HEIGHT, camera);
+        viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
         layout = new GlyphLayout();
         bitmapFont = new BitmapFont();
 
