@@ -23,8 +23,9 @@ import com.octavian.game.config.Config;
 import com.octavian.game.config.GameState;
 import com.octavian.game.entity.Player;
 import com.octavian.game.entity.Obstacle;
+import com.octavian.game.util.GameInput;
+import com.octavian.game.util.Utils;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -32,6 +33,8 @@ import java.util.List;
  */
 
 public class GameScreen extends ScreenAdapter {
+
+    private GameInput gameInput;
 
     private Score playerScore;
     private Coins playerCoins;
@@ -43,7 +46,7 @@ public class GameScreen extends ScreenAdapter {
 
     private Player player;
     private static int obstacle_nr = 8;
-    private static int obstacole_create = 0;
+    private static int obstacle_create = 0;
     private Array<Obstacle> obstacles;
 
 
@@ -67,8 +70,6 @@ public class GameScreen extends ScreenAdapter {
     private Texture skinsPressTexture;
     private Texture exitTexture;
     private Texture exitPressTexture;
-    private Texture replayTexture;
-    private Texture replayPressTexture;
     private Texture backTexture;
     private Texture backPressTexture;
     private Texture gameover;
@@ -77,7 +78,6 @@ public class GameScreen extends ScreenAdapter {
     private ImageButton about;
     private ImageButton skins;
     private ImageButton exit;
-    private ImageButton replay;
     private ImageButton back;
 
 
@@ -94,16 +94,17 @@ public class GameScreen extends ScreenAdapter {
         layout = new GlyphLayout();
         bitmapFont = new BitmapFont();
 
-        playerTextures = Utils.loadTextures(Config.SKINS_ARRAY);
-        textures = Utils.loadTextures(Config.SQUARES);
+        playerTextures = com.octavian.game.util.Utils.loadTextures(Config.SKINS_ARRAY);
+        textures = com.octavian.game.util.Utils.loadTextures(Config.SQUARES);
         gameover = new Texture(Gdx.files.internal(Config.GAMEOVER));
 
         music = Gdx.audio.newMusic(Gdx.files.internal(Config.MUSIC1));
+        gameInput = new GameInput();
 
 
         playerScore = new Score();
         playerCoins = new Coins();
-        player = new Player(playerTextures.get(Utils.randomNumber(playerTextures.size())), Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+        player = new Player(playerTextures.get(com.octavian.game.util.Utils.randomNumber(playerTextures.size())), Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
         obstacles = new Array<Obstacle>();
         batch = new SpriteBatch();
 
@@ -113,12 +114,12 @@ public class GameScreen extends ScreenAdapter {
     @Override
     public void render(float delta){
         setInputProcessor(state);
-        Utils.clearScreen();
+        com.octavian.game.util.Utils.clearScreen();
         music.play();
 
         switch (state){
             case PLAYING:
-                    queryInput();
+                    gameInput.queryInput(player);
                     update(delta);
                     draw();
                 break;
@@ -129,20 +130,16 @@ public class GameScreen extends ScreenAdapter {
                     stageSkins.draw();
                 break;
 
-            case PAUSED:
-
-                break;
-
             case ABOUT:
                     draw();
-                    state = Utils.checkBack(state); // Goes Back to menu
+                    state = com.octavian.game.util.Utils.checkBack(state); // Goes Back to menu
                     stageAbout.act(delta);
                     stageAbout.draw();
                 break;
 
             case SKINS:
                     draw();
-                    state = Utils.checkBack(state);
+                    state = com.octavian.game.util.Utils.checkBack(state);
                     stageSkins.act(delta);
                     stageSkins.draw();
                 break;
@@ -151,7 +148,6 @@ public class GameScreen extends ScreenAdapter {
                     update(delta);
                     draw();
                     stage.act(delta);
-
                     stage.draw();
                 break;
         }
@@ -162,7 +158,11 @@ public class GameScreen extends ScreenAdapter {
         updateObstacles(delta);
 
         if(checkCollision() && state.equals(GameState.PLAYING)){
-            //restart();
+            playerCoins.addCoins();
+            if(playerScore.isScoreBetter(playerScore.getScore())) {
+                com.octavian.game.util.Utils.writeGameFile(playerScore.getScore(), 'h');
+            }
+            com.octavian.game.util.Utils.writeGameFile(playerCoins.getCoins(), 'c');
             state = GameState.GAMEOVER;
 
         }
@@ -170,9 +170,9 @@ public class GameScreen extends ScreenAdapter {
 
     private void createNewObstacle(){
         if(obstacles.size < Config.MAXIMUM_OBSTACLES) {
-            Obstacle newObstacle = new Obstacle(textures.get(Utils.randomNumber(Config.NUMBER_OF_TEXTURES)));
+            Obstacle newObstacle = new Obstacle(textures.get(com.octavian.game.util.Utils.randomNumber(Config.NUMBER_OF_TEXTURES)));
             obstacles.add(newObstacle);
-            obstacole_create++;
+            obstacle_create++;
         }
     }
 
@@ -189,9 +189,9 @@ public class GameScreen extends ScreenAdapter {
         if(obstacles.size < obstacle_nr){
             createNewObstacle();
         }
-        if(obstacole_create == 10){
+        if(obstacle_create == 10){
             obstacle_nr++;
-            obstacole_create = 0;
+            obstacle_create = 0;
         }
     }
 
@@ -211,7 +211,6 @@ public class GameScreen extends ScreenAdapter {
                 obstacles.removeValue(i, true);
                 if(state.equals(GameState.PLAYING)) {
                     playerScore.addScore();
-                    playerCoins.addCoins();
                 }
             }
         }
@@ -223,85 +222,10 @@ public class GameScreen extends ScreenAdapter {
        }
     }
 
-    private void drawScore(){
-        if(state == GameState.PLAYING){
-            String scoreAsString = Long.toString(playerScore.getScore());
-            GlyphLayout gl = new GlyphLayout();
-            BitmapFont scoreBounds = bitmapFont;
-            scoreBounds.getData().setScale(3, 3);
-            gl.setText(scoreBounds, scoreAsString);
-            scoreBounds.draw(batch, scoreAsString, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight() - 100);
-        }
-    }
-
-    private void drawCoins(){
-        if(state.equals(GameState.SKINS)  || state.equals(GameState.MENU)){
-
-            String coinsAsString = null;
-
-            try {
-                coinsAsString = "Coins: " + Utils.getGameFile('c');
-            }catch (IOException e){
-                e.printStackTrace();
-            }
-            GlyphLayout gl = new GlyphLayout();
-            BitmapFont coinsBounds = bitmapFont;
-            coinsBounds.getData().setScale(3, 3);
-            gl.setText(coinsBounds, coinsAsString);
-            coinsBounds.draw(batch, coinsAsString, Gdx.graphics.getWidth()/2 - 100, Gdx.graphics.getHeight() - 150);
-        }
-    }
-
-    private void drawDebugPlayerCoords(){
-        if(state == GameState.PLAYING){
-            String ics = Float.toString(player.getX());
-            String igrec = Float.toString(player.getY());
-            String result = ics + ", " + igrec;
-
-            GlyphLayout gl = new GlyphLayout();
-            BitmapFont coords = bitmapFont;
-            coords.getData().setScale(3, 3);
-            gl.setText(coords, ics + igrec);
-
-            coords.draw(batch, result, 100, 100 );
-
-        }
-    }
-
-    private void drawDebugWH(){
-
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("W: ");
-        sb.append(Gdx.graphics.getWidth());
-        sb.append(", H: ");
-        sb.append(Gdx.graphics.getHeight());
-
-        BitmapFont coords = bitmapFont;
-
-        coords.draw(batch, sb.toString(), 400, 400 );
-    }
-
-    private void drawHighscore(){
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("Highscore: ");
-        try {
-            sb.append(Utils.getGameFile('h'));
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-
-        BitmapFont coords = bitmapFont;
-        coords.getData().setScale(3, 3);
-
-        coords.draw(batch, sb.toString(), Gdx.graphics.getWidth() / 2 - 150, Gdx.graphics.getHeight() - 200 );
-    }
-
     private void drawAbout(){
         StringBuilder sb = new StringBuilder();
 
-        sb.append("A mini game made using libgdx. \nI want to thank to everybody who is playing.\n");
+        sb.append("A mini game made using Libgdx. \nI want to thank to everybody who is playing.\n");
         sb.append("And to everybody who supported me.\nHave fun and a nice day :)");
 
         BitmapFont message = bitmapFont;
@@ -311,24 +235,9 @@ public class GameScreen extends ScreenAdapter {
 
     }
 
-    private void drawGameOver(){
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("You've made : " );
-        sb.append(playerScore.getScore());
-
-        BitmapFont message = bitmapFont;
-        message.getData().setScale(3, 3);
-
-        message.draw(batch, sb.toString(), Gdx.graphics.getWidth() / 2 - 140, Gdx.graphics.getHeight() / 2);
-
-    }
-
     private void drawSkinMenu(){
         for(int i = 0; i < playerTextures.size(); i++){
-
             batch.draw(playerTextures.get(i), 40, Gdx.graphics.getHeight() - i * 200);
-
         }
     }
 
@@ -340,19 +249,15 @@ public class GameScreen extends ScreenAdapter {
                 batch.begin();
                     batch.draw(player.getTexture(), player.getX(), player.getY());
                     drawObstacles();
-                    drawScore();
-                    drawCoins();
-                    //drawDebugPlayerCoords();
-                    //drawDebugWH();
+                    com.octavian.game.util.Utils.drawText(String.valueOf(playerScore.getScore()), bitmapFont, batch, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight() - 100);
                 batch.end();
-
                 break;
 
             case MENU:
                 batch.begin();
                     drawObstacles();
-                    drawHighscore();
-                    drawCoins();
+                    Utils.drawText("HighScore : " + Utils.getGameFile('h'), bitmapFont, batch, Gdx.graphics.getWidth()/2 - 150, Gdx.graphics.getHeight() - 200);
+                    Utils.drawText("Coins : " + Utils.getGameFile('c'), bitmapFont, batch, Gdx.graphics.getWidth()/2 - 100, Gdx.graphics.getHeight() - 150);
                 batch.end();
                 break;
 
@@ -366,26 +271,15 @@ public class GameScreen extends ScreenAdapter {
             case SKINS:
                 batch.begin();
                     drawSkinMenu();
-                    drawCoins();
+                    Utils.drawText("Coins : " + Utils.getGameFile('c'), bitmapFont, batch, Gdx.graphics.getWidth()/2 - 100, Gdx.graphics.getHeight() - 150);
                 batch.end();
-
                 break;
 
             case GAMEOVER:
                 batch.begin();
-                    drawGameOver();
+                    Utils.drawText("You've made : " + playerScore.getScore() + "\nCoins : 5", bitmapFont, batch, Gdx.graphics.getWidth()/2 - 100, Gdx.graphics.getHeight()/2);
                 batch.end();
-        }
-
-    }
-
-    private void queryInput(){
-        boolean isTouched = Gdx.input.isTouched();
-
-        if(isTouched) {
-            float x = (float) Gdx.input.getX();
-            float y = Config.WORLD_HEIGHT - (float) Gdx.input.getY() - 100;
-            player.update(x, y);
+                break;
         }
 
     }
@@ -393,19 +287,10 @@ public class GameScreen extends ScreenAdapter {
     private void restart(){
 
         if(!state.equals(GameState.MENU)) {
-            try {
-                if (playerScore.getScore() > Utils.getGameFile('h')) {
-                    Utils.writeGameFile(playerScore.getScore(), 'h');
-                    Utils.writeGameFile(playerCoins.getCoins(), 'c');
-                }
-            }catch (IOException e){
-                e.printStackTrace();
-            }
-
             playerScore.clear();
-            obstacole_create = 0;
+            obstacle_create = 0;
             obstacle_nr = 8;
-            player = new Player(playerTextures.get(Utils.randomNumber(playerTextures.size())), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+            player = new Player(playerTextures.get(com.octavian.game.util.Utils.randomNumber(playerTextures.size())), Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
             obstacles.clear();
         }
     }
@@ -483,6 +368,7 @@ public class GameScreen extends ScreenAdapter {
             public void tap(InputEvent event, float x, float y, int count, int button){
                 if(state.equals(GameState.SKINS) || state.equals(GameState.GAMEOVER)){
                     state = GameState.MENU;
+                    restart();
                 }
             }
         });

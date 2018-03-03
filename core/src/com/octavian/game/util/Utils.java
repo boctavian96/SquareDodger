@@ -1,4 +1,4 @@
-package com.octavian.game;
+package com.octavian.game.util;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -6,8 +6,12 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.octavian.game.config.Config;
 import com.octavian.game.config.GameState;
+import com.octavian.game.entity.Player;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,7 +49,7 @@ public class Utils {
      * @param value
      * @param mode - c = COINS; h = HIGHSCORE
      */
-    public static void writeGameFile(long value, char mode) throws IOException{
+    public static void writeGameFile(long value, char mode){
 
         FileHandle file = null;
 
@@ -57,15 +61,14 @@ public class Utils {
                     file = Gdx.files.local(Config.HS_FILE);
                     break;
                 default:
-                    throw new IOException();
             }
 
         if(!file.exists()) {
-            try {
-                file.file().createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+                try {
+                    file.file().createNewFile();
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
         }
 
         file.writeString(String.valueOf(value), false);
@@ -73,11 +76,11 @@ public class Utils {
 
     /**
      *
-     * @param mode
+     * @param mode h - highscore / c - coins
      * @return
      * @throws IOException
      */
-    public static long getGameFile(char mode) throws IOException{
+    public static long getGameFile(char mode) {
 
         FileHandle file = null;
 
@@ -89,7 +92,6 @@ public class Utils {
                 file = Gdx.files.local(Config.CN_FILE);
                 break;
             default:
-                throw new IOException();
         }
 
         if(!file.exists()){
@@ -123,14 +125,58 @@ public class Utils {
      * @param args String with paths to textures
      * @return
      */
-    public static List<Texture> loadTextures(String[] args){
+    public static List<Texture> loadTextures(String[] args) {
         ArrayList<Texture> list = new ArrayList<Texture>();
 
-        for(String i : args){
+        for (String i : args) {
             list.add(new Texture(i));
         }
 
         return list;
+    }
+
+    /**
+     * Draw a text on screen
+     * @param text Text to draw
+     * @param bitmapFont
+     * @param batch
+     * @param x x coordinate
+     * @param y y coordinate
+     */
+    public static void drawText(String text, BitmapFont bitmapFont, SpriteBatch batch, float x, float y){
+            GlyphLayout gl = new GlyphLayout();
+            BitmapFont scoreBounds = bitmapFont;
+            scoreBounds.getData().setScale(3, 3);
+            gl.setText(scoreBounds, text);
+            scoreBounds.draw(batch, text, x, y);
+    }
+
+
+    public static void drawDebugWH(BitmapFont bitmapFont, SpriteBatch batch){
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("W: ");
+        sb.append(Gdx.graphics.getWidth());
+        sb.append(", H: ");
+        sb.append(Gdx.graphics.getHeight());
+
+        BitmapFont coords = bitmapFont;
+
+        coords.draw(batch, sb.toString(), 400, 400 );
+    }
+
+    public static void drawDebugPlayerCoords(Player player, BitmapFont bitmapFont, SpriteBatch batch){
+            String ics = Float.toString(player.getX());
+            String igrec = Float.toString(player.getY());
+            String result = ics + ", " + igrec;
+
+            GlyphLayout gl = new GlyphLayout();
+            BitmapFont coords = bitmapFont;
+            coords.getData().setScale(3, 3);
+            gl.setText(coords, ics + igrec);
+
+            coords.draw(batch, result, 100, 100 );
     }
 
 }

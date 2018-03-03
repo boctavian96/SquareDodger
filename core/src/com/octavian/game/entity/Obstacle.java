@@ -5,8 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
-import com.octavian.game.Utils;
-import com.octavian.game.config.Config;
+import com.octavian.game.util.Utils;
 
 /**
  * Created by octavian on 2/21/18.

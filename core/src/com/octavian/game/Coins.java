@@ -21,7 +21,7 @@ public class Coins {
     }
 
     public void addCoins(){
-        coins += 1L;
+        coins += 5L;
     }
 
     public void payCoins(long value){
