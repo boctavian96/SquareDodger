@@ -13,6 +13,7 @@ import com.octavian.game.config.Config;
 import com.octavian.game.config.GameState;
 import com.octavian.game.entity.Player;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -106,6 +107,48 @@ public class Utils {
         }
     }
 
+    public static void setSkinsStatus(ArrayList<String> status){
+        FileHandle file;
+
+        file = Gdx.files.local(Config.SKINS_LIST);
+
+        if(!file.exists()){
+            try {
+                file.file().createNewFile();
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+
+            for(int i = 0; i < status.size(); i++){
+                file.writeString(String.valueOf(i * 10), false);
+            }
+        }else{
+            for(String i : status)
+                file.writeString(i, false);
+        }
+    }
+
+    public static List<String> getSkinsStatus(){
+        FileHandle file;
+        String[] result;
+        ArrayList<String> list = new ArrayList<String>();
+
+        file = Gdx.files.local(Config.SKINS_LIST);
+
+        if(!file.exists()){
+            file = Gdx.files.internal("hard_skins.txt");
+            result = file.readString().split(" ");
+        }else{
+            result = file.readString().split(" ");
+        }
+
+        for(String i : result){
+            list.add(i);
+        }
+
+        return list;
+    }
+
     /**
      *
      * @param state Actual state
@@ -152,7 +195,7 @@ public class Utils {
     }
 
 
-    public static void drawDebugWH(BitmapFont bitmapFont, SpriteBatch batch){
+    public static void drawDebugWidthHeight(BitmapFont bitmapFont, SpriteBatch batch){
 
         StringBuilder sb = new StringBuilder();
 

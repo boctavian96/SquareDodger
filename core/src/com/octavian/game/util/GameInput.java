@@ -1,8 +1,6 @@
 package com.octavian.game.util;
 
 import com.badlogic.gdx.Gdx;
-import com.octavian.game.config.Config;
-import com.octavian.game.config.GameState;
 import com.octavian.game.entity.Player;
 
 /**
@@ -16,7 +14,7 @@ public class GameInput {
 
         if(isTouched) {
             float x = (float) Gdx.input.getX();
-            float y = Config.WORLD_HEIGHT - (float) Gdx.input.getY() - 100;
+            float y = Gdx.graphics.getHeight() + 50 - (float) Gdx.input.getY();
             player.update(x, y);
         }
 

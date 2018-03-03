@@ -1,16 +1,10 @@
 package com.octavian.game.config;
 
-import com.sun.org.apache.xml.internal.utils.XMLStringFactory;
-
 /**
  * Created by octavian on 2/21/18.
  */
 
 public interface Config {
-
-    //World
-    float WORLD_WIDTH = 1200f;
-    float WORLD_HEIGHT = 2200f;
 
     //Score
     float POINTS_PER_RECT = 5F;
@@ -89,8 +83,6 @@ public interface Config {
     String SKINS_PRESS = "ui/skinsPress.png";
     String EXIT = "ui/exit.png";
     String EXIT_PRESS = "ui/exitPress.png";
-    String RESTART = "ui/restart.png";
-    String RESTART_PRESS = "ui/restartPress.png";
     String BACK = "ui/back.png";
     String BACK_PRESS = "ui/backPress.png";
 
