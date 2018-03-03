@@ -13,7 +13,6 @@ import com.octavian.game.config.Config;
 import com.octavian.game.config.GameState;
 import com.octavian.game.entity.Player;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -107,7 +106,7 @@ public class Utils {
         }
     }
 
-    public static void setSkinsStatus(ArrayList<String> status){
+    public static void setSkinsStatus(List<String> status){
         FileHandle file;
 
         file = Gdx.files.local(Config.SKINS_LIST);

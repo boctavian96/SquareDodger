@@ -32,7 +32,9 @@ public class Player {
             setY(y);
         }else{
             setY(Gdx.graphics.getHeight() - 100);
-
+        }
+        if (y < 50){
+            setY(50);
         }
 
         setX(x);

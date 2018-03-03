@@ -23,6 +23,7 @@ import com.octavian.game.config.Config;
 import com.octavian.game.config.GameState;
 import com.octavian.game.entity.Player;
 import com.octavian.game.entity.Obstacle;
+import com.octavian.game.entity.Skin;
 import com.octavian.game.util.GameInput;
 import com.octavian.game.util.Utils;
 
@@ -45,6 +46,7 @@ public class GameScreen extends ScreenAdapter {
     private List<Texture> playerTextures;
 
     private Player player;
+    private Skin skinManager;
     private static int obstacle_nr = 8;
     private static int obstacle_create = 0;
     private Array<Obstacle> obstacles;
@@ -94,6 +96,7 @@ public class GameScreen extends ScreenAdapter {
         layout = new GlyphLayout();
         bitmapFont = new BitmapFont();
 
+        skinManager = new Skin();
         playerTextures = com.octavian.game.util.Utils.loadTextures(Config.SKINS_ARRAY);
         textures = com.octavian.game.util.Utils.loadTextures(Config.SQUARES);
         gameover = new Texture(Gdx.files.internal(Config.GAMEOVER));
@@ -132,14 +135,14 @@ public class GameScreen extends ScreenAdapter {
 
             case ABOUT:
                     draw();
-                    state = com.octavian.game.util.Utils.checkBack(state); // Goes Back to menu
+                    state = Utils.checkBack(state); // Goes Back to menu
                     stageAbout.act(delta);
                     stageAbout.draw();
                 break;
 
             case SKINS:
                     draw();
-                    state = com.octavian.game.util.Utils.checkBack(state);
+                    state = Utils.checkBack(state);
                     stageSkins.act(delta);
                     stageSkins.draw();
                 break;
