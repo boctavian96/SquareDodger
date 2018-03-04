@@ -74,6 +74,9 @@ public interface Config {
             "player/skin9.png"
     };
 
+    String LOCK = "various/lock.png";
+    String LOCK_PRESS = "various/lockPress.png";
+
     //UI
     String PLAY = "ui/play.png";
     String PLAY_PRESS = "ui/playPress.png";

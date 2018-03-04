@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sat Mar 03 22:27:32 EET 2018
+#Sun Mar 04 15:44:49 EET 2018
 76.base=/home/octavian/AndroidStudioProjects/SpaceDodger/squaredodger/android/build/intermediates/assets/debug
 5.base=/home/octavian/AndroidStudioProjects/SpaceDodger/squaredodger/android/build/intermediates/transforms/mergeJniLibs/debug/folders/2000/1f/main
 86.base=/home/octavian/AndroidStudioProjects/SpaceDodger/squaredodger/android/build/intermediates/assets/debug

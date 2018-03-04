@@ -2,5 +2,9 @@
     {
         "merged": "/home/octavian/AndroidStudioProjects/SpaceDodger/android/build/intermediates/res/merged/release/drawable-hdpi/ic_launcher.png",
         "source": "/home/octavian/AndroidStudioProjects/SpaceDodger/android/res/drawable-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/octavian/AndroidStudioProjects/SpaceDodger/squaredodger/android/build/intermediates/res/merged/release/drawable-hdpi/ic_launcher.png",
+        "source": "/home/octavian/AndroidStudioProjects/SpaceDodger/squaredodger/android/res/drawable-hdpi/ic_launcher.png"
     }
 ]
