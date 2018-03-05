@@ -66,6 +66,7 @@ public class GameScreen extends ScreenAdapter {
     private Stage stage;
     private Stage stageAbout;
     private Stage stageSkins;
+    private Stage stageGameOver;
     private Texture playTexture;
     private Texture playPressTexture;
     private Texture aboutTexture;
@@ -93,6 +94,7 @@ public class GameScreen extends ScreenAdapter {
     public void show(){
 
         Gdx.input.setCatchBackKey(true); // Back from phone
+        state = GameState.MENU;
 
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.position.set(Gdx.graphics.getWidth() / 2,  Gdx.graphics.getHeight() / 2, 0);
@@ -139,8 +141,8 @@ public class GameScreen extends ScreenAdapter {
 
             case GAMEOVER:
                     draw();
-                    stageSkins.act(delta);
-                    stageSkins.draw();
+                    stageGameOver.act(delta);
+                    stageGameOver.draw();
                 break;
 
             case ABOUT:
@@ -173,9 +175,9 @@ public class GameScreen extends ScreenAdapter {
         if(checkCollision() && state.equals(GameState.PLAYING)){
             playerCoins.addCoins();
             if(playerScore.isScoreBetter(playerScore.getScore())) {
-                com.octavian.game.util.Utils.writeGameFile(playerScore.getScore(), 'h');
+                Utils.writeGameFile(playerScore.getScore(), 'h');
             }
-            com.octavian.game.util.Utils.writeGameFile(playerCoins.getCoins(), 'c');
+            Utils.writeGameFile(playerCoins.getCoins(), 'c');
             state = GameState.GAMEOVER;
 
         }
@@ -183,7 +185,7 @@ public class GameScreen extends ScreenAdapter {
 
     private void createNewObstacle(){
         if(obstacles.size < Config.MAXIMUM_OBSTACLES) {
-            Obstacle newObstacle = new Obstacle(textures.get(com.octavian.game.util.Utils.randomNumber(Config.NUMBER_OF_TEXTURES)));
+            Obstacle newObstacle = new Obstacle(textures.get(Utils.randomNumber(Config.NUMBER_OF_TEXTURES)));
             obstacles.add(newObstacle);
             obstacle_create++;
         }
@@ -353,6 +355,7 @@ public class GameScreen extends ScreenAdapter {
                 batch.begin();
                     drawSkinMenu();
                     Utils.drawText("Coins : " + Utils.getGameFile('c'), bitmapFont, batch, Gdx.graphics.getWidth()/2 - 100, Gdx.graphics.getHeight() - 150);
+                    Utils.drawText("For next skin you need \n \t \t \t" + Utils.lowestSkinCost() + " coins", bitmapFont, batch, Gdx.graphics.getWidth()/2 - 150, Gdx.graphics.getHeight()/3);
                 batch.end();
                 break;
 
@@ -381,15 +384,11 @@ public class GameScreen extends ScreenAdapter {
      */
     private void instantiateUI(){
 
-        ImageButton skn1;
-        ImageButton skn2;
-        ImageButton skn3;
-        ImageButton skn4;
-        ImageButton skn5;
-        ImageButton skn6;
-        ImageButton skn7;
-        ImageButton skn8;
-        ImageButton skn9;
+
+        ImageButton buy;
+        ImageButton back2;
+        ImageButton back3;
+
 
         playTexture = new Texture(Gdx.files.internal(Config.PLAY));
         playPressTexture = new Texture(Gdx.files.internal(Config.PLAY_PRESS));
@@ -458,16 +457,44 @@ public class GameScreen extends ScreenAdapter {
         back.setPosition(Gdx.graphics.getWidth() / 5, 0);
         back.addListener(new ActorGestureListener(){
             public void tap(InputEvent event, float x, float y, int count, int button){
-                if(state.equals(GameState.SKINS) || state.equals(GameState.GAMEOVER)){
                     state = GameState.MENU;
                     restart();
-                }
             }
         });
+
+        back2 = new ImageButton(new TextureRegionDrawable(new TextureRegion(backTexture)), new TextureRegionDrawable(new TextureRegion(backPressTexture)));
+        back2.setPosition(Gdx.graphics.getWidth() / 5, 0);
+        back2.addListener(new ActorGestureListener(){
+            public void tap(InputEvent event, float x, float y, int count, int button){
+                state = GameState.MENU;
+                restart();
+            }
+        });
+
+        back3 = new ImageButton(new TextureRegionDrawable(new TextureRegion(backTexture)), new TextureRegionDrawable(new TextureRegion(backPressTexture)));
+        back3.setPosition(Gdx.graphics.getWidth() / 5, 0);
+        back3.addListener(new ActorGestureListener(){
+            public void tap(InputEvent event, float x, float y, int count, int button){
+                state = GameState.MENU;
+                restart();
+            }
+        });
+
+        buy = new ImageButton(new TextureRegionDrawable(new TextureRegion(backTexture)), new TextureRegionDrawable(new TextureRegion(backPressTexture)));
+        buy.setPosition(Gdx.graphics.getWidth() / 5, Gdx.graphics.getHeight() / 5);
+        buy.addListener(new ActorGestureListener(){
+            public void tap(InputEvent event, float x, float y, int count, int button){
+                state = GameState.MENU;
+                restart();
+            }
+        });
+
+
 
         stage = new Stage(new FillViewport(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2));
         stageAbout = new Stage(new FillViewport(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2));
         stageSkins = new Stage(new FillViewport(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2));
+        stageGameOver = new Stage(new FillViewport(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2));
 
         setInputProcessor(state);
 
@@ -478,88 +505,10 @@ public class GameScreen extends ScreenAdapter {
 
         stageAbout.addActor(back);
 
-        skn1 = new ImageButton(new TextureRegionDrawable(new TextureRegion(lockTexture)), new TextureRegionDrawable(new TextureRegion(lockTexturePress)));
-        skn1.setPosition(Gdx.graphics.getWidth() / 5 - 10, 0);
-        skn1.addListener(new ActorGestureListener(){
-            public void tap(InputEvent event, float x, float y, int count, int button){
+        stageSkins.addActor(back2);
+        stageSkins.addActor(buy);
 
-            }
-        });
-
-        skn2 = new ImageButton(new TextureRegionDrawable(new TextureRegion(lockTexture)), new TextureRegionDrawable(new TextureRegion(lockTexturePress)));
-        skn2.setPosition(Gdx.graphics.getWidth() / 5 - 10, 0);
-        skn2.addListener(new ActorGestureListener(){
-            public void tap(InputEvent event, float x, float y, int count, int button){
-
-            }
-        });
-
-        skn3 = new ImageButton(new TextureRegionDrawable(new TextureRegion(lockTexture)), new TextureRegionDrawable(new TextureRegion(lockTexturePress)));
-        skn3.setPosition(Gdx.graphics.getWidth() / 5 - 10, 0);
-        skn3.addListener(new ActorGestureListener(){
-            public void tap(InputEvent event, float x, float y, int count, int button){
-
-            }
-
-        });
-        skn4 = new ImageButton(new TextureRegionDrawable(new TextureRegion(lockTexture)), new TextureRegionDrawable(new TextureRegion(lockTexturePress)));
-        skn4.setPosition(Gdx.graphics.getWidth() / 5 - 10, 0);
-        skn4.addListener(new ActorGestureListener(){
-            public void tap(InputEvent event, float x, float y, int count, int button){
-
-            }
-        });
-
-        skn5 = new ImageButton(new TextureRegionDrawable(new TextureRegion(lockTexture)), new TextureRegionDrawable(new TextureRegion(lockTexturePress)));
-        skn5.setPosition(Gdx.graphics.getWidth() / 5 - 10, 0);
-        skn5.addListener(new ActorGestureListener(){
-            public void tap(InputEvent event, float x, float y, int count, int button){
-
-            }
-        });
-
-        skn6 = new ImageButton(new TextureRegionDrawable(new TextureRegion(lockTexture)), new TextureRegionDrawable(new TextureRegion(lockTexturePress)));
-        skn6.setPosition(Gdx.graphics.getWidth() / 5 - 10, 0);
-        skn6.addListener(new ActorGestureListener(){
-            public void tap(InputEvent event, float x, float y, int count, int button){
-
-            }
-        });
-
-        skn7 = new ImageButton(new TextureRegionDrawable(new TextureRegion(lockTexture)), new TextureRegionDrawable(new TextureRegion(lockTexturePress)));
-        skn7.setPosition(Gdx.graphics.getWidth() / 5 - 10, 0);
-        skn7.addListener(new ActorGestureListener(){
-            public void tap(InputEvent event, float x, float y, int count, int button){
-
-            }
-        });
-
-        skn8 = new ImageButton(new TextureRegionDrawable(new TextureRegion(lockTexture)), new TextureRegionDrawable(new TextureRegion(lockTexturePress)));
-        skn8.setPosition(Gdx.graphics.getWidth() / 5 - 10, 0);
-        skn8.addListener(new ActorGestureListener(){
-            public void tap(InputEvent event, float x, float y, int count, int button){
-
-            }
-        });
-
-        skn9 = new ImageButton(new TextureRegionDrawable(new TextureRegion(lockTexture)), new TextureRegionDrawable(new TextureRegion(lockTexturePress)));
-        skn9.setPosition(Gdx.graphics.getWidth() / 5 - 10, 0);
-        skn9.addListener(new ActorGestureListener(){
-            public void tap(InputEvent event, float x, float y, int count, int button){
-
-            }
-        });
-
-        stageSkins.addActor(back);
-        stageSkins.addActor(skn1);
-        stageSkins.addActor(skn2);
-        stageSkins.addActor(skn3);
-        stageSkins.addActor(skn4);
-        stageSkins.addActor(skn5);
-        stageSkins.addActor(skn6);
-        stageSkins.addActor(skn7);
-        stageSkins.addActor(skn8);
-        stageSkins.addActor(skn9);
+        stageGameOver.addActor(back3);
 
 
     }
@@ -576,7 +525,7 @@ public class GameScreen extends ScreenAdapter {
                 Gdx.input.setInputProcessor(stageSkins);
                 break;
             case GAMEOVER:
-                Gdx.input.setInputProcessor(stageSkins);
+                Gdx.input.setInputProcessor(stageGameOver);
                 break;
         }
     }

@@ -221,4 +221,25 @@ public class Utils {
             coords.draw(batch, result, 100, 100 );
     }
 
+    public static int lowestSkinCost(){
+        List<String> dummy = Utils.getSkinsStatus();
+        List<Integer> lst = new ArrayList<Integer>();
+
+        for(String i : dummy){
+            lst.add(Integer.valueOf(i));
+        }
+
+        return Utils.getMinimum(lst);
+    }
+
+    public static int getMinimum(List<Integer> list){
+        int minim = Integer.MAX_VALUE;
+        for(Integer i : list){
+            if(i < minim && i != 0)
+                minim = i;
+        }
+
+        return minim;
+    }
+
 }
