@@ -16,7 +16,7 @@ public interface Config {
     int MAXIMUM_OBSTACLES = 1000;
 
     //Music
-    String MUSIC1 = "audio/PatakasWorld.wav";
+    String MUSIC1 = "audio/PatakasWorld.mp3";
 
     //Images
 
