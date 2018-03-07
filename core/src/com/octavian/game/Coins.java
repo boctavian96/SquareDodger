@@ -24,6 +24,10 @@ public class Coins {
         coins += 5L;
     }
 
+    public void setCoins(long c){
+        this.coins = c;
+    }
+
     public void payCoins(long value){
         if(value > 0) {
             if (value >= this.coins) {

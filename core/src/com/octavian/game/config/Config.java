@@ -1,16 +1,12 @@
 package com.octavian.game.config;
 
-/**
- * Created by octavian on 2/21/18.
- */
-
 public interface Config {
 
     //Score
     float POINTS_PER_RECT = 5F;
 
     //Number of textures
-    int NUMBER_OF_TEXTURES = 36;
+    int NUMBER_OF_TEXTURES = 48;
 
     //
     int MAXIMUM_OBSTACLES = 1000;
@@ -56,7 +52,19 @@ public interface Config {
             "obstacle/circle9.png",
             "obstacle/circle10.png",
             "obstacle/circle11.png",
-            "obstacle/circle12.png"
+            "obstacle/circle12.png",
+            "obstacle/star1.png",
+            "obstacle/star2.png",
+            "obstacle/star3.png",
+            "obstacle/star4.png",
+            "obstacle/star5.png",
+            "obstacle/star6.png",
+            "obstacle/star7.png",
+            "obstacle/star8.png",
+            "obstacle/star9.png",
+            "obstacle/star10.png",
+            "obstacle/star11.png",
+            "obstacle/star12.png"
     };
 
     //Player Skins
@@ -88,6 +96,8 @@ public interface Config {
     String EXIT_PRESS = "ui/exitPress.png";
     String BACK = "ui/back.png";
     String BACK_PRESS = "ui/backPress.png";
+    String BUY = "ui/pay.png";
+    String BUY_PRESS = "ui/payPress.png";
 
     //Screen
     String GAMEOVER = "screen/gameover.png";
