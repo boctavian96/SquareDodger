@@ -27,6 +27,8 @@ public class Score {
         this.score += Config.POINTS_PER_RECT;
     }
 
+    public void pay(Long cost){ this.score -= cost; }
+
     public boolean isScoreBetter(long score){
         if (Utils.getGameFile('h') < score)
             return true;

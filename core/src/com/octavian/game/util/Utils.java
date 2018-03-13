@@ -25,9 +25,10 @@ import java.util.Random;
 public class Utils {
 
     /**
-     * Cleas the screen
+     * Clears the screen
      */
     public static void clearScreen(){
+        //Black
         Gdx.gl.glClearColor(Color.BLACK.r, Color.BLACK.g, Color.BLACK.b, Color.BLACK.a);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
@@ -240,6 +241,21 @@ public class Utils {
         }
 
         return minim;
+    }
+
+    public static List<Boolean> availableSkins(){
+        List<String> skn_list = Utils.getSkinsStatus();
+        List<Boolean> bool_list = new ArrayList<Boolean>();
+
+        for(String i : skn_list){
+           if(i.equals("0")){
+                bool_list.add(true);
+            }else{
+                bool_list.add(false);
+            }
+        }
+
+        return bool_list;
     }
 
 }

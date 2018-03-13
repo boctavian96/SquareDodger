@@ -46,9 +46,9 @@ public class GameScreen extends ScreenAdapter {
     private List<Texture> textures;
     private List<Texture> playerTextures;
     private List<String> skin_values;
+    private List<Boolean> available_skins;
 
     private Player player;
-    private Skin skinManager;
     private static int obstacle_nr = 8;
     private static int obstacle_create = 0;
     private Array<Obstacle> obstacles;
@@ -112,9 +112,9 @@ public class GameScreen extends ScreenAdapter {
         layout = new GlyphLayout();
         bitmapFont = new BitmapFont();
 
-        skinManager = new Skin();
-        playerTextures = com.octavian.game.util.Utils.loadTextures(Config.SKINS_ARRAY);
-        textures = com.octavian.game.util.Utils.loadTextures(Config.SQUARES);
+        //skinManager = new Skin();
+        playerTextures = Utils.loadTextures(Config.SKINS_ARRAY);
+        textures = Utils.loadTextures(Config.SQUARES);
         gameover = new Texture(Gdx.files.internal(Config.GAMEOVER));
 
         music = Gdx.audio.newMusic(Gdx.files.internal(Config.MUSIC1));
@@ -132,6 +132,7 @@ public class GameScreen extends ScreenAdapter {
         lockTexturePress = new Texture(Gdx.files.internal(Config.LOCK_PRESS));
         all_skins = new Skin();
         skin_values = all_skins.readValues();
+        available_skins = Utils.availableSkins();
 
         instantiateUI();
     }
@@ -139,7 +140,7 @@ public class GameScreen extends ScreenAdapter {
     @Override
     public void render(float delta){
         setInputProcessor(state);
-        com.octavian.game.util.Utils.clearScreen();
+        Utils.clearScreen();
         music.play();
 
         switch (state){
@@ -166,6 +167,7 @@ public class GameScreen extends ScreenAdapter {
                     draw();
                     state = Utils.checkBack(state);
                     stageSkins.act(delta);
+                    stageSkins.draw();
                 break;
 
             case MENU:
@@ -176,6 +178,7 @@ public class GameScreen extends ScreenAdapter {
                 break;
         }
 
+        //Debug
         mem = new MemoryUsage();
         Gdx.app.log("Mem Use", mem.getInfo());
     }
@@ -237,6 +240,7 @@ public class GameScreen extends ScreenAdapter {
                 obstacles.removeValue(i, true);
                 if(state.equals(GameState.PLAYING)) {
                     playerScore.addScore();
+                    obstacle_nr--;
                 }
             }
         }
@@ -261,91 +265,9 @@ public class GameScreen extends ScreenAdapter {
 
     }
 
+    //Deprecated
     private void drawSkinMenu(){
 
-        final float LEFT = 50;
-        final float CENTER = Gdx.graphics.getWidth()/2 - 50;
-        final float RIGHT = Gdx.graphics.getWidth() - 150;
-        final float SCREEN_HEIGHT = Gdx.graphics.getHeight() - 220;
-
-        /*
-        ImageButton[] skins = new ImageButton[9];
-        ImageButton skin2;
-        ImageButton skin3;
-        ImageButton skin4;
-        ImageButton skin5;
-        ImageButton skin6;
-        ImageButton skin7;
-        ImageButton skin8;
-        ImageButton skin9;
-        */
-
-        /*
-        for(int i = 0; i < 9; i++){
-            skins[i] = new ImageButton(new TextureRegionDrawable(new TextureRegion(playerTextures.get(0))), new TextureRegionDrawable(new TextureRegion(aboutPressTexture)));
-
-        }
-
-        about = new ImageButton(new TextureRegionDrawable(new TextureRegion(aboutTexture)), new TextureRegionDrawable(new TextureRegion(aboutPressTexture)));
-        about.setPosition(Gdx.graphics.getWidth()/5 - 10, PLAY_POSITION - 100);
-        about.addListener(new ActorGestureListener(){
-            public void tap(InputEvent event, float x, float y, int count, int button){
-                super.tap(event, x, y, count, button);
-                if(state.equals(GameState.MENU)){
-                    state = GameState.ABOUT;
-                }
-            }
-        });
-
-        */
-
-        stagePlayerSkins = new Stage(new FillViewport(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2));
-
-
-        if(skin_values.get(0).equals("0"))
-            batch.draw(playerTextures.get(0), LEFT, SCREEN_HEIGHT - 200);
-        else
-            batch.draw(lockTexture, LEFT, SCREEN_HEIGHT - 200);
-
-        if(skin_values.get(1).equals("0"))
-            batch.draw(playerTextures.get(1), CENTER, SCREEN_HEIGHT - 200);
-        else
-            batch.draw(lockTexture, CENTER, SCREEN_HEIGHT - 200);
-
-        if(skin_values.get(2).equals("0"))
-            batch.draw(playerTextures.get(1), RIGHT, SCREEN_HEIGHT - 200);
-        else
-            batch.draw(lockTexture, RIGHT, SCREEN_HEIGHT - 200);
-
-        if(skin_values.get(3).equals("0"))
-            batch.draw(playerTextures.get(1), LEFT, SCREEN_HEIGHT - 400);
-        else
-            batch.draw(lockTexture, LEFT, SCREEN_HEIGHT - 400);
-
-        if(skin_values.get(4).equals("0"))
-            batch.draw(playerTextures.get(1), CENTER, SCREEN_HEIGHT - 400);
-        else
-            batch.draw(lockTexture, CENTER, SCREEN_HEIGHT - 400);
-
-        if(skin_values.get(5).equals("0"))
-            batch.draw(playerTextures.get(1), RIGHT, SCREEN_HEIGHT - 400);
-        else
-            batch.draw(lockTexture, RIGHT, SCREEN_HEIGHT - 400);
-
-        if(skin_values.get(6).equals("0"))
-            batch.draw(playerTextures.get(1), LEFT, SCREEN_HEIGHT - 600);
-        else
-            batch.draw(lockTexture, LEFT, SCREEN_HEIGHT - 600);
-
-        if(skin_values.get(7).equals("0"))
-            batch.draw(playerTextures.get(1), CENTER, SCREEN_HEIGHT - 600);
-        else
-            batch.draw(lockTexture, CENTER, SCREEN_HEIGHT - 600);
-
-        if(skin_values.get(8).equals("0"))
-            batch.draw(playerTextures.get(1), RIGHT, SCREEN_HEIGHT - 600);
-        else
-            batch.draw(lockTexture, RIGHT, SCREEN_HEIGHT - 600);
     }
 
     private void draw(){
@@ -356,7 +278,7 @@ public class GameScreen extends ScreenAdapter {
                 batch.begin();
                     batch.draw(player.getTexture(), player.getX(), player.getY());
                     drawObstacles();
-                    com.octavian.game.util.Utils.drawText(String.valueOf(playerScore.getScore()), bitmapFont, batch, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight() - 100);
+                    Utils.drawText(String.valueOf(playerScore.getScore()), bitmapFont, batch, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight() - 100);
                 batch.end();
                 break;
 
@@ -408,12 +330,17 @@ public class GameScreen extends ScreenAdapter {
      */
     private void instantiateUI(){
 
+        final float LEFT = 50 / 2;
+        final float CENTER = (Gdx.graphics.getWidth()/2 - 50) / 2;
+        final float RIGHT = (Gdx.graphics.getWidth() - 150) / 2;
+        final float SCREEN_HEIGHT = (Gdx.graphics.getHeight()) / 2;
+
         final float PLAY_POSITION = Gdx.graphics.getHeight() / 4;
 
         ImageButton buy;
         ImageButton back2;
         ImageButton back3;
-
+        final ImageButton[] skinss = new ImageButton[9];
 
         playTexture = new Texture(Gdx.files.internal(Config.PLAY));
         playPressTexture = new Texture(Gdx.files.internal(Config.PLAY_PRESS));
@@ -432,8 +359,6 @@ public class GameScreen extends ScreenAdapter {
 
         buyTexture = new Texture(Gdx.files.internal(Config.BUY));
         buyPressTexture = new Texture(Gdx.files.internal(Config.BUY_PRESS));
-
-
 
         play = new ImageButton(new TextureRegionDrawable(new TextureRegion(playTexture)), new TextureRegionDrawable(new TextureRegion(playPressTexture)));
         play.setPosition(Gdx.graphics.getWidth()/5 - 10, PLAY_POSITION);
@@ -512,8 +437,96 @@ public class GameScreen extends ScreenAdapter {
         buy.setPosition(Gdx.graphics.getWidth() / 5, Gdx.graphics.getHeight() / 5);
         buy.addListener(new ActorGestureListener(){
             public void tap(InputEvent event, float x, float y, int count, int button){
-                state = GameState.MENU;
-                restart();
+                if (playerScore.getScore() > Utils.lowestSkinCost()){
+                    playerScore.pay(Long.valueOf(Utils.lowestSkinCost()));
+                }
+            }
+        });
+
+        for(int i = 0; i < skinss.length; i++){
+            if(skin_values.get(i).equals("0")){
+                skinss[i] = new ImageButton(new TextureRegionDrawable(new TextureRegion(playerTextures.get(i))));
+            }else{
+                skinss[i] = new ImageButton(new TextureRegionDrawable(new TextureRegion(lockTexture)), new TextureRegionDrawable(new TextureRegion(lockTexturePress)));
+            }
+        }
+
+        skinss[0].setPosition(LEFT, SCREEN_HEIGHT - 100);
+        skinss[0].addListener(new ActorGestureListener(){
+            public void tap(InputEvent event, float x, float y, int count, int button){
+                selection = playerTextures.get(0);
+            }
+        });
+
+        skinss[1].setPosition(CENTER, SCREEN_HEIGHT - 100);
+        skinss[1].addListener(new ActorGestureListener(){
+            public void tap(InputEvent event, float x, float y, int count, int button){
+                if(available_skins.get(1))
+                    selection = playerTextures.get(1);
+            }
+        });
+
+        skinss[2].setPosition(RIGHT, SCREEN_HEIGHT - 100);
+        skinss[2].addListener(new ActorGestureListener(){
+            public void tap(InputEvent event, float x, float y, int count, int button){
+                if(available_skins.get(2))
+                    selection = playerTextures.get(2);
+                else{
+                    if(playerScore.getScore() > Long.valueOf(skin_values.get(2))){
+                        playerScore.pay(Long.valueOf(skin_values.get(2)));
+                        skinss[2] = new ImageButton(new TextureRegionDrawable(new TextureRegion(playerTextures.get(2))));
+                        skinss[2].setPosition(RIGHT, SCREEN_HEIGHT - 100);
+
+                    }
+                }
+            }
+        });
+
+        skinss[3].setPosition(LEFT, SCREEN_HEIGHT - 300);
+        skinss[3].addListener(new ActorGestureListener(){
+            public void tap(InputEvent event, float x, float y, int count, int button){
+                if(available_skins.get(3))
+                    selection = playerTextures.get(3);
+            }
+        });
+
+        skinss[4].setPosition(CENTER, SCREEN_HEIGHT - 300);
+        skinss[4].addListener(new ActorGestureListener(){
+            public void tap(InputEvent event, float x, float y, int count, int button){
+                if(available_skins.get(4))
+                    selection = playerTextures.get(4);
+            }
+        });
+
+        skinss[5].setPosition(RIGHT, SCREEN_HEIGHT - 300);
+        skinss[5].addListener(new ActorGestureListener(){
+            public void tap(InputEvent event, float x, float y, int count, int button){
+                if(available_skins.get(5))
+                    selection = playerTextures.get(5);
+            }
+        });
+
+        skinss[6].setPosition(LEFT, SCREEN_HEIGHT - 500);
+        skinss[6].addListener(new ActorGestureListener(){
+            public void tap(InputEvent event, float x, float y, int count, int button){
+                if(available_skins.get(6))
+                    selection = playerTextures.get(6);
+            }
+        });
+
+        skinss[7].setPosition(CENTER, SCREEN_HEIGHT - 500);
+        skinss[7].addListener(new ActorGestureListener(){
+            public void tap(InputEvent event, float x, float y, int count, int button){
+                if(available_skins.get(7))
+                    selection = playerTextures.get(7);
+            }
+        });
+
+        skinss[8].setPosition(RIGHT, SCREEN_HEIGHT - 500);
+        skinss[8].addListener(new ActorGestureListener(){
+            public void tap(InputEvent event, float x, float y, int count, int button){
+                if(available_skins.get(8))
+                    selection = playerTextures.get(8);
             }
         });
 
@@ -521,7 +534,7 @@ public class GameScreen extends ScreenAdapter {
 
         stage = new Stage(new FillViewport(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2));
         stageAbout = new Stage(new FillViewport(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2));
-        stageSkins = new Stage(new FillViewport(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2));
+        stageSkins = new Stage(new FillViewport(Gdx.graphics.getWidth() /2, Gdx.graphics.getHeight() /2));
         stageGameOver = new Stage(new FillViewport(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2));
 
         setInputProcessor(state);
@@ -536,8 +549,11 @@ public class GameScreen extends ScreenAdapter {
         stageSkins.addActor(back2);
         stageSkins.addActor(buy);
 
-        stageGameOver.addActor(back3);
+        for(int i = 0; i < skinss.length; i++){
+            stageSkins.addActor(skinss[i]);
+        }
 
+        stageGameOver.addActor(back3);
 
     }
 
