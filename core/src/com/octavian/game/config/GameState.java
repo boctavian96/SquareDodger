@@ -5,5 +5,5 @@ package com.octavian.game.config;
  */
 
 public enum GameState {
-    PLAYING, PAUSED, MENU, ABOUT, SKINS, GAMEOVER
+    PLAYING, MENU, ABOUT, SKINS, GAMEOVER
 }
