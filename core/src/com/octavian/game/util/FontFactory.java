@@ -10,8 +10,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
  */
 
 public final class FontFactory {
-    public static final String FONT_PIXELED = "fonts/Pixeled.ttf";
-    public static final String FONT_BEBAS_NEUE = "fonts/BebasNeue.otf";
+    public static final String FONT_PRESS_START2P = "fonts/PressStart2P.ttf";
 
     private static FontFactory instance;
 
