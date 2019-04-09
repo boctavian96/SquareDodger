@@ -26,7 +26,7 @@ public class Obstacle {
 
     public Obstacle(Texture t){
         this.t = t;
-        this.x = (float)Utils.randomNumber((int)Gdx.graphics.getWidth());
+        this.x = (float)Utils.randomNumber(Gdx.graphics.getWidth());
         this.y = Gdx.graphics.getHeight();
         this.speed = (float)Utils.randomNumber((int)MAXIMUM_SPEED) + MINIMUM_SPEED;
         collisionRectangle = new Rectangle(x, y, COLLISION_RECT_SIZE, COLLISION_RECT_SIZE);

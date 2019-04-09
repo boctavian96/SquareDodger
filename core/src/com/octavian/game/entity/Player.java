@@ -41,13 +41,9 @@ public class Player {
         updateCollisionRectangle();
     }
 
-    //Draw
     public void draw(SpriteBatch sb){
         sb.draw(t, this.x, this.y);
     }
-
-
-    //GETTERS AND SETTERS
 
     public void setX(float x){
         this.x = x;
