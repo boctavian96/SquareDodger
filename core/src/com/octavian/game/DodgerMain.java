@@ -9,5 +9,4 @@ public class DodgerMain extends Game {
 		setScreen(new GameScreen());
 	}
 
-
 }

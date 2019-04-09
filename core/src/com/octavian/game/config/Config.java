@@ -7,20 +7,20 @@ public final class Config {
     }
 
     //Score
-    float POINTS_PER_RECT = 5F;
+   public static float POINTS_PER_RECT = 5F;
 
     //Number of textures
-    int NUMBER_OF_TEXTURES = 48;
+    public static int NUMBER_OF_TEXTURES = 48;
 
     //
-    int MAXIMUM_OBSTACLES = 1000;
+    public static int MAXIMUM_OBSTACLES = 1000;
 
     //Music
-    String MUSIC1 = "audio/PatakasWorld.mp3";
+    public static String MUSIC1 = "audio/PatakasWorld.mp3";
 
     //Images
 
-    String[] SQUARES = {
+    public static String[] SQUARES = {
             "obstacle/square1.png",
             "obstacle/square2.png",
             "obstacle/square3.png",
@@ -73,7 +73,7 @@ public final class Config {
 
     //Player Skins
 
-    String[] SKINS_ARRAY = {
+    public static String[] SKINS_ARRAY = {
 
             "player/skin1.png",
             "player/skin2.png",
@@ -86,32 +86,32 @@ public final class Config {
             "player/skin9.png"
     };
 
-    String LOCK = "various/lock.png";
-    String LOCK_PRESS = "various/lockPress.png";
+    public static String LOCK = "various/lock.png";
+    public static String LOCK_PRESS = "various/lockPress.png";
 
     //UI
-    String PLAY = "ui/play.png";
-    String PLAY_PRESS = "ui/playPress.png";
-    String ABOUT = "ui/about.png";
-    String ABOUT_PRESS = "ui/aboutPress.png";
-    String SKINS = "ui/skins.png";
-    String SKINS_PRESS = "ui/skinsPress.png";
-    String EXIT = "ui/exit.png";
-    String EXIT_PRESS = "ui/exitPress.png";
-    String BACK = "ui/back.png";
-    String BACK_PRESS = "ui/backPress.png";
-    String BUY = "ui/pay.png";
-    String BUY_PRESS = "ui/payPress.png";
+    public static String PLAY = "ui/play.png";
+    public static String PLAY_PRESS = "ui/playPress.png";
+    public static String ABOUT = "ui/about.png";
+    public static String ABOUT_PRESS = "ui/aboutPress.png";
+    public static String SKINS = "ui/skins.png";
+    public static String SKINS_PRESS = "ui/skinsPress.png";
+    public static String EXIT = "ui/exit.png";
+    public static String EXIT_PRESS = "ui/exitPress.png";
+    public static String BACK = "ui/back.png";
+    public static String BACK_PRESS = "ui/backPress.png";
+    public static String BUY = "ui/pay.png";
+    public static String BUY_PRESS = "ui/payPress.png";
 
     //Screen
-    String GAMEOVER = "screen/gameover.png";
+    public static String GAMEOVER = "screen/gameover.png";
 
     //Highscore
-    String HS_FILE = "highscore.txt";
+    public static String HS_FILE = "highscore.txt";
 
     //Coins file
-    String CN_FILE = "coins.txt";
+    public static String CN_FILE = "coins.txt";
 
     //Skins file
-    String SKINS_LIST = "skins.txt";
+    public static String SKINS_LIST = "skins.txt";
 }
