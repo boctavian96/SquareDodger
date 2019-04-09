@@ -6,6 +6,10 @@ public final class Config {
         //Do not instantiate.
     }
 
+    public static float WORLD_HEIGHT = 800F;
+    public static float WORLD_WIDTH = 480F;
+    public static float WORLD_UNIT = 32F;
+
     //Score
    public static float POINTS_PER_RECT = 5F;
 

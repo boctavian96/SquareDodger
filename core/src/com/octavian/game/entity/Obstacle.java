@@ -13,7 +13,7 @@ import com.octavian.game.util.Utils;
 
 public class Obstacle {
 
-    public static final float MAXIMUM_SPEED = 1000F;
+    public static final float MAXIMUM_SPEED = 900F;
     public static final float MINIMUM_SPEED = 300F;
 
     public static final float COLLISION_RECT_SIZE = 48F;
