@@ -1,6 +1,10 @@
 package com.octavian.game.config;
 
-public interface Config {
+public final class Config {
+
+    private Config(){
+        //Do not instantiate.
+    }
 
     //Score
     float POINTS_PER_RECT = 5F;
