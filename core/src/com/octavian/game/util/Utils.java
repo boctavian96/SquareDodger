@@ -24,20 +24,12 @@ import java.util.Random;
 
 public class Utils {
 
-    /**
-     * Clears the screen
-     */
     public static void clearScreen(){
         //Black
         Gdx.gl.glClearColor(Color.BLACK.r, Color.BLACK.g, Color.BLACK.b, Color.BLACK.a);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
 
-    /**
-     * Generate a random number
-     * @param max maximul
-     * @return generated number
-     */
     public static int randomNumber(int max){
         Random rand = new Random();
         int r = rand.nextInt(max);
@@ -50,6 +42,7 @@ public class Utils {
      * @param value
      * @param mode - c = COINS; h = HIGHSCORE
      */
+    @Deprecated
     public static void writeGameFile(long value, char mode){
 
         FileHandle file = null;
@@ -81,6 +74,7 @@ public class Utils {
      * @return
      * @throws IOException
      */
+    @Deprecated
     public static long getGameFile(char mode) {
 
         FileHandle file = null;
@@ -178,14 +172,7 @@ public class Utils {
         return list;
     }
 
-    /**
-     * Draw a text on screen
-     * @param text Text to draw
-     * @param bitmapFont
-     * @param batch
-     * @param x x coordinate
-     * @param y y coordinate
-     */
+    @Deprecated
     public static void drawText(String text, BitmapFont bitmapFont, SpriteBatch batch, float x, float y){
             GlyphLayout gl = new GlyphLayout();
             BitmapFont scoreBounds = bitmapFont;
@@ -254,7 +241,6 @@ public class Utils {
                 bool_list.add(false);
             }
         }
-
         return bool_list;
     }
 
