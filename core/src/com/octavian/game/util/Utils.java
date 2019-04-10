@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.octavian.game.config.Config;
 import com.octavian.game.config.GameState;
-import com.octavian.game.entity.Player;
+import com.octavian.game.datamodel.Player;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.octavian.game;
+package com.octavian.game.datamodel;
 
 /**
  * Created by octavian on 2/27/18.

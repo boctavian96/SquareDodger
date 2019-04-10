@@ -1,4 +1,4 @@
-package com.octavian.game.entity;
+package com.octavian.game.datamodel;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;

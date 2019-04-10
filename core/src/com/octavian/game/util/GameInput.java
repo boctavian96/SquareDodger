@@ -1,7 +1,7 @@
 package com.octavian.game.util;
 
 import com.badlogic.gdx.Gdx;
-import com.octavian.game.entity.Player;
+import com.octavian.game.datamodel.Player;
 
 /**
  * Created by octavian on 3/3/18.

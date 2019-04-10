@@ -1,4 +1,4 @@
-package com.octavian.game.entity;
+package com.octavian.game.datamodel;
 
 import com.octavian.game.util.Utils;
 
