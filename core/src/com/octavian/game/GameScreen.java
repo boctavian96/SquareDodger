@@ -277,7 +277,7 @@ public class GameScreen extends ScreenAdapter {
 
             case PLAYING:
                 batch.begin();
-                    batch.draw(player.getTexture(), player.getX(), player.getY());
+                    player.draw(batch);
                     drawObstacles();
                     Utils.drawText(String.valueOf(playerScore.getScore()), bitmapFont, batch, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight() - 100);
                 batch.end();

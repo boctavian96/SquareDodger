@@ -1,5 +1,6 @@
 package com.octavian.game.windows;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.octavian.game.DodgerMain;
 
@@ -10,10 +11,12 @@ import com.octavian.game.DodgerMain;
 public class MainMenuScreen extends AbstractGameScreen {
 
     private DodgerMain game;
+    private SpriteBatch batch;
 
     public MainMenuScreen(DodgerMain main){
         super();
         this.game = main;
+        this.batch = game.getBatch();
     }
 
     public void update(){
