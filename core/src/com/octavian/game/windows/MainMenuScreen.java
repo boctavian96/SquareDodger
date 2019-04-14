@@ -1,7 +1,6 @@
 package com.octavian.game.windows;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.octavian.game.DodgerMain;
 
 /**
