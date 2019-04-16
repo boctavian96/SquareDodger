@@ -136,18 +136,14 @@ public class Utils {
             result = file.readString().split(" ");
         }
 
-        for(String i : result){
-            list.add(i);
+        for(String status : result){
+            list.add(status);
         }
 
         return list;
     }
 
-    /**
-     *
-     * @param state Actual state
-     * @return Menu or the actual game state
-     */
+    @Deprecated
     public static GameState checkBack(GameState state){
         if (Gdx.input.isKeyJustPressed(Input.Keys.BACK)){
             if(state.equals(GameState.SKINS) || state.equals(GameState.ABOUT))
@@ -157,6 +153,7 @@ public class Utils {
         return state;
     }
 
+    @Deprecated
     public static List<Texture> loadTextures(String[] args) {
         ArrayList<Texture> list = new ArrayList<Texture>();
 
