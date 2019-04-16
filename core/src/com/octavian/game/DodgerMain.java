@@ -2,6 +2,7 @@ package com.octavian.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.octavian.game.config.Assets;
 import com.octavian.game.windows.MainMenuScreen;
 
 public class DodgerMain extends Game {
@@ -11,11 +12,10 @@ public class DodgerMain extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
+		Assets.load();
 		//settings = new Settings();
-		//assets = new Assets();
 
 		//settings.load();
-		//assets.load();
 		setScreen(new MainMenuScreen(this));
 	}
 
@@ -27,5 +27,4 @@ public class DodgerMain extends Game {
 	public SpriteBatch getBatch() {
 		return this.batch;
 	}
-
 }

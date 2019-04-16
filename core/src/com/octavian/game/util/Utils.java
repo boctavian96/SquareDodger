@@ -157,11 +157,6 @@ public class Utils {
         return state;
     }
 
-    /**
-     * Function used to load the textures in main
-     * @param args String with paths to textures
-     * @return
-     */
     public static List<Texture> loadTextures(String[] args) {
         ArrayList<Texture> list = new ArrayList<Texture>();
 
@@ -180,7 +175,6 @@ public class Utils {
             gl.setText(scoreBounds, text);
             scoreBounds.draw(batch, text, x, y);
     }
-
 
     public static void drawDebugWidthHeight(BitmapFont bitmapFont, SpriteBatch batch){
 
@@ -242,6 +236,16 @@ public class Utils {
             }
         }
         return bool_list;
+    }
+
+    public static String getHighScore(){
+        //TODO: Write this;
+        return null;
+    }
+
+    public static String getCoins(){
+        //TODO: Write this;
+        return null;
     }
 
 }
