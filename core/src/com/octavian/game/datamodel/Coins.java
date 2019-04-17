@@ -1,5 +1,7 @@
 package com.octavian.game.datamodel;
 
+import com.octavian.game.config.Config;
+
 /**
  * Created by octavian on 2/27/18.
  */
@@ -12,8 +14,8 @@ public class Coins {
         this.coins = coins;
     }
 
-    public Coins(){
-
+    public Coins(String coins){
+        this.coins = Long.valueOf(coins);
     }
 
     public long getCoins(){

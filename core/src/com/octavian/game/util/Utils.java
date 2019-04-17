@@ -238,15 +238,14 @@ public class Utils {
 
     public static String getHighScore(){
         IDataSource dataSource = XMLDataSource.getInstance();
-
         HighScore highScore = dataSource.getScores();
 
+        //FIXME: Think about this...
         return String.valueOf(highScore.getScore());
     }
 
     public static String getCoins(){
         IDataSource dataSource = XMLDataSource.getInstance();
-
         Coins coins = dataSource.getCoins();
 
         //FIXME: Think about this...

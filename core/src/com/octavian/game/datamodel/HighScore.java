@@ -7,6 +7,10 @@ package com.octavian.game.datamodel;
 public class HighScore {
     private long score;
 
+    public HighScore(String score){
+        this.score = Long.valueOf(score);
+    }
+
     public long getScore(){
         return score;
     }

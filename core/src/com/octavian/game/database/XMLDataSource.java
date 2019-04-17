@@ -1,10 +1,12 @@
 package com.octavian.game.database;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.utils.XmlReader;
+import com.octavian.game.config.Config;
 import com.octavian.game.datamodel.Coins;
 import com.octavian.game.datamodel.HighScore;
 import com.octavian.game.datamodel.SkinStatus;
-import com.octavian.game.util.FontFactory;
-
 /**
  * Created by octavian on 4/14/19.
  */
@@ -12,6 +14,8 @@ import com.octavian.game.util.FontFactory;
 public final class XMLDataSource implements IDataSource {
 
     private static XMLDataSource instance;
+
+    private XmlReader reader;
 
     private XMLDataSource(){
         super();
@@ -26,7 +30,11 @@ public final class XMLDataSource implements IDataSource {
 
     @Override
     public HighScore getScores() {
-        return new HighScore();
+        FileHandle fileHandle = Gdx.files.local(Config.LOADFILE);
+        XmlReader.Element root = reader.parse(fileHandle);
+
+        XmlReader.Element highScore = root.getChildByName("highscore");
+        return new HighScore(highScore.getText());
     }
 
     @Override
@@ -36,6 +44,11 @@ public final class XMLDataSource implements IDataSource {
 
     @Override
     public Coins getCoins(){
-        return new Coins();
+
+        FileHandle fileHandle = Gdx.files.local(Config.LOADFILE);
+        XmlReader.Element root = reader.parse(fileHandle);
+
+        XmlReader.Element coins = root.getChildByName("coins");
+        return new Coins(coins.getText());
     }
 }

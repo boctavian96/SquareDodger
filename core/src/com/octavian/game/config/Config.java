@@ -111,7 +111,10 @@ public final class Config {
     public static String GAMEOVER = "screen/gameover.png";
 
     //Highscore
+    @Deprecated
     public static String HS_FILE = "highscore.txt";
+
+    public static String LOADFILE = "load.xml";
 
     //Coins file
     public static String CN_FILE = "coins.txt";
