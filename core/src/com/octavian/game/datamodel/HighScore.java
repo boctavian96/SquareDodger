@@ -5,4 +5,9 @@ package com.octavian.game.datamodel;
  */
 
 public class HighScore {
+    private long score;
+
+    public long getScore(){
+        return score;
+    }
 }

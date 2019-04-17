@@ -11,6 +11,10 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.octavian.game.config.Config;
 import com.octavian.game.config.GameState;
+import com.octavian.game.database.IDataSource;
+import com.octavian.game.database.XMLDataSource;
+import com.octavian.game.datamodel.Coins;
+import com.octavian.game.datamodel.HighScore;
 import com.octavian.game.datamodel.Player;
 
 import java.io.IOException;
@@ -233,13 +237,20 @@ public class Utils {
     }
 
     public static String getHighScore(){
-        //TODO: Write this;
-        return null;
+        IDataSource dataSource = XMLDataSource.getInstance();
+
+        HighScore highScore = dataSource.getScores();
+
+        return String.valueOf(highScore.getScore());
     }
 
     public static String getCoins(){
-        //TODO: Write this;
-        return null;
+        IDataSource dataSource = XMLDataSource.getInstance();
+
+        Coins coins = dataSource.getCoins();
+
+        //FIXME: Think about this...
+        return String.valueOf(coins.getCoins());
     }
 
 }

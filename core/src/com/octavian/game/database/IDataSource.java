@@ -1,5 +1,6 @@
 package com.octavian.game.database;
 
+import com.octavian.game.datamodel.Coins;
 import com.octavian.game.datamodel.HighScore;
 import com.octavian.game.datamodel.SkinStatus;
 
@@ -11,5 +12,6 @@ public interface IDataSource {
 
     HighScore getScores();
     SkinStatus[] getSkins();
+    Coins getCoins();
 
 }
