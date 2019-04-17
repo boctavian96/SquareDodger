@@ -9,7 +9,7 @@ import com.octavian.game.datamodel.SkinStatus;
 
 public interface IDataSource {
 
-    HighScore[] getScores();
+    HighScore getScores();
     SkinStatus[] getSkins();
 
 }

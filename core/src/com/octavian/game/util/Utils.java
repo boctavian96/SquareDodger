@@ -15,6 +15,7 @@ import com.octavian.game.datamodel.Player;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -32,9 +33,7 @@ public class Utils {
 
     public static int randomNumber(int max){
         Random rand = new Random();
-        int r = rand.nextInt(max);
-
-        return r;
+        return rand.nextInt(max);
     }
 
     /**
@@ -136,9 +135,7 @@ public class Utils {
             result = file.readString().split(" ");
         }
 
-        for(String status : result){
-            list.add(status);
-        }
+        list.addAll(Arrays.asList(result));
 
         return list;
     }
@@ -211,7 +208,7 @@ public class Utils {
         return Utils.getMinimum(lst);
     }
 
-    public static int getMinimum(List<Integer> list){
+    private static int getMinimum(List<Integer> list){
         int minim = Integer.MAX_VALUE;
         for(Integer i : list){
             if(i < minim && i != 0)

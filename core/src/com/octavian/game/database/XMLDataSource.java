@@ -9,8 +9,8 @@ import com.octavian.game.datamodel.SkinStatus;
 
 public class XMLDataSource implements IDataSource {
     @Override
-    public HighScore[] getScores() {
-        return new HighScore[0];
+    public HighScore getScores() {
+        return new HighScore();
     }
 
     @Override
