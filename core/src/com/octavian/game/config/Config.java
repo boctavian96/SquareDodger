@@ -6,8 +6,8 @@ public final class Config {
         //Do not instantiate.
     }
 
-    public static float WORLD_HEIGHT = 800F;
-    public static float WORLD_WIDTH = 480F;
+    public static float WORLD_HEIGHT = 1334F;
+    public static float WORLD_WIDTH = 750F;
     public static float WORLD_UNIT = 32F;
 
     //Score
@@ -17,7 +17,7 @@ public final class Config {
     public static int NUMBER_OF_TEXTURES = 48;
 
     //
-    public static int MAXIMUM_OBSTACLES = 1000;
+    public static int MAXIMUM_OBSTACLES = 500;
 
     //Music
     public static String MUSIC1 = "audio/PatakasWorld.mp3";

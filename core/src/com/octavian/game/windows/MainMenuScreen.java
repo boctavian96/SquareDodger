@@ -2,12 +2,14 @@ package com.octavian.game.windows;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.octavian.game.DodgerMain;
 import com.octavian.game.config.Assets;
+import com.octavian.game.config.Config;
 import com.octavian.game.util.FontFactory;
 import com.octavian.game.util.Utils;
 
@@ -36,18 +38,29 @@ public class MainMenuScreen extends AbstractGameScreen {
         stage.addActor(Assets.about);
         stage.addActor(Assets.skins);
         stage.addActor(Assets.exit);
+
+        Gdx.input.setInputProcessor(stage);
+
     }
 
     @Override
     public void update(float delta){
-
+        camera.update();
     }
 
     @Override
     public void draw(){
+        GL20 gl = Gdx.gl;
+        Utils.clearScreen();
+        gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        camera.update();
+        batch.setProjectionMatrix(camera.combined);
+        batch.disableBlending();
+
         batch.begin();
-            font.draw(batch, "HighScore: " + Utils.getHighScore(), Gdx.graphics.getWidth()/2 - 150, Gdx.graphics.getHeight()-200);
-            font.draw(batch, "Coins: " + Utils.getCoins(), Gdx.graphics.getWidth()/2 - 100, Gdx.graphics.getHeight() - 150 );
+            //FIXME: Read score and coins from xml.
+            font.draw(batch, "HighScore: " + "1000", Gdx.graphics.getWidth()/2 - 150, Gdx.graphics.getHeight()-200);
+            font.draw(batch, "Coins: " + "500", Gdx.graphics.getWidth()/2 - 100, Gdx.graphics.getHeight() - 150 );
         batch.end();
     }
 
@@ -60,7 +73,7 @@ public class MainMenuScreen extends AbstractGameScreen {
     }
 
     private void addListeners(){
-        Assets.play.setPosition(Gdx.graphics.getWidth()/5 - 10, PLAY_POSITION);
+        Assets.play.setPosition(Gdx.graphics.getWidth()/2 - Config.WORLD_UNIT, PLAY_POSITION);
         Assets.play.addListener(new ActorGestureListener(){
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button){
