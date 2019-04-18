@@ -19,6 +19,7 @@ public final class XMLDataSource implements IDataSource {
 
     private XMLDataSource(){
         super();
+        reader = new XmlReader();
     }
 
     public static synchronized XMLDataSource getInstance(){
