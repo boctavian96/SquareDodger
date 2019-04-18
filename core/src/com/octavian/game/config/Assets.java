@@ -72,9 +72,6 @@ public final class Assets {
         skins = loadButton(skinsTexture,skinsPressTexture);
         exit = loadButton(exitTexture, exitPressTexture);
         back = loadButton(backTexture, backPressTexture);
-
-
-
     }
 
     public static void playMusic(Music music){
