@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.octavian.game.DodgerMain;
 import com.octavian.game.config.Assets;
@@ -32,6 +33,7 @@ public class MainMenuScreen extends AbstractGameScreen {
         this.batch = game.getBatch();
         this.factory = FontFactory.getInstance();
         this.font = factory.generateFont(FontFactory.FONT_PRESS_START2P, 16, Color.WHITE);
+        stage = new Stage(viewport, batch);
 
         addListeners();
         stage.addActor(Assets.play);

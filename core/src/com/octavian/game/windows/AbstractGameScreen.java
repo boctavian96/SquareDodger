@@ -1,8 +1,7 @@
 package com.octavian.game.windows;
 
-import com.badlogic.gdx.Application;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
@@ -17,7 +16,7 @@ import com.octavian.game.config.Config;
 public abstract class AbstractGameScreen extends ScreenAdapter{
 
     protected Vector3 touchPoint;
-    protected OrthographicCamera camera;
+    protected Camera camera;
     protected FitViewport viewport;
     protected Stage stage;
 
@@ -25,10 +24,9 @@ public abstract class AbstractGameScreen extends ScreenAdapter{
     protected float screenWidth;
 
     public AbstractGameScreen(){
-        camera = new OrthographicCamera();
+        camera = new OrthographicCamera(Config.WORLD_WIDTH, Config.WORLD_HEIGHT);
         camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
-        viewport = new FitViewport(Config.WORLD_WIDTH, Config.WORLD_HEIGHT, camera);
-        stage = new Stage();
+        viewport = new FitViewport(Config.WORLD_UNIT, Config.WORLD_UNIT, camera);
 
         screenHeight = Config.WORLD_HEIGHT;
         screenWidth = Config.WORLD_WIDTH;
