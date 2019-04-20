@@ -2,7 +2,6 @@ package com.octavian.game.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -25,14 +24,14 @@ public class MainMenuScreen extends AbstractGameScreen {
     private DodgerMain game;
     private SpriteBatch batch;
     private FontFactory factory;
-    private BitmapFont font;
+    private BitmapFont font32;
     private WorldRenderer worldRenderer;
 
     public MainMenuScreen(DodgerMain main){
         game = main;
         batch = game.getBatch();
         factory = FontFactory.getInstance();
-        font = factory.generateFont(FontFactory.FONT_PRESS_START2P, 32, Color.WHITE);
+        font32 = factory.generateFont(FontFactory.FONT_PRESS_START2P, 32, Color.WHITE);
         stage = new Stage(viewport, batch);
         worldRenderer = new WorldRenderer();
 
@@ -55,10 +54,13 @@ public class MainMenuScreen extends AbstractGameScreen {
         batch.setProjectionMatrix(camera.combined);
         //batch.disableBlending();
 
+
+
         batch.begin();
             //FIXME: Read score and coins from xml.
-            font.draw(batch, "HighScore: " + "1000", Gdx.graphics.getWidth()/2 , Gdx.graphics.getHeight()- 200);
-            font.draw(batch, "Coins: " + "500", Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight() - 150 );
+            font32.draw(batch, "High Score: 1000", Config.WORLD_WIDTH / 6, 100);
+            font32.draw(batch, "Coins: " + "500", Config.WORLD_WIDTH / 3 - Config.WORLD_UNIT, Config.WORLD_HEIGHT - Config.WORLD_UNIT );
+
             worldRenderer.drawObstacles(batch);
         batch.end();
 
