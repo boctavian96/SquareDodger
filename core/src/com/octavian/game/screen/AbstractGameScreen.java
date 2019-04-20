@@ -1,9 +1,8 @@
-package com.octavian.game.windows;
+package com.octavian.game.screen;
 
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -25,8 +24,8 @@ public abstract class AbstractGameScreen extends ScreenAdapter{
 
     public AbstractGameScreen(){
         camera = new OrthographicCamera(Config.WORLD_WIDTH, Config.WORLD_HEIGHT);
-        camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
-        viewport = new FitViewport(Config.WORLD_UNIT, Config.WORLD_UNIT, camera);
+        camera.position.set(0, 0, 0);
+        viewport = new FitViewport(Config.WORLD_WIDTH, Config.WORLD_HEIGHT, camera);
 
         screenHeight = Config.WORLD_HEIGHT;
         screenWidth = Config.WORLD_WIDTH;

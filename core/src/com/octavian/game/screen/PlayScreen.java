@@ -1,10 +1,9 @@
-package com.octavian.game.windows;
+package com.octavian.game.screen;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.octavian.game.DodgerMain;
-import com.octavian.game.config.Assets;
 import com.octavian.game.util.FontFactory;
 
 /**

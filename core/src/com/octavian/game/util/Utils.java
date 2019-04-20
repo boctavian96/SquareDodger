@@ -15,6 +15,7 @@ import com.octavian.game.database.IDataSource;
 import com.octavian.game.database.XMLDataSource;
 import com.octavian.game.datamodel.Coins;
 import com.octavian.game.datamodel.HighScore;
+import com.octavian.game.datamodel.Obstacle;
 import com.octavian.game.datamodel.Player;
 
 import java.io.IOException;

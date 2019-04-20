@@ -1,4 +1,4 @@
-package com.octavian.game.windows;
+package com.octavian.game.screen;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -9,7 +9,7 @@ import com.octavian.game.util.FontFactory;
  * Created by octavian on 4/9/19.
  */
 
-public class SkinsScreen extends AbstractGameScreen {
+public class HighScoreScreen extends AbstractGameScreen{
 
     private DodgerMain game;
     private Batch batch;
@@ -17,7 +17,7 @@ public class SkinsScreen extends AbstractGameScreen {
     private BitmapFont font;
 
 
-    public SkinsScreen(DodgerMain game){
+    public HighScoreScreen(DodgerMain game){
         super();
         this.game = game;
         this.batch = game.getBatch();

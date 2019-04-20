@@ -1,4 +1,4 @@
-package com.octavian.game.windows;
+package com.octavian.game.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -28,11 +28,10 @@ public class MainMenuScreen extends AbstractGameScreen {
     private BitmapFont font;
 
     public MainMenuScreen(DodgerMain main){
-        super();
-        this.game = main;
-        this.batch = game.getBatch();
-        this.factory = FontFactory.getInstance();
-        this.font = factory.generateFont(FontFactory.FONT_PRESS_START2P, 16, Color.WHITE);
+        game = main;
+        batch = game.getBatch();
+        factory = FontFactory.getInstance();
+        font = factory.generateFont(FontFactory.FONT_PRESS_START2P, 16, Color.WHITE);
         stage = new Stage(viewport, batch);
 
         addListeners();
@@ -61,8 +60,8 @@ public class MainMenuScreen extends AbstractGameScreen {
 
         batch.begin();
             //FIXME: Read score and coins from xml.
-            font.draw(batch, "HighScore: " + "1000", Gdx.graphics.getWidth()/2 - 150, Gdx.graphics.getHeight()-200);
-            font.draw(batch, "Coins: " + "500", Gdx.graphics.getWidth()/2 - 100, Gdx.graphics.getHeight() - 150 );
+            font.draw(batch, "HighScore: " + "1000", Gdx.graphics.getWidth()/2 , Gdx.graphics.getHeight()- 200);
+            font.draw(batch, "Coins: " + "500", Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight() - 150 );
         batch.end();
     }
 
