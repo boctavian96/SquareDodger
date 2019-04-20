@@ -53,7 +53,7 @@ public class MainMenuScreen extends AbstractGameScreen {
     @Override
     public void draw(){
         batch.setProjectionMatrix(camera.combined);
-        batch.disableBlending();
+        //batch.disableBlending();
 
         batch.begin();
             //FIXME: Read score and coins from xml.
