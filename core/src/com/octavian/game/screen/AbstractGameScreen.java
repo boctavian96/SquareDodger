@@ -23,7 +23,7 @@ public abstract class AbstractGameScreen extends ScreenAdapter{
     protected float screenWidth;
 
     public AbstractGameScreen(){
-        camera = new OrthographicCamera(Config.WORLD_WIDTH, Config.WORLD_HEIGHT);
+        camera = new OrthographicCamera();
         camera.position.set(0, 0, 0);
         viewport = new FitViewport(Config.WORLD_WIDTH, Config.WORLD_HEIGHT, camera);
 

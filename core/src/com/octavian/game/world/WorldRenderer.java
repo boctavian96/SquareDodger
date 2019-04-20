@@ -1,5 +1,6 @@
 package com.octavian.game.world;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.octavian.game.Score;
 import com.octavian.game.config.Assets;
@@ -23,7 +24,7 @@ public class WorldRenderer {
     public WorldRenderer(){
         playerScore = new Score();
         obstacles = new Array<Obstacle>();
-        obstaclesNumber = 0;
+        obstaclesNumber = 8;
         obstaclesCreated = 0;
     }
 
@@ -35,7 +36,7 @@ public class WorldRenderer {
         }
     }
 
-    private boolean checkCollision(Player player){
+    public boolean checkCollision(Player player){
         for(Obstacle i : obstacles){
             if(i.isPlayerColliding(player)){
                 return true;
@@ -44,7 +45,7 @@ public class WorldRenderer {
         return false;
     }
 
-    private void checkIfObstacleIsNeeded(){
+    public void checkIfObstacleIsNeeded(){
         if(obstacles.size < obstaclesNumber){
             createNewObstacle();
         }
@@ -54,9 +55,9 @@ public class WorldRenderer {
         }
     }
 
-    private void updateObstacles(float delta){
-        for(Obstacle i : obstacles){
-            i.update(delta);
+    public void updateObstacles(float delta){
+        for(Obstacle obstacle : obstacles){
+            obstacle.update(delta);
         }
 
         checkIfObstacleIsNeeded();
@@ -69,8 +70,13 @@ public class WorldRenderer {
             if (i.getY() < 0){
                 obstacles.removeValue(i, true);
                 playerScore.addScore();
-                obstaclesNumber--;
             }
+        }
+    }
+
+    public void drawObstacles(SpriteBatch batch){
+        for(Obstacle obstacle : obstacles){
+            obstacle.draw(batch);
         }
     }
 

@@ -34,6 +34,8 @@ public final class Assets {
     public static Texture gameover;
     //public static Texture selection; //Selected texture
 
+    public static Music music;
+
     public static ImageButton play;
     public static ImageButton about;
     public static ImageButton skins;
@@ -44,7 +46,11 @@ public final class Assets {
 
 
     private static Texture loadTexture (String file) {
-        return new Texture(Gdx.files.internal(file));
+        return new Texture(file);
+    }
+
+    private static Music loadMusic(String file){
+        return Gdx.audio.newMusic(Gdx.files.internal(file));
     }
 
     private static Array<Texture> loadTexture(String[] files){
@@ -80,6 +86,8 @@ public final class Assets {
         gameover = loadTexture(Config.GAMEOVER);
 
         obstacleTextures.addAll(loadTexture(Config.SQUARES));
+
+        music = loadMusic(Config.MUSIC1);
 
         play = loadButton(playTexture, playPressTexture);
         about = loadButton(aboutTexture, aboutPressTexture);

@@ -7,12 +7,14 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.octavian.game.DodgerMain;
 import com.octavian.game.config.Assets;
 import com.octavian.game.config.Config;
 import com.octavian.game.util.FontFactory;
 import com.octavian.game.util.Utils;
+import com.octavian.game.world.WorldRenderer;
 
 /**
  * Created by octavian on 4/9/19.
@@ -20,26 +22,23 @@ import com.octavian.game.util.Utils;
 
 public class MainMenuScreen extends AbstractGameScreen {
 
-    final float PLAY_POSITION = Gdx.graphics.getHeight() / 4; //???????
-
     private DodgerMain game;
     private SpriteBatch batch;
     private FontFactory factory;
     private BitmapFont font;
+    private WorldRenderer worldRenderer;
 
     public MainMenuScreen(DodgerMain main){
         game = main;
         batch = game.getBatch();
         factory = FontFactory.getInstance();
-        font = factory.generateFont(FontFactory.FONT_PRESS_START2P, 16, Color.WHITE);
+        font = factory.generateFont(FontFactory.FONT_PRESS_START2P, 32, Color.WHITE);
         stage = new Stage(viewport, batch);
+        worldRenderer = new WorldRenderer();
 
-        addListeners();
-        stage.addActor(Assets.play);
-        stage.addActor(Assets.about);
-        stage.addActor(Assets.skins);
-        stage.addActor(Assets.exit);
+        instantiateUI();
 
+        Assets.music.play();
         Gdx.input.setInputProcessor(stage);
 
     }
@@ -47,14 +46,12 @@ public class MainMenuScreen extends AbstractGameScreen {
     @Override
     public void update(float delta){
         camera.update();
+        worldRenderer.updateObstacles(delta);
+        Utils.clearScreen();
     }
 
     @Override
     public void draw(){
-        GL20 gl = Gdx.gl;
-        Utils.clearScreen();
-        gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        camera.update();
         batch.setProjectionMatrix(camera.combined);
         batch.disableBlending();
 
@@ -62,7 +59,11 @@ public class MainMenuScreen extends AbstractGameScreen {
             //FIXME: Read score and coins from xml.
             font.draw(batch, "HighScore: " + "1000", Gdx.graphics.getWidth()/2 , Gdx.graphics.getHeight()- 200);
             font.draw(batch, "Coins: " + "500", Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight() - 150 );
+            worldRenderer.drawObstacles(batch);
         batch.end();
+
+        stage.draw();
+
     }
 
     @Override
@@ -70,11 +71,12 @@ public class MainMenuScreen extends AbstractGameScreen {
         update(delta);
         draw();
         stage.act(delta);
-        stage.draw();
     }
 
-    private void addListeners(){
-        Assets.play.setPosition(Gdx.graphics.getWidth()/2 - Config.WORLD_UNIT, PLAY_POSITION);
+    private void instantiateUI(){
+        Table table = new Table();
+        table.defaults().space(Config.WORLD_UNIT);
+
         Assets.play.addListener(new ActorGestureListener(){
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button){
@@ -83,7 +85,6 @@ public class MainMenuScreen extends AbstractGameScreen {
             }
         });
 
-        Assets.about.setPosition(Gdx.graphics.getWidth()/5 - 10, PLAY_POSITION - 100F);
         Assets.about.addListener(new ActorGestureListener(){
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button){
@@ -92,7 +93,6 @@ public class MainMenuScreen extends AbstractGameScreen {
             }
         });
 
-        Assets.skins.setPosition(Gdx.graphics.getWidth()/5 - 10, PLAY_POSITION - 200F);
         Assets.skins.addListener(new ActorGestureListener(){
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button){
@@ -101,7 +101,6 @@ public class MainMenuScreen extends AbstractGameScreen {
             }
         });
 
-        Assets.exit.setPosition(Gdx.graphics.getWidth() / 5 - 10, PLAY_POSITION - 300F);
         Assets.exit.addListener(new ActorGestureListener(){
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button){
@@ -109,5 +108,21 @@ public class MainMenuScreen extends AbstractGameScreen {
                 Gdx.app.exit();
             }
         });
+
+        stage.addActor(Assets.play);
+        stage.addActor(Assets.about);
+        stage.addActor(Assets.skins);
+        stage.addActor(Assets.exit);
+
+        table.add(Assets.play).row();
+        table.add(Assets.skins).row();
+        table.add(Assets.about).row();
+        table.add(Assets.exit).row();
+
+        table.setFillParent(true);
+        table.center();
+        table.pack();
+
+        stage.addActor(table);
     }
 }

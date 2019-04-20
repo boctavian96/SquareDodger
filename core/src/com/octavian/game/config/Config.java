@@ -2,10 +2,6 @@ package com.octavian.game.config;
 
 public final class Config {
 
-    private Config(){
-        //Do not instantiate.
-    }
-
     public static float WORLD_HEIGHT = 1334F;
     public static float WORLD_WIDTH = 750F;
     public static float WORLD_UNIT = 32F;
@@ -121,4 +117,8 @@ public final class Config {
 
     //Skins file
     public static String SKINS_LIST = "skins.txt";
+
+    private Config(){
+     //Do not instantiate.
+    }
 }
