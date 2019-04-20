@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Array;
 
 /**
  * Created by octavian on 4/14/19.
@@ -39,12 +40,23 @@ public final class Assets {
     public static ImageButton exit;
     public static ImageButton back;
 
+    public static Array<Texture> obstacleTextures = new Array<Texture>();
 
-    public static Texture loadTexture (String file) {
+
+    private static Texture loadTexture (String file) {
         return new Texture(Gdx.files.internal(file));
     }
 
-    public static ImageButton loadButton(Texture buttonUp, Texture buttonDown){
+    private static Array<Texture> loadTexture(String[] files){
+        Array<Texture> textures = new Array<Texture>();
+        for(int i = 0; i < files.length; i++){
+            textures.add(loadTexture(files[i]));
+        }
+
+        return textures;
+    }
+
+    private static ImageButton loadButton(Texture buttonUp, Texture buttonDown){
         return new ImageButton(new TextureRegionDrawable(new TextureRegion(buttonUp)), new TextureRegionDrawable(new TextureRegion(buttonDown)));
 
     }
@@ -66,6 +78,8 @@ public final class Assets {
         lockTexture = loadTexture(Config.LOCK);
         lockTexturePress = loadTexture(Config.LOCK_PRESS);
         gameover = loadTexture(Config.GAMEOVER);
+
+        obstacleTextures.addAll(loadTexture(Config.SQUARES));
 
         play = loadButton(playTexture, playPressTexture);
         about = loadButton(aboutTexture, aboutPressTexture);
