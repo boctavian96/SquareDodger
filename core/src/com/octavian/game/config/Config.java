@@ -2,25 +2,28 @@ package com.octavian.game.config;
 
 public final class Config {
 
-    public static float WORLD_HEIGHT = 1334F;
-    public static float WORLD_WIDTH = 750F;
-    public static float WORLD_UNIT = 32F;
+    public static final float WORLD_HEIGHT = 1334F;
+    public static final float WORLD_WIDTH = 750F;
+    public static final float WORLD_UNIT = 32F;
 
     //Score
-   public static float POINTS_PER_RECT = 5F;
+   public static final float POINTS_PER_RECT = 5F;
 
     //Number of textures
     public static int NUMBER_OF_TEXTURES = 48;
 
     //
-    public static int MAXIMUM_OBSTACLES = 500;
+    public static final int MAXIMUM_OBSTACLES = 500;
 
     //Music
-    public static String MUSIC1 = "audio/PatakasWorld.mp3";
+    public static final String MUSIC1 = "audio/PatakasWorld.mp3";
+
+    //About Text File
+    public static final String ABOUT_TEXT_FILE = "common/about.txt";
 
     //Images
 
-    public static String[] SQUARES = {
+    public static final String[] SQUARES = {
             "obstacle/square1.png",
             "obstacle/square2.png",
             "obstacle/square3.png",
@@ -73,7 +76,7 @@ public final class Config {
 
     //Player Skins
 
-    public static String[] SKINS_ARRAY = {
+    public static final String[] SKINS_ARRAY = {
 
             "player/skin1.png",
             "player/skin2.png",

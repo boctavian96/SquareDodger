@@ -21,7 +21,7 @@ import com.octavian.game.world.WorldRenderer;
 
 public class MainMenuScreen extends AbstractGameScreen {
 
-    private DodgerMain game;
+    private final DodgerMain game;
     private SpriteBatch batch;
     private FontFactory factory;
     private BitmapFont font32;
@@ -53,8 +53,6 @@ public class MainMenuScreen extends AbstractGameScreen {
     public void draw(){
         batch.setProjectionMatrix(camera.combined);
         //batch.disableBlending();
-
-
 
         batch.begin();
             //FIXME: Read score and coins from xml.
@@ -91,6 +89,10 @@ public class MainMenuScreen extends AbstractGameScreen {
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button){
                 super.tap(event, x, y, count, button);
+                Assets.music.pause();
+                worldRenderer = null;
+                stage.dispose();
+                dispose();
                 game.setScreen(new AboutScreen(game));
             }
         });

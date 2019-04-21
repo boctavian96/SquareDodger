@@ -88,6 +88,7 @@ public final class Assets {
         obstacleTextures.addAll(loadTexture(Config.SQUARES));
 
         music = loadMusic(Config.MUSIC1);
+        music.setLooping(true);
 
         play = loadButton(playTexture, playPressTexture);
         about = loadButton(aboutTexture, aboutPressTexture);

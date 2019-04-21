@@ -34,5 +34,4 @@ public abstract class AbstractGameScreen extends ScreenAdapter{
     public abstract void update(float delta);
     public abstract void render(float delta);
     public abstract void draw();
-
 }
