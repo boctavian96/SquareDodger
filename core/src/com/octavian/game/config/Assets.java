@@ -43,6 +43,7 @@ public final class Assets {
     public static ImageButton back;
 
     public static Array<Texture> obstacleTextures = new Array<Texture>();
+    public static Array<Texture> skinTextures = new Array<Texture>();
 
 
     private static Texture loadTexture (String file) {
@@ -86,6 +87,7 @@ public final class Assets {
         gameover = loadTexture(Config.GAMEOVER);
 
         obstacleTextures.addAll(loadTexture(Config.SQUARES));
+        skinTextures.addAll(loadTexture(Config.SKINS_ARRAY));
 
         music = loadMusic(Config.MUSIC1);
         music.setLooping(true);

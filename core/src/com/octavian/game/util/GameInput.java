@@ -13,7 +13,7 @@ public class GameInput {
         boolean isTouched = Gdx.input.isTouched();
 
         if(isTouched) {
-            float x = (float) Gdx.input.getX() - 20;
+            float x = Gdx.input.getX();
             float y = Gdx.graphics.getHeight() + 50 - (float) Gdx.input.getY();
             player.update(x, y);
         }

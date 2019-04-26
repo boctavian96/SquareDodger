@@ -12,7 +12,6 @@ public final class Config {
     //Number of textures
     public static int NUMBER_OF_TEXTURES = 48;
 
-    //
     public static final int MAXIMUM_OBSTACLES = 500;
 
     //Music
@@ -22,7 +21,6 @@ public final class Config {
     public static final String ABOUT_TEXT_FILE = "common/about.txt";
 
     //Images
-
     public static final String[] SQUARES = {
             "obstacle/square1.png",
             "obstacle/square2.png",
@@ -75,9 +73,7 @@ public final class Config {
     };
 
     //Player Skins
-
     public static final String[] SKINS_ARRAY = {
-
             "player/skin1.png",
             "player/skin2.png",
             "player/skin3.png",

@@ -26,6 +26,7 @@ public abstract class AbstractGameScreen extends ScreenAdapter{
         camera = new OrthographicCamera();
         camera.position.set(0, 0, 0);
         viewport = new FitViewport(Config.WORLD_WIDTH, Config.WORLD_HEIGHT, camera);
+        touchPoint = new Vector3();
 
         screenHeight = Config.WORLD_HEIGHT;
         screenWidth = Config.WORLD_WIDTH;

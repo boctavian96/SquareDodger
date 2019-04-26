@@ -36,7 +36,7 @@ public class WorldRenderer {
         }
     }
 
-    public boolean checkCollision(Player player){
+    public boolean isPlayerColliding(Player player){
         for(Obstacle i : obstacles){
             if(i.isPlayerColliding(player)){
                 return true;

@@ -15,8 +15,8 @@ public class Player {
     private static float SIZE = 48F;
 
     private final Rectangle collisionRectangle;
-    private float x=0;
-    private float y=0;
+    private float x;
+    private float y;
     private Texture t;
 
     public Player(Texture t, float x, float y){
@@ -28,10 +28,10 @@ public class Player {
     }
 
     public void update(float x, float y){
-        if(y < Gdx.graphics.getHeight() - 100) {
+        if(y < Gdx.graphics.getHeight()) {
             setY(y);
         }else{
-            setY(Gdx.graphics.getHeight() - 100);
+            setY(Gdx.graphics.getHeight() - 500);
         }
         if (y < 50){
             setY(50);
@@ -73,7 +73,7 @@ public class Player {
     }
 
     private void updateCollisionRectangle(){
-        this.collisionRectangle.setPosition(this.x, this.y);
+        collisionRectangle.setPosition(x, y);
     }
 
 
