@@ -16,6 +16,9 @@ public class GameInput {
             float x = Gdx.input.getX();
             float y = Gdx.graphics.getHeight() + 50 - (float) Gdx.input.getY();
             player.update(x, y);
+
+            Gdx.app.log("X: ", "" + x);
+            Gdx.app.log("Y: ", "" + y);
         }
 
     }

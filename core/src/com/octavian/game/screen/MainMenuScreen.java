@@ -2,12 +2,14 @@ package com.octavian.game.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.octavian.game.DodgerMain;
 import com.octavian.game.config.Assets;
 import com.octavian.game.config.Config;
@@ -28,8 +30,12 @@ public class MainMenuScreen extends AbstractGameScreen {
     private WorldRenderer worldRenderer;
 
     public MainMenuScreen(DodgerMain main){
+        camera = new OrthographicCamera();
+        camera.position.set(0, 0, 0);
+        viewport = new FitViewport(Config.WORLD_WIDTH, Config.WORLD_HEIGHT, camera);
+
         game = main;
-        batch = game.getBatch();
+        batch = new SpriteBatch();
         factory = FontFactory.getInstance();
         font32 = factory.generateFont(FontFactory.FONT_PRESS_START2P, 32, Color.WHITE);
         stage = new Stage(viewport, batch);
@@ -39,7 +45,6 @@ public class MainMenuScreen extends AbstractGameScreen {
 
         Assets.music.play();
         Gdx.input.setInputProcessor(stage);
-
     }
 
     @Override
@@ -52,7 +57,6 @@ public class MainMenuScreen extends AbstractGameScreen {
     @Override
     public void draw(){
         batch.setProjectionMatrix(camera.combined);
-        //batch.disableBlending();
 
         batch.begin();
             //FIXME: Read score and coins from xml.
@@ -83,7 +87,6 @@ public class MainMenuScreen extends AbstractGameScreen {
                 super.tap(event, x, y, count, button);
                 worldRenderer = null;
                 stage.dispose();
-                dispose();
                 game.setScreen(new PlayScreen(game));
             }
         });
@@ -95,7 +98,6 @@ public class MainMenuScreen extends AbstractGameScreen {
                 Assets.music.pause();
                 worldRenderer = null;
                 stage.dispose();
-                dispose();
                 game.setScreen(new AboutScreen(game));
             }
         });

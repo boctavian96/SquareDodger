@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
@@ -30,7 +31,7 @@ public class AboutScreen extends AbstractGameScreen{
 
     public AboutScreen(DodgerMain game){
         this.game = game;
-        batch = game.getBatch();
+        batch = new SpriteBatch();
         factory = FontFactory.getInstance();
         factory = FontFactory.getInstance();
         font32 = factory.generateFont(FontFactory.FONT_PRESS_START2P, 32, Color.YELLOW);
@@ -70,7 +71,6 @@ public class AboutScreen extends AbstractGameScreen{
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button){
                 super.tap(event, x, y, count, button);
-                dispose();
                 game.setScreen(new MainMenuScreen(game));
             }
         });

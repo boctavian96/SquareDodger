@@ -14,7 +14,6 @@ import com.octavian.game.config.Config;
 
 public abstract class AbstractGameScreen extends ScreenAdapter{
 
-    protected Vector3 touchPoint;
     protected Camera camera;
     protected FitViewport viewport;
     protected Stage stage;
@@ -23,11 +22,6 @@ public abstract class AbstractGameScreen extends ScreenAdapter{
     protected float screenWidth;
 
     public AbstractGameScreen(){
-        camera = new OrthographicCamera();
-        camera.position.set(0, 0, 0);
-        viewport = new FitViewport(Config.WORLD_WIDTH, Config.WORLD_HEIGHT, camera);
-        touchPoint = new Vector3();
-
         screenHeight = Config.WORLD_HEIGHT;
         screenWidth = Config.WORLD_WIDTH;
     }

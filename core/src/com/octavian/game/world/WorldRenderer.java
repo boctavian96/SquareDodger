@@ -37,8 +37,8 @@ public class WorldRenderer {
     }
 
     public boolean isPlayerColliding(Player player){
-        for(Obstacle i : obstacles){
-            if(i.isPlayerColliding(player)){
+        for(Obstacle obstacle : obstacles){
+            if(obstacle.isPlayerColliding(player)){
                 return true;
             }
         }
@@ -66,9 +66,9 @@ public class WorldRenderer {
 
 
     private void removeObstaclesIfPassed(){
-        for(Obstacle i : obstacles){
-            if (i.getY() < 0){
-                obstacles.removeValue(i, true);
+        for(Obstacle obstacle : obstacles){
+            if (obstacle.getY() < 0){
+                obstacles.removeValue(obstacle, true);
                 playerScore.addScore();
             }
         }
@@ -78,6 +78,14 @@ public class WorldRenderer {
         for(Obstacle obstacle : obstacles){
             obstacle.draw(batch);
         }
+    }
+
+    public String getScore(){
+        return "" + playerScore.getScore();
+    }
+
+    public void dropCoin(SpriteBatch batch){
+        coin.draw(batch);
     }
 
 }

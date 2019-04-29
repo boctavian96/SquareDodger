@@ -2,6 +2,7 @@ package com.octavian.game.screen;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.octavian.game.DodgerMain;
 import com.octavian.game.util.FontFactory;
 
@@ -20,7 +21,7 @@ public class SkinsScreen extends AbstractGameScreen {
     public SkinsScreen(DodgerMain game){
         super();
         this.game = game;
-        this.batch = game.getBatch();
+        this.batch = new SpriteBatch();
         this.factory = FontFactory.getInstance();
     }
 
