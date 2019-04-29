@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.Array;
 import com.octavian.game.Score;
 import com.octavian.game.config.Assets;
 import com.octavian.game.config.Config;
+import com.octavian.game.datamodel.Coin;
 import com.octavian.game.datamodel.Obstacle;
 import com.octavian.game.datamodel.Player;
 import com.octavian.game.util.Utils;
@@ -20,12 +21,14 @@ public class WorldRenderer {
     private Array<Obstacle> obstacles;
     private int obstaclesNumber;
     private int obstaclesCreated;
+    private Coin coin;
 
     public WorldRenderer(){
         playerScore = new Score();
         obstacles = new Array<Obstacle>();
         obstaclesNumber = 8;
         obstaclesCreated = 0;
+        coin = new Coin(Assets.coinTexture);
     }
 
     private void createNewObstacle(){

@@ -18,17 +18,17 @@ public class Obstacle {
 
     public static final float COLLISION_RECT_SIZE = 48F;
 
-    private final Rectangle collisionRectangle;
-    private float x;
-    private float y;
-    private Texture t;
-    private float speed;
+    protected final Rectangle collisionRectangle;
+    protected float x;
+    protected float y;
+    protected Texture t;
+    protected float speed;
 
     public Obstacle(Texture t){
         this.t = t;
-        this.x = (float)Utils.randomNumber(Gdx.graphics.getWidth());
-        this.y = Gdx.graphics.getHeight();
-        this.speed = (float)Utils.randomNumber((int)MAXIMUM_SPEED) + MINIMUM_SPEED;
+        x = Utils.randomNumber(Gdx.graphics.getWidth());
+        y = Gdx.graphics.getHeight();
+        speed = Utils.randomNumber((int)MAXIMUM_SPEED) + MINIMUM_SPEED;
         collisionRectangle = new Rectangle(x, y, COLLISION_RECT_SIZE, COLLISION_RECT_SIZE);
     }
 
@@ -42,11 +42,11 @@ public class Obstacle {
     }
 
     public float getY(){
-        return this.y;
+        return y;
     }
 
     public void draw(SpriteBatch sb){
-        sb.draw(this.t, this.x, this.y);
+        sb.draw(t, x, y);
     }
 
     public boolean isPlayerColliding(Player player){
@@ -56,8 +56,8 @@ public class Obstacle {
         return Intersector.overlaps(playerRect, collisionRectangle);
     }
 
-    private void updateCollisionRectangle(){
-        collisionRectangle.setY(this.y);
+    protected void updateCollisionRectangle(){
+        collisionRectangle.setY(y);
     }
 
 }

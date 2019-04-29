@@ -85,6 +85,7 @@ public final class Config {
             "player/skin9.png"
     };
 
+    public static String COIN = "various/coin.png";
     public static String LOCK = "various/lock.png";
     public static String LOCK_PRESS = "various/lockPress.png";
 
