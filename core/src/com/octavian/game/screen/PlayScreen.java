@@ -14,6 +14,7 @@ import com.octavian.game.DodgerMain;
 import com.octavian.game.Score;
 import com.octavian.game.config.Assets;
 import com.octavian.game.config.Config;
+import com.octavian.game.datamodel.Coins;
 import com.octavian.game.datamodel.Player;
 import com.octavian.game.util.FontFactory;
 import com.octavian.game.util.GameInput;
@@ -33,9 +34,8 @@ public class PlayScreen extends AbstractGameScreen {
     private FontFactory factory;
     private WorldRenderer worldRenderer;
     private Player player;
-    private GameInput input;
-    private Score score;
     private Vector3 touchPoint;
+    private Coins coins;
 
     private BitmapFont font32;
 
@@ -51,9 +51,8 @@ public class PlayScreen extends AbstractGameScreen {
         font32 = factory.generateFont(FontFactory.FONT_PRESS_START2P, 32, Color.WHITE);
         worldRenderer = new WorldRenderer();
         player = new Player(Assets.skinTextures.first(), 100, 100);
-        input = new GameInput();
-        score = new Score();
         touchPoint = new Vector3(0, 0,0);
+        coins = new Coins(0);
 
         Gdx.input.setInputProcessor(stage);
         instantiateHUD();
@@ -71,15 +70,17 @@ public class PlayScreen extends AbstractGameScreen {
             Gdx.app.log("Touch Y", "" + touchPoint.y);
         }
 
+        worldRenderer.createCoin();
+        worldRenderer.updateCoin(delta);
         worldRenderer.updateObstacles(delta);
         worldRenderer.checkIfObstacleIsNeeded();
 
-        if(Gdx.input.isKeyPressed(Input.Keys.BACK)){
-            game.setScreen(new MainMenuScreen(game));
-        }
-
         if(worldRenderer.isPlayerColliding(player)){
             //game.setScreen(new MainMenuScreen(game));
+        }
+
+        if(worldRenderer.isCoinColliding(player)){
+            coins.addCoins();
         }
 
         Utils.clearScreen();
@@ -101,6 +102,7 @@ public class PlayScreen extends AbstractGameScreen {
             font32.draw(batch, "Score: " + worldRenderer.getScore(), Config.WORLD_WIDTH / 2, Config.WORLD_HEIGHT - Config.WORLD_UNIT);
 
             worldRenderer.drawObstacles(batch);
+            worldRenderer.dropCoin(batch);
         batch.end();
 
         stage.draw();

@@ -18,10 +18,13 @@ import com.octavian.game.util.Utils;
 public class WorldRenderer {
 
     private Score playerScore;
+
     private Array<Obstacle> obstacles;
     private int obstaclesNumber;
     private int obstaclesCreated;
+
     private Coin coin;
+    private boolean coinPassed;
 
     public WorldRenderer(){
         playerScore = new Score();
@@ -87,8 +90,35 @@ public class WorldRenderer {
         return "" + playerScore.getScore();
     }
 
+    public void createCoin(){
+        if(coinPassed){
+            coin = new Coin(Assets.coinTexture);
+        }
+    }
+
     public void dropCoin(SpriteBatch batch){
         coin.draw(batch);
+    }
+
+    public void updateCoin(float delta){
+        coin.update(delta);
+        coinPassed = isCoinPassed();
+    }
+
+    public boolean isCoinColliding(Player player){
+        if (coin.isPlayerColliding(player)){
+            coin.setPosition(-50F);
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean isCoinPassed(){
+        if(coin.getY() < 0){
+            return true;
+        }
+        return false;
     }
 
 }
