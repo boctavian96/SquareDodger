@@ -99,7 +99,7 @@ public class PlayScreen extends AbstractGameScreen {
 
         batch.begin();
             player.draw(batch);
-            font32.draw(batch, "Score: " + worldRenderer.getScore(), Config.WORLD_WIDTH / 2, Config.WORLD_HEIGHT - Config.WORLD_UNIT);
+            font32.draw(batch, "Score: " + worldRenderer.getScore(), Config.WORLD_WIDTH / 2, Config.WORLD_HEIGHT );
 
             worldRenderer.drawObstacles(batch);
             worldRenderer.dropCoin(batch);
