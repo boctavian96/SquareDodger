@@ -41,6 +41,7 @@ public final class Assets {
     public static ImageButton skins;
     public static ImageButton exit;
     public static ImageButton back;
+    public static ImageButton buy;
 
     public static Array<Texture> obstacleTextures = new Array<Texture>();
     public static Array<Texture> skinTextures = new Array<Texture>();
@@ -99,6 +100,7 @@ public final class Assets {
         skins = loadButton(skinsTexture,skinsPressTexture);
         exit = loadButton(exitTexture, exitPressTexture);
         back = loadButton(backTexture, backPressTexture);
+        buy = loadButton(buyTexture, buyPressTexture);
     }
 
     public static void playMusic(Music music){
