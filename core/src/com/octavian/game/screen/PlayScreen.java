@@ -51,7 +51,7 @@ public class PlayScreen extends AbstractGameScreen {
         factory = FontFactory.getInstance();
         font32 = factory.generateFont(FontFactory.FONT_PRESS_START2P, 32, Color.WHITE);
         worldRenderer = new WorldRenderer();
-        player = new Player(Assets.skinTextures.first(), 100, 100);
+        player = new Player(Assets.skinTextures.get(Assets.selectedTexture), 100, 100);
         touchPoint = new Vector3(0, 0,0);
         coins = new Coins(0);
 

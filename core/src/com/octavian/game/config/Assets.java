@@ -15,6 +15,9 @@ import com.badlogic.gdx.utils.Array;
  */
 
 public final class Assets {
+    //Selected Texture
+    public static int selectedTexture = 0;
+
     //User interface
     public static Texture playTexture;
     public static Texture playPressTexture;
@@ -42,6 +45,16 @@ public final class Assets {
     public static ImageButton exit;
     public static ImageButton back;
     public static ImageButton buy;
+    public static ImageButton lock;
+    public static ImageButton skinUI1;
+    public static ImageButton skinUI2;
+    public static ImageButton skinUI3;
+    public static ImageButton skinUI4;
+    public static ImageButton skinUI5;
+    public static ImageButton skinUI6;
+    public static ImageButton skinUI7;
+    public static ImageButton skinUI8;
+    public static ImageButton skinUI9;
 
     public static Array<Texture> obstacleTextures = new Array<Texture>();
     public static Array<Texture> skinTextures = new Array<Texture>();
@@ -101,9 +114,17 @@ public final class Assets {
         exit = loadButton(exitTexture, exitPressTexture);
         back = loadButton(backTexture, backPressTexture);
         buy = loadButton(buyTexture, buyPressTexture);
-    }
+        lock = loadButton(exitTexture, exitPressTexture);
 
-    public static void playMusic(Music music){
-
+        //Skins UI
+        skinUI1 = loadButton(skinTextures.get(0), skinTextures.get(0));
+        skinUI2 = loadButton(skinTextures.get(1), skinTextures.get(1));
+        skinUI3 = loadButton(skinTextures.get(2), skinTextures.get(2));
+        skinUI4 = loadButton(skinTextures.get(3), skinTextures.get(3));
+        skinUI5 = loadButton(skinTextures.get(4), skinTextures.get(4));
+        skinUI6 = loadButton(skinTextures.get(5), skinTextures.get(5));
+        skinUI7 = loadButton(skinTextures.get(6), skinTextures.get(6));
+        skinUI8 = loadButton(skinTextures.get(7), skinTextures.get(7));
+        skinUI9 = loadButton(skinTextures.get(8), skinTextures.get(8));
     }
 }

@@ -98,6 +98,86 @@ public class SkinsScreen extends AbstractGameScreen {
             }
         });
 
+        Assets.skinUI1.addListener(new ActorGestureListener() {
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                super.tap(event, x, y, count, button);
+                Assets.selectedTexture = 0;
+            }
+        });
+
+
+        Assets.skinUI2.addListener(new ActorGestureListener() {
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                super.tap(event, x, y, count, button);
+                Assets.selectedTexture = 1;
+            }
+        });
+
+
+        Assets.skinUI3.addListener(new ActorGestureListener() {
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                super.tap(event, x, y, count, button);
+                Assets.selectedTexture = 2;
+            }
+        });
+
+
+        Assets.skinUI4.addListener(new ActorGestureListener() {
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                super.tap(event, x, y, count, button);
+                Assets.selectedTexture = 3;
+            }
+        });
+
+
+        Assets.skinUI5.addListener(new ActorGestureListener() {
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                super.tap(event, x, y, count, button);
+                Assets.selectedTexture = 4;
+            }
+        });
+
+
+        Assets.skinUI6.addListener(new ActorGestureListener() {
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                super.tap(event, x, y, count, button);
+                Assets.selectedTexture = 5;
+            }
+        });
+
+
+        Assets.skinUI7.addListener(new ActorGestureListener() {
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                super.tap(event, x, y, count, button);
+                Assets.selectedTexture = 6;
+            }
+        });
+
+
+        Assets.skinUI8.addListener(new ActorGestureListener() {
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                super.tap(event, x, y, count, button);
+                Assets.selectedTexture = 7;
+            }
+        });
+
+
+        Assets.skinUI9.addListener(new ActorGestureListener() {
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button) {
+                super.tap(event, x, y, count, button);
+                Assets.selectedTexture = 8;
+            }
+        });
+
         stage.addActor(Assets.back);
         stage.addActor(Assets.buy);
 
@@ -110,15 +190,15 @@ public class SkinsScreen extends AbstractGameScreen {
         uiTable.pack();
         uiTable.setDebug(true);
 
-        skinsTable.add(Assets.buy);
-        skinsTable.add(Assets.buy);
-        skinsTable.add(Assets.buy).row();
-        skinsTable.add(Assets.buy);
-        skinsTable.add(Assets.buy);
-        skinsTable.add(Assets.buy).row();
-        skinsTable.add(Assets.buy);
-        skinsTable.add(Assets.buy);
-        skinsTable.add(Assets.buy).row();
+        skinsTable.add(Assets.skinUI1);
+        skinsTable.add(Assets.skinUI2);
+        skinsTable.add(Assets.skinUI3).row();
+        skinsTable.add(Assets.skinUI4);
+        skinsTable.add(Assets.skinUI5);
+        skinsTable.add(Assets.skinUI6).row();
+        skinsTable.add(Assets.skinUI7);
+        skinsTable.add(Assets.skinUI8);
+        skinsTable.add(Assets.skinUI9).row();
 
 
         skinsTable.setFillParent(true);
