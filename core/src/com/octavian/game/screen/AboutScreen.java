@@ -30,6 +30,7 @@ public class AboutScreen extends AbstractGameScreen{
 
 
     public AboutScreen(DodgerMain game){
+        super();
         this.game = game;
         batch = new SpriteBatch();
         factory = FontFactory.getInstance();

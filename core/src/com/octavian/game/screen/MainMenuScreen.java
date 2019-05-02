@@ -30,10 +30,6 @@ public class MainMenuScreen extends AbstractGameScreen {
     private WorldRenderer worldRenderer;
 
     public MainMenuScreen(DodgerMain main){
-        camera = new OrthographicCamera();
-        camera.position.set(0, 0, 0);
-        viewport = new FitViewport(Config.WORLD_WIDTH, Config.WORLD_HEIGHT, camera);
-
         game = main;
         batch = new SpriteBatch();
         factory = FontFactory.getInstance();
