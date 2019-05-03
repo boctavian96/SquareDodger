@@ -39,7 +39,7 @@ public class MainMenuScreen extends AbstractGameScreen {
 
         instantiateUI();
 
-        Assets.music.play();
+        Assets.playMusic(Assets.music);
         Gdx.input.setInputProcessor(stage);
     }
 
@@ -92,7 +92,7 @@ public class MainMenuScreen extends AbstractGameScreen {
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button){
                 super.tap(event, x, y, count, button);
-                Assets.music.pause();
+                Assets.stopMusic(Assets.music);
                 worldRenderer = null;
                 stage.dispose();
                 Gdx.app.log("SWITCH", "Changed to AboutScreen");
@@ -104,7 +104,7 @@ public class MainMenuScreen extends AbstractGameScreen {
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button){
                 super.tap(event, x, y, count, button);
-                Assets.music.pause();
+                Assets.stopMusic(Assets.music);
                 worldRenderer = null;
                 stage.dispose();
                 Gdx.app.log("SWITCH", "Changed to SkinsScreen");

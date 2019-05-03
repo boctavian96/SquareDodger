@@ -127,4 +127,14 @@ public final class Assets {
         skinUI8 = loadButton(skinTextures.get(7), skinTextures.get(7));
         skinUI9 = loadButton(skinTextures.get(8), skinTextures.get(8));
     }
+
+    public static void playMusic(Music music){
+        if(Settings.isSoundEnabled) {
+            music.play();
+        }
+    }
+
+    public static void stopMusic(Music music){
+        music.pause();
+    }
 }

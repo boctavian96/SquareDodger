@@ -65,6 +65,7 @@ public class PlayScreen extends AbstractGameScreen {
         camera.update();
         if(Gdx.input.isTouched()){
             touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+            camera.unproject(touchPoint);
             player.update(touchPoint);
 
             Gdx.app.log("Touch X", "" + touchPoint.x);
@@ -77,7 +78,7 @@ public class PlayScreen extends AbstractGameScreen {
         worldRenderer.checkIfObstacleIsNeeded();
 
         if(worldRenderer.isPlayerColliding(player)){
-            //game.setScreen(new MainMenuScreen(game));
+            game.setScreen(new GameOverScreen(game, coins, worldRenderer.getScore()));
         }
 
         if(worldRenderer.isCoinColliding(player)){

@@ -59,7 +59,7 @@ public class SkinsScreen extends AbstractGameScreen {
         skins = Utils.getDummySkins();
 
         //FIXME: Update after dovle's feature.
-        availableCoins = new Coins(1000L);
+        availableCoins = new Coins(10L);
 
         isTouchReleased = true;
 
@@ -113,10 +113,10 @@ public class SkinsScreen extends AbstractGameScreen {
             //Skin Details
             if(selectedSkin.isUnlocked()) {
                 batch.draw(selectedSkin.getTexture(), Config.WORLD_WIDTH / 2 - Config.WORLD_UNIT, Config.WORLD_HEIGHT / 2);
-                font16Yellow.draw(batch, "Selected skin: " + selectedSkin.getName(), Config.WORLD_WIDTH/2 - 2 * Config.WORLD_UNIT, Config.WORLD_HEIGHT/2 + 4 * Config.WORLD_UNIT);
+                font16Yellow.draw(batch, "Selected skin: " + selectedSkin.getName(), Config.WORLD_WIDTH/4, Config.WORLD_HEIGHT/2 + 4 * Config.WORLD_UNIT);
             }else{
-                batch.draw(Assets.lockTexture, Config.WORLD_WIDTH/2 - Config.WORLD_UNIT, Config.WORLD_HEIGHT/2);
-                font16Yellow.draw(batch, "Cost: " + selectedSkin.getCost(), Config.WORLD_WIDTH/2 - Config.WORLD_UNIT, Config.WORLD_HEIGHT/2 - 2 * Config.WORLD_UNIT);
+                batch.draw(Assets.lockTexture, Config.WORLD_WIDTH/2 - 2 * Config.WORLD_UNIT, Config.WORLD_HEIGHT/2);
+                font16Yellow.draw(batch, "Cost: " + selectedSkin.getCost(), Config.WORLD_WIDTH/2 - 2 * Config.WORLD_UNIT, Config.WORLD_HEIGHT/2 - 2 * Config.WORLD_UNIT);
             }
 
         batch.end();
@@ -166,8 +166,9 @@ public class SkinsScreen extends AbstractGameScreen {
         uiTable.pad(Config.WORLD_UNIT);
         uiTable.align(Align.bottom);
         uiTable.pack();
-        uiTable.setDebug(true);
+        uiTable.setDebug(false);
 
         stage.addActor(uiTable);
+        //stage.addActor(skinsTable);
     }
 }
