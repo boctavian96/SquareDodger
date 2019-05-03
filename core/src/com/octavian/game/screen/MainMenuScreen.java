@@ -31,8 +31,9 @@ public class MainMenuScreen extends AbstractGameScreen {
     private BitmapFont font32;
     private WorldRenderer worldRenderer;
 
-    public MainMenuScreen(DodgerMain main){
-        game = main;
+    public MainMenuScreen(DodgerMain game){
+        super();
+        this.game = game;
         batch = new SpriteBatch();
         factory = FontFactory.getInstance();
         font32 = factory.generateFont(FontFactory.FONT_PRESS_START2P, 32, Color.WHITE);
