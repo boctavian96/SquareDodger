@@ -12,9 +12,15 @@ import com.octavian.game.util.Utils;
 public class GameOverScreen extends AbstractGameScreen {
     private DodgerMain game;
 
-    public GameOverScreen(DodgerMain game, Coins coins, String score){
+    private int coins;
+    private String score;
+
+    public GameOverScreen(DodgerMain game, int coins, String score){
         super();
         this.game = game;
+
+        this.coins = coins;
+        this.score = score;
     }
 
     @Override
@@ -32,4 +38,4 @@ public class GameOverScreen extends AbstractGameScreen {
     public void update(float delta){
         Utils.clearScreen();
     }
-}
+}log

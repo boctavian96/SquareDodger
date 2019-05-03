@@ -36,6 +36,7 @@ public class PlayScreen extends AbstractGameScreen {
     private Player player;
     private Vector3 touchPoint;
     private Coins coins;
+    private int collectedCoins;
 
     private BitmapFont font32;
 
@@ -54,6 +55,7 @@ public class PlayScreen extends AbstractGameScreen {
         player = new Player(Assets.skinTextures.get(Assets.selectedTexture), 100, 100);
         touchPoint = new Vector3(0, 0,0);
         coins = new Coins(0);
+        collectedCoins = 0;
 
         Gdx.input.setInputProcessor(stage);
         instantiateHUD();
@@ -78,11 +80,12 @@ public class PlayScreen extends AbstractGameScreen {
         worldRenderer.checkIfObstacleIsNeeded();
 
         if(worldRenderer.isPlayerColliding(player)){
-            game.setScreen(new GameOverScreen(game, coins, worldRenderer.getScore()));
+            game.setScreen(new GameOverScreen(game, collectedCoins, worldRenderer.getScore()));
         }
 
         if(worldRenderer.isCoinColliding(player)){
             coins.addCoins();
+            collectedCoins++;
         }
 
         Utils.clearScreen();
