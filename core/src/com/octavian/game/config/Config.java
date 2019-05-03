@@ -2,29 +2,26 @@ package com.octavian.game.config;
 
 public final class Config {
 
-    private Config(){
-        //Do not instantiate.
-    }
-
-    public static float WORLD_HEIGHT = 800F;
-    public static float WORLD_WIDTH = 480F;
-    public static float WORLD_UNIT = 32F;
+    public static final float WORLD_HEIGHT = 1334F;
+    public static final float WORLD_WIDTH = 750F;
+    public static final float WORLD_UNIT = 32F;
 
     //Score
-   public static float POINTS_PER_RECT = 5F;
+   public static final float POINTS_PER_RECT = 5F;
 
     //Number of textures
     public static int NUMBER_OF_TEXTURES = 48;
 
-    //
-    public static int MAXIMUM_OBSTACLES = 1000;
+    public static final int MAXIMUM_OBSTACLES = 500;
 
     //Music
-    public static String MUSIC1 = "audio/PatakasWorld.mp3";
+    public static final String MUSIC1 = "audio/PatakasWorld.mp3";
+
+    //About Text File
+    public static final String ABOUT_TEXT_FILE = "common/about.txt";
 
     //Images
-
-    public static String[] SQUARES = {
+    public static final String[] SQUARES = {
             "obstacle/square1.png",
             "obstacle/square2.png",
             "obstacle/square3.png",
@@ -76,9 +73,7 @@ public final class Config {
     };
 
     //Player Skins
-
-    public static String[] SKINS_ARRAY = {
-
+    public static final String[] SKINS_ARRAY = {
             "player/skin1.png",
             "player/skin2.png",
             "player/skin3.png",
@@ -90,6 +85,7 @@ public final class Config {
             "player/skin9.png"
     };
 
+    public static String COIN = "various/coin.png";
     public static String LOCK = "various/lock.png";
     public static String LOCK_PRESS = "various/lockPress.png";
 
@@ -121,4 +117,8 @@ public final class Config {
 
     //Skins file
     public static String SKINS_LIST = "skins.txt";
+
+    private Config(){
+     //Do not instantiate.
+    }
 }

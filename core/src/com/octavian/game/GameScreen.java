@@ -123,8 +123,8 @@ public class GameScreen extends ScreenAdapter {
 
 
         selection = playerTextures.get(0);
-        playerScore = new Score();
-        playerCoins = new Coins();
+        //playerScore = new Score();
+        //playerCoins = new Coins();
         playerCoins.setCoins(Utils.getGameFile('c'));
         player = new Player(selection, Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
         obstacles = new Array<Obstacle>();

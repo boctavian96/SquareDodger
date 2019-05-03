@@ -15,8 +15,12 @@ import com.octavian.game.database.IDataSource;
 import com.octavian.game.database.XMLDataSource;
 import com.octavian.game.datamodel.Coins;
 import com.octavian.game.datamodel.HighScore;
+import com.octavian.game.datamodel.Obstacle;
 import com.octavian.game.datamodel.Player;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -154,6 +158,10 @@ public class Utils {
         return state;
     }
 
+    public static boolean checkBack(){
+        return Gdx.input.isKeyJustPressed(Input.Keys.BACK);
+    }
+
     @Deprecated
     public static List<Texture> loadTextures(String[] args) {
         ArrayList<Texture> list = new ArrayList<Texture>();
@@ -250,6 +258,20 @@ public class Utils {
 
         //FIXME: Think about this...
         return String.valueOf(coins.getCoins());
+    }
+
+    /**
+     * Little easter egg.
+     * @return TRUE
+     */
+    public static boolean isRichardARooster(){
+        return true;
+    }
+
+    public static String readAbout(){
+        FileHandle file;
+        file = Gdx.files.internal(Config.ABOUT_TEXT_FILE);
+        return file.readString();
     }
 
 }

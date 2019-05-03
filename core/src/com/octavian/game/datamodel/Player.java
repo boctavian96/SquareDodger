@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
+import com.octavian.game.config.Config;
 
 
 /**
@@ -15,8 +17,8 @@ public class Player {
     private static float SIZE = 48F;
 
     private final Rectangle collisionRectangle;
-    private float x=0;
-    private float y=0;
+    private float x;
+    private float y;
     private Texture t;
 
     public Player(Texture t, float x, float y){
@@ -28,17 +30,32 @@ public class Player {
     }
 
     public void update(float x, float y){
-        if(y < Gdx.graphics.getHeight() - 100) {
-            setY(y);
+        float virtualY = Config.WORLD_HEIGHT + 800 - y;
+
+        if(virtualY < Gdx.graphics.getHeight()) {
+            setY(virtualY);
         }else{
-            setY(Gdx.graphics.getHeight() - 100);
-        }
-        if (y < 50){
-            setY(50);
+            setY(Gdx.graphics.getHeight() - 500);
         }
 
-        setX(x);
+        if (virtualY < 100){
+            setY(100);
+        }
+
+        if (x < Gdx.graphics.getWidth()){
+            setX(x);
+        }else{
+            setX(Gdx.graphics.getWidth() - 50);
+        }
+
+        if(x < 0){
+            setX(50);
+        }
         updateCollisionRectangle();
+    }
+
+    public void update(Vector3 touchPoint){
+        update(touchPoint.x, touchPoint.y);
     }
 
     public void draw(SpriteBatch sb){
@@ -73,7 +90,7 @@ public class Player {
     }
 
     private void updateCollisionRectangle(){
-        this.collisionRectangle.setPosition(this.x, this.y);
+        collisionRectangle.setPosition(x, y);
     }
 
 

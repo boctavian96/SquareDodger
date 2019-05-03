@@ -23,7 +23,7 @@ public class Coins {
     }
 
     public void addCoins(){
-        coins += 5L;
+        coins += 1L;
     }
 
     public void setCoins(long c){

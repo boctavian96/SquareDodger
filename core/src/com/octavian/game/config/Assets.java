@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Array;
 
 /**
  * Created by octavian on 4/14/19.
@@ -33,18 +34,37 @@ public final class Assets {
     public static Texture gameover;
     //public static Texture selection; //Selected texture
 
+    public static Music music;
+
     public static ImageButton play;
     public static ImageButton about;
     public static ImageButton skins;
     public static ImageButton exit;
     public static ImageButton back;
 
+    public static Array<Texture> obstacleTextures = new Array<Texture>();
+    public static Array<Texture> skinTextures = new Array<Texture>();
+    public static Texture coinTexture;
 
-    public static Texture loadTexture (String file) {
-        return new Texture(Gdx.files.internal(file));
+
+    private static Texture loadTexture (String file) {
+        return new Texture(file);
     }
 
-    public static ImageButton loadButton(Texture buttonUp, Texture buttonDown){
+    private static Music loadMusic(String file){
+        return Gdx.audio.newMusic(Gdx.files.internal(file));
+    }
+
+    private static Array<Texture> loadTexture(String[] files){
+        Array<Texture> textures = new Array<Texture>();
+        for(int i = 0; i < files.length; i++){
+            textures.add(loadTexture(files[i]));
+        }
+
+        return textures;
+    }
+
+    private static ImageButton loadButton(Texture buttonUp, Texture buttonDown){
         return new ImageButton(new TextureRegionDrawable(new TextureRegion(buttonUp)), new TextureRegionDrawable(new TextureRegion(buttonDown)));
 
     }
@@ -67,14 +87,18 @@ public final class Assets {
         lockTexturePress = loadTexture(Config.LOCK_PRESS);
         gameover = loadTexture(Config.GAMEOVER);
 
+        obstacleTextures.addAll(loadTexture(Config.SQUARES));
+        skinTextures.addAll(loadTexture(Config.SKINS_ARRAY));
+        coinTexture = loadTexture(Config.COIN);
+
+        music = loadMusic(Config.MUSIC1);
+        music.setLooping(true);
+
         play = loadButton(playTexture, playPressTexture);
         about = loadButton(aboutTexture, aboutPressTexture);
         skins = loadButton(skinsTexture,skinsPressTexture);
         exit = loadButton(exitTexture, exitPressTexture);
         back = loadButton(backTexture, backPressTexture);
-
-
-
     }
 
     public static void playMusic(Music music){
