@@ -286,9 +286,11 @@ public class Utils {
      */
     public static Array<Skin> getDummySkins(){
         Array<Skin> skins = new Array<Skin>();
+        boolean isEven;
 
         for(int i = 0; i < 9; i++){
-            skins.add(new Skin("dummy" + i, Assets.skinTextures.get(i), 1000, true));
+            isEven = i % 2 == 0 ? true : false;
+            skins.add(new Skin("dummy" + i, Assets.skinTextures.get(i), i * 10, isEven));
         }
 
         return skins;

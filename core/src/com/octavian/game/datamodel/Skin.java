@@ -38,4 +38,6 @@ public class Skin{
     public boolean isUnlocked(){
         return isUnlocked;
     }
+
+    public void unlock(){ isUnlocked = true;}
 }
