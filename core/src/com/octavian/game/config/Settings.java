@@ -11,4 +11,8 @@ public final class Settings {
     private Settings(){
         //Do not instantiate
     }
+
+    public static void switchSound(){
+        isSoundEnabled = !isSoundEnabled;
+    }
 }

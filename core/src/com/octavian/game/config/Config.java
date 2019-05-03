@@ -90,24 +90,24 @@ public final class Config {
     public static final String LOCK_PRESS = "various/lockPress.png";
 
     //UI
-    public static final String PLAY = "ui/play.png";
-    public static final String PLAY_PRESS = "ui/playPress.png";
-    public static final String ABOUT = "ui/about.png";
-    public static final String ABOUT_PRESS = "ui/aboutPress.png";
-    public static final String SKINS = "ui/skins.png";
-    public static final String SKINS_PRESS = "ui/skinsPress.png";
-    public static final String EXIT = "ui/exit.png";
-    public static final String EXIT_PRESS = "ui/exitPress.png";
-    public static final String BACK = "ui/back.png";
-    public static final String BACK_PRESS = "ui/backPress.png";
-    public static final String BUY = "ui/buy.png";
-    public static final String BUY_PRESS = "ui/buyPress.png";
-    public static final String RESET = "ui/reset.png";
-    public static final String RESET_PRESS = "ui/resetPress.png";
-    public static final String SOUND = "ui/sound.png";
-    public static final String SOUND_PRESS = "ui/soundPress.png";
-    public static final String SOUND_MUTE = "ui/soundMute.png";
-    public static final String SOUND_MUTE_PRESS = "ui/soundMutePress.png";
+    public static String PLAY = "ui/play.png";
+    public static String PLAY_PRESS = "ui/playPress.png";
+    public static String ABOUT = "ui/about.png";
+    public static String ABOUT_PRESS = "ui/aboutPress.png";
+    public static String SKINS = "ui/skins.png";
+    public static String SKINS_PRESS = "ui/skinsPress.png";
+    public static String EXIT = "ui/exit.png";
+    public static String EXIT_PRESS = "ui/exitPress.png";
+    public static String BACK = "ui/back.png";
+    public static String BACK_PRESS = "ui/backPress.png";
+    public static String BUY = "ui/buy.png";
+    public static String BUY_PRESS = "ui/buyPress.png";
+    public static String RESET = "ui/restart.png";
+    public static String RESET_PRESS = "ui/restartPress.png";
+    public static String SOUND = "ui/sound.png";
+    public static String SOUND_PRESS = "ui/soundPress.png";
+    public static String SOUND_MUTE = "ui/soundMuted.png";
+    public static String SOUND_MUTE_PRESS = "ui/soundMutedPress.png";
 
     //Screen
     @Deprecated
