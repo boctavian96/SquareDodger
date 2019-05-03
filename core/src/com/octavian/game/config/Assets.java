@@ -31,6 +31,12 @@ public final class Assets {
     public static Texture backPressTexture;
     public static Texture buyTexture;
     public static Texture buyPressTexture;
+    public static Texture resetTexture;
+    public static Texture resetPressTexture;
+    public static Texture soundTexture;
+    public static Texture soundPressTexture;
+    public static Texture soundMuteTexture;
+    public static Texture soundMutePressTexture;
 
     public static Texture lockTexture;
     public static Texture lockTexturePress;
@@ -99,6 +105,12 @@ public final class Assets {
         buyPressTexture = loadTexture(Config.BUY_PRESS);
         lockTexture = loadTexture(Config.LOCK);
         lockTexturePress = loadTexture(Config.LOCK_PRESS);
+        resetTexture = loadTexture(Config.RESET);
+        resetPressTexture = loadTexture(Config.RESET_PRESS);
+        soundTexture = loadTexture(Config.SOUND);
+        soundPressTexture = loadTexture(Config.SOUND_PRESS);
+        soundMuteTexture = loadTexture(Config.SOUND_MUTE);
+        soundMutePressTexture = loadTexture(Config.SOUND_MUTE_PRESS);
         gameover = loadTexture(Config.GAMEOVER);
 
         obstacleTextures.addAll(loadTexture(Config.SQUARES));

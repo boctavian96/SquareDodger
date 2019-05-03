@@ -10,7 +10,7 @@ public final class Config {
    public static final float POINTS_PER_RECT = 5F;
 
     //Number of textures
-    public static int NUMBER_OF_TEXTURES = 48;
+    public static final int NUMBER_OF_TEXTURES = 48;
 
     public static final int MAXIMUM_OBSTACLES = 500;
 
@@ -85,37 +85,47 @@ public final class Config {
             "player/skin9.png"
     };
 
-    public static String COIN = "various/coin.png";
-    public static String LOCK = "various/lock.png";
-    public static String LOCK_PRESS = "various/lockPress.png";
+    public static final String COIN = "various/coin.png";
+    public static final String LOCK = "various/lock.png";
+    public static final String LOCK_PRESS = "various/lockPress.png";
 
     //UI
-    public static String PLAY = "ui/play.png";
-    public static String PLAY_PRESS = "ui/playPress.png";
-    public static String ABOUT = "ui/about.png";
-    public static String ABOUT_PRESS = "ui/aboutPress.png";
-    public static String SKINS = "ui/skins.png";
-    public static String SKINS_PRESS = "ui/skinsPress.png";
-    public static String EXIT = "ui/exit.png";
-    public static String EXIT_PRESS = "ui/exitPress.png";
-    public static String BACK = "ui/back.png";
-    public static String BACK_PRESS = "ui/backPress.png";
-    public static String BUY = "ui/buy.png";
-    public static String BUY_PRESS = "ui/buyPress.png";
+    public static final String PLAY = "ui/play.png";
+    public static final String PLAY_PRESS = "ui/playPress.png";
+    public static final String ABOUT = "ui/about.png";
+    public static final String ABOUT_PRESS = "ui/aboutPress.png";
+    public static final String SKINS = "ui/skins.png";
+    public static final String SKINS_PRESS = "ui/skinsPress.png";
+    public static final String EXIT = "ui/exit.png";
+    public static final String EXIT_PRESS = "ui/exitPress.png";
+    public static final String BACK = "ui/back.png";
+    public static final String BACK_PRESS = "ui/backPress.png";
+    public static final String BUY = "ui/buy.png";
+    public static final String BUY_PRESS = "ui/buyPress.png";
+    public static final String RESET = "ui/reset.png";
+    public static final String RESET_PRESS = "ui/resetPress.png";
+    public static final String SOUND = "ui/sound.png";
+    public static final String SOUND_PRESS = "ui/soundPress.png";
+    public static final String SOUND_MUTE = "ui/soundMute.png";
+    public static final String SOUND_MUTE_PRESS = "ui/soundMutePress.png";
 
     //Screen
+    @Deprecated
     public static String GAMEOVER = "screen/gameover.png";
 
     //Highscore
     @Deprecated
     public static String HS_FILE = "highscore.txt";
 
+    @Deprecated
     public static String LOADFILE = "load.xml";
 
     //Coins file
+    @Deprecated
     public static String CN_FILE = "coins.txt";
 
     //Skins file
+    @Deprecated
     public static String SKINS_LIST = "skins.txt";
 
     private Config(){
