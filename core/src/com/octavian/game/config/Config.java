@@ -100,8 +100,8 @@ public final class Config {
     public static String EXIT_PRESS = "ui/exitPress.png";
     public static String BACK = "ui/back.png";
     public static String BACK_PRESS = "ui/backPress.png";
-    public static String BUY = "ui/pay.png";
-    public static String BUY_PRESS = "ui/payPress.png";
+    public static String BUY = "ui/buy.png";
+    public static String BUY_PRESS = "ui/buyPress.png";
 
     //Screen
     public static String GAMEOVER = "screen/gameover.png";

@@ -38,4 +38,4 @@ public class GameOverScreen extends AbstractGameScreen {
     public void update(float delta){
         Utils.clearScreen();
     }
-}log
+}
