@@ -43,10 +43,12 @@ public class SkinsScreen extends AbstractGameScreen {
     private boolean isTouchReleased;
 
     public SkinsScreen(DodgerMain game){
+        super();
         this.game = game;
         batch = new SpriteBatch();
         factory = FontFactory.getInstance();
         touchInput = new GameInput();
+        skins = Utils.getDummySkins();
 
         camera = new OrthographicCamera(Config.WORLD_WIDTH, Config.WORLD_HEIGHT);
         viewport = new FitViewport(Config.WORLD_WIDTH, Config.WORLD_HEIGHT, camera);
@@ -56,7 +58,6 @@ public class SkinsScreen extends AbstractGameScreen {
 
         stage = new Stage(viewport, batch);
         Gdx.input.setInputProcessor(stage);
-        skins = Utils.getDummySkins();
 
         //FIXME: Update after dovle's feature.
         availableCoins = new Coins(10L);
@@ -145,6 +146,7 @@ public class SkinsScreen extends AbstractGameScreen {
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button){
                 super.tap(event, x, y, count, button);
+                selectedSkin = skins.get(Assets.selectedTexture);
                 if(selectedSkin.isUnlocked()){
                     Gdx.app.log("WARN", "Item already bought!");
                 }else {
@@ -170,5 +172,11 @@ public class SkinsScreen extends AbstractGameScreen {
 
         stage.addActor(uiTable);
         //stage.addActor(skinsTable);
+    }
+
+    public void dispose(){
+        stage.dispose();
+        Assets.buy.clearListeners();
+        Assets.back.clearListeners();
     }
 }

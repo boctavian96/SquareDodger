@@ -276,13 +276,14 @@ public class Utils {
 
     public static String readAbout(){
         FileHandle file;
+        String about;
         file = Gdx.files.internal(Config.ABOUT_TEXT_FILE);
         return file.readString();
     }
 
     /**
      * Dummy Skins generator
-     * @return 9 identical skins.
+     * @return 9 dummy skins.
      */
     public static Array<Skin> getDummySkins(){
         Array<Skin> skins = new Array<Skin>();

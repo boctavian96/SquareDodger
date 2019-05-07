@@ -54,6 +54,7 @@ public final class Assets {
     public static ImageButton lock;
     public static ImageButton reset;
     public static ImageButton sound;
+    public static ImageButton soundMute;
 
     public static Array<Texture> obstacleTextures = new Array<Texture>();
     public static Array<Texture> skinTextures = new Array<Texture>();
@@ -122,6 +123,7 @@ public final class Assets {
         lock = loadButton(exitTexture, exitPressTexture);
         reset = loadButton(resetTexture, resetPressTexture);
         sound = loadButton(soundTexture, soundPressTexture);
+        soundMute = loadButton(soundMuteTexture, soundMutePressTexture);
     }
 
     public static void playMusic(Music music){

@@ -70,8 +70,8 @@ public class PlayScreen extends AbstractGameScreen {
             camera.unproject(touchPoint);
             player.update(touchPoint);
 
-            Gdx.app.log("Touch X", "" + touchPoint.x);
-            Gdx.app.log("Touch Y", "" + touchPoint.y);
+            //Gdx.app.log("Touch X", "" + touchPoint.x);
+            //Gdx.app.log("Touch Y", "" + touchPoint.y);
         }
 
         worldRenderer.createCoin();
@@ -81,12 +81,17 @@ public class PlayScreen extends AbstractGameScreen {
 
         if(worldRenderer.isPlayerColliding(player)){
             game.setScreen(new GameOverScreen(game, collectedCoins, worldRenderer.getScore()));
+            Gdx.app.log("SWITCH", "Player is dead Switch to GameOver");
+            dispose();
         }
 
         if(worldRenderer.isCoinColliding(player)){
             coins.addCoins();
             collectedCoins++;
         }
+
+        if(worldRenderer.is)
+
 
         Utils.clearScreen();
     }
@@ -122,5 +127,9 @@ public class PlayScreen extends AbstractGameScreen {
         table.pack();
 
         stage.addActor(table);
+    }
+
+    public void dispose(){
+        stage.dispose();
     }
 }

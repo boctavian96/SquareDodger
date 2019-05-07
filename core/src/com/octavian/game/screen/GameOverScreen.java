@@ -79,6 +79,8 @@ public class GameOverScreen extends AbstractGameScreen {
         Assets.reset.addListener(new ActorGestureListener(){
             public void tap(InputEvent event, float x, float y, int count, int button){
                 super.tap(event, x, y, count, button);
+                dispose();
+                Gdx.app.log("SWITCH", "Start a new game!");
                 game.setScreen(new PlayScreen(game));
             }
 
@@ -87,6 +89,8 @@ public class GameOverScreen extends AbstractGameScreen {
         Assets.back.addListener(new ActorGestureListener(){
             public void tap(InputEvent event, float x, float y, int count, int button){
                 super.tap(event, x, y, count, button);
+                dispose();
+                Gdx.app.log("SWITCH", "Back to MainMenu");
                 game.setScreen(new MainMenuScreen(game));
             }
         });
@@ -114,5 +118,11 @@ public class GameOverScreen extends AbstractGameScreen {
         stage.addActor(buttonsTable);
         stage.addActor(textTable);
 
+    }
+
+    public void dispose(){
+        stage.dispose();
+        Assets.back.clearListeners();
+        Assets.reset.clearListeners();
     }
 }

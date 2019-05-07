@@ -50,6 +50,7 @@ public class MainMenuScreen extends AbstractGameScreen {
     public void update(float delta){
         camera.update();
         worldRenderer.updateObstacles(delta);
+        Assets.playMusic(Assets.music);
         Utils.clearScreen();
     }
 
@@ -78,17 +79,16 @@ public class MainMenuScreen extends AbstractGameScreen {
 
     private void instantiateUI(){
         Table table = new Table();
-        Table settingsTable = new Table();
+        final Table settingsTable = new Table();
 
         table.defaults().space(Config.WORLD_UNIT);
-        settingsTable.defaults().space(Config.WORLD_UNIT);
 
         Assets.play.addListener(new ActorGestureListener(){
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button){
                 super.tap(event, x, y, count, button);
                 worldRenderer = null;
-                stage.dispose();
+                dispose();
                 Gdx.app.log("SWITCH", "Changed to PlayScreen");
                 game.setScreen(new PlayScreen(game));
             }
@@ -100,7 +100,7 @@ public class MainMenuScreen extends AbstractGameScreen {
                 super.tap(event, x, y, count, button);
                 Assets.stopMusic(Assets.music);
                 worldRenderer = null;
-                stage.dispose();
+                dispose();
                 Gdx.app.log("SWITCH", "Changed to AboutScreen");
                 game.setScreen(new AboutScreen(game));
             }
@@ -112,7 +112,7 @@ public class MainMenuScreen extends AbstractGameScreen {
                 super.tap(event, x, y, count, button);
                 Assets.stopMusic(Assets.music);
                 worldRenderer = null;
-                stage.dispose();
+                dispose();
                 Gdx.app.log("SWITCH", "Changed to SkinsScreen");
                 game.setScreen(new SkinsScreen(game));
             }
@@ -123,6 +123,7 @@ public class MainMenuScreen extends AbstractGameScreen {
             public void tap(InputEvent event, float x, float y, int count, int button){
                 super.tap(event, x, y, count, button);
                 Gdx.app.log("EXIT", "Exiting the app");
+                dispose();
                 Gdx.app.exit();
             }
         });
@@ -134,22 +135,45 @@ public class MainMenuScreen extends AbstractGameScreen {
                 super.tap(event, x, y, count, button);
                 Settings.switchSound();
                 Assets.playMusic(Assets.music);
+                settingsTable.removeActor(Assets.sound);
+                settingsTable.add(Assets.soundMute);
+                Assets.soundMute.setVisible(true);
+                Gdx.app.log("INFO", "Stop the music");
             }
         });
 
+        Assets.soundMute.addListener(new ActorGestureListener(){
+            @Override
+            public void tap(InputEvent event, float x, float y, int count, int button){
+                super.tap(event, x, y, count, button);
+                Settings.switchSound();
+                Assets.playMusic(Assets.music);
+                settingsTable.removeActor(Assets.soundMute);
+                settingsTable.add(Assets.sound);
+                Assets.sound.setVisible(true);
+                Gdx.app.log("INFO", "Play the music");
+            }
+        });
 
         stage.addActor(Assets.play);
         stage.addActor(Assets.about);
         stage.addActor(Assets.skins);
         stage.addActor(Assets.exit);
         stage.addActor(Assets.sound);
+        stage.addActor(Assets.soundMute);
 
         table.add(Assets.play).row();
         table.add(Assets.skins).row();
         table.add(Assets.about).row();
         table.add(Assets.exit).row();
 
-        settingsTable.add(Assets.sound);
+        if(Settings.isSoundEnabled) {
+            settingsTable.add(Assets.sound);
+            Assets.soundMute.setVisible(false);
+        }else{
+            settingsTable.add(Assets.soundMute);
+            Assets.sound.setVisible(false);
+        }
 
         table.setFillParent(true);
         table.center();
@@ -161,5 +185,14 @@ public class MainMenuScreen extends AbstractGameScreen {
 
         stage.addActor(table);
         stage.addActor(settingsTable);
+    }
+
+    public void dispose(){
+        stage.dispose();
+        Assets.sound.clearListeners();
+        Assets.soundMute.clearListeners();
+        Assets.play.clearListeners();
+        Assets.skins.clearListeners();
+        Assets.about.clearListeners();
     }
 }

@@ -102,7 +102,9 @@ public class WorldRenderer {
 
     public void updateCoin(float delta){
         coin.update(delta);
-        coinPassed = isCoinPassed();
+        if(isCoinPassed()){
+            coin.setPosition();
+        }
     }
 
     public boolean isCoinColliding(Player player){
