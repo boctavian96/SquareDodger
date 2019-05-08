@@ -103,7 +103,7 @@ public class WorldRenderer {
     public void updateCoin(float delta){
         coin.update(delta);
         if(isCoinPassed()){
-            coin.setPosition();
+            coin.reset(Config.WORLD_HEIGHT + 100F);
         }
     }
 

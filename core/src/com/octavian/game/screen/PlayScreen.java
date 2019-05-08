@@ -69,9 +69,6 @@ public class PlayScreen extends AbstractGameScreen {
             touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0);
             camera.unproject(touchPoint);
             player.update(touchPoint);
-
-            //Gdx.app.log("Touch X", "" + touchPoint.x);
-            //Gdx.app.log("Touch Y", "" + touchPoint.y);
         }
 
         worldRenderer.createCoin();
@@ -89,9 +86,6 @@ public class PlayScreen extends AbstractGameScreen {
             coins.addCoins();
             collectedCoins++;
         }
-
-        if(worldRenderer.is)
-
 
         Utils.clearScreen();
     }

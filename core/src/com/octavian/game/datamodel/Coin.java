@@ -23,5 +23,11 @@ public class Coin extends Obstacle {
         updateCollisionRectangle();
     }
 
+    public void reset(float y){
+        this.y = y;
+        x = Utils.randomNumber(Gdx.graphics.getWidth());
+        updateCollisionRectangle();
+    }
+
 
 }
