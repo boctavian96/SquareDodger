@@ -23,4 +23,20 @@ public class GameInput {
 
     }
 
+    public boolean isSwipeRight(){
+        return (Gdx.input.isTouched() && Gdx.input.getDeltaX() > 0);
+    }
+
+    public boolean isSwipeLeft(){
+        return (Gdx.input.isTouched() && Gdx.input.getDeltaX() < 0);
+    }
+
+    public boolean isSwipeUp(){
+        return (Gdx.input.isTouched() && Gdx.input.getDeltaY()>0);
+    }
+
+    public boolean isSwipeDown(){
+        return (Gdx.input.isTouched() && Gdx.input.getDeltaX()<0);
+    }
+
 }

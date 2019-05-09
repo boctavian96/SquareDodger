@@ -10,6 +10,7 @@ import com.octavian.game.util.FontFactory;
  * Created by octavian on 4/9/19.
  */
 
+//TODO: For the next release. Not for P.1.3.100
 public class HighScoreScreen extends AbstractGameScreen{
 
     private DodgerMain game;

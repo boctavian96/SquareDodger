@@ -30,10 +30,6 @@ public class MainMenuScreen extends AbstractGameScreen {
     private WorldRenderer worldRenderer;
 
     public MainMenuScreen(DodgerMain main){
-        camera = new OrthographicCamera();
-        camera.position.set(0, 0, 0);
-        viewport = new FitViewport(Config.WORLD_WIDTH, Config.WORLD_HEIGHT, camera);
-
         game = main;
         batch = new SpriteBatch();
         factory = FontFactory.getInstance();
@@ -87,6 +83,7 @@ public class MainMenuScreen extends AbstractGameScreen {
                 super.tap(event, x, y, count, button);
                 worldRenderer = null;
                 stage.dispose();
+                Gdx.app.log("SWITCH", "Changed to PlayScreen");
                 game.setScreen(new PlayScreen(game));
             }
         });
@@ -98,6 +95,7 @@ public class MainMenuScreen extends AbstractGameScreen {
                 Assets.music.pause();
                 worldRenderer = null;
                 stage.dispose();
+                Gdx.app.log("SWITCH", "Changed to AboutScreen");
                 game.setScreen(new AboutScreen(game));
             }
         });
@@ -106,6 +104,10 @@ public class MainMenuScreen extends AbstractGameScreen {
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button){
                 super.tap(event, x, y, count, button);
+                Assets.music.pause();
+                worldRenderer = null;
+                stage.dispose();
+                Gdx.app.log("SWITCH", "Changed to SkinsScreen");
                 game.setScreen(new SkinsScreen(game));
             }
         });
@@ -114,6 +116,7 @@ public class MainMenuScreen extends AbstractGameScreen {
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button){
                 super.tap(event, x, y, count, button);
+                Gdx.app.log("EXIT", "Exiting the app");
                 Gdx.app.exit();
             }
         });

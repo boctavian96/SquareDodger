@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Array;
+import com.octavian.game.config.Assets;
 import com.octavian.game.config.Config;
 import com.octavian.game.config.GameState;
 import com.octavian.game.database.IDataSource;
@@ -17,6 +19,7 @@ import com.octavian.game.datamodel.Coins;
 import com.octavian.game.datamodel.HighScore;
 import com.octavian.game.datamodel.Obstacle;
 import com.octavian.game.datamodel.Player;
+import com.octavian.game.datamodel.Skin;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -40,8 +43,8 @@ public class Utils {
     }
 
     public static int randomNumber(int max){
-        Random rand = new Random();
-        return rand.nextInt(max);
+        Random random = new Random();
+        return random.nextInt(max);
     }
 
     /**
@@ -129,6 +132,7 @@ public class Utils {
         }
     }
 
+    @Deprecated
     public static List<String> getSkinsStatus(){
         FileHandle file;
         String[] result;
@@ -209,6 +213,7 @@ public class Utils {
             coords.draw(batch, result, 100, 100 );
     }
 
+    @Deprecated
     public static int lowestSkinCost(){
         List<String> dummy = Utils.getSkinsStatus();
         List<Integer> lst = new ArrayList<Integer>();
@@ -230,6 +235,7 @@ public class Utils {
         return minim;
     }
 
+    @Deprecated
     public static List<Boolean> availableSkins(){
         List<String> skn_list = Utils.getSkinsStatus();
         List<Boolean> bool_list = new ArrayList<Boolean>();
@@ -272,6 +278,20 @@ public class Utils {
         FileHandle file;
         file = Gdx.files.internal(Config.ABOUT_TEXT_FILE);
         return file.readString();
+    }
+
+    /**
+     * Dummy Skins generator
+     * @return 9 identical skins.
+     */
+    public static Array<Skin> getDummySkins(){
+        Array<Skin> skins = new Array<Skin>();
+
+        for(int i = 0; i < 9; i++){
+            skins.add(new Skin("dummy" + i, Assets.skinTextures.get(i), 1000, true));
+        }
+
+        return skins;
     }
 
 }

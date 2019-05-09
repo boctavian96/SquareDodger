@@ -39,18 +39,19 @@ public class PlayScreen extends AbstractGameScreen {
 
     private BitmapFont font32;
 
-    public PlayScreen(DodgerMain main){
-        camera = new OrthographicCamera(Config.WORLD_WIDTH, Config.WORLD_HEIGHT);
-        camera.position.set(510, 810, 0);
-        viewport = new FitViewport(Config.WORLD_WIDTH, Config.WORLD_HEIGHT, camera);
-        stage = new Stage();
+    public PlayScreen(DodgerMain game){
+        this.game = game;
 
-        game = main;
+        camera = new OrthographicCamera(Config.WORLD_WIDTH, Config.WORLD_HEIGHT);
+        viewport = new FitViewport(Config.WORLD_WIDTH, Config.WORLD_HEIGHT, camera);
         batch = new SpriteBatch();
+
+        stage = new Stage(viewport, batch);
+
         factory = FontFactory.getInstance();
         font32 = factory.generateFont(FontFactory.FONT_PRESS_START2P, 32, Color.WHITE);
         worldRenderer = new WorldRenderer();
-        player = new Player(Assets.skinTextures.first(), 100, 100);
+        player = new Player(Assets.skinTextures.get(Assets.selectedTexture), 100, 100);
         touchPoint = new Vector3(0, 0,0);
         coins = new Coins(0);
 
@@ -99,7 +100,7 @@ public class PlayScreen extends AbstractGameScreen {
 
         batch.begin();
             player.draw(batch);
-            font32.draw(batch, "Score: " + worldRenderer.getScore(), Config.WORLD_WIDTH / 2, Config.WORLD_HEIGHT - Config.WORLD_UNIT);
+            font32.draw(batch, "Score: " + worldRenderer.getScore(), Config.WORLD_WIDTH / 3, Config.WORLD_HEIGHT - Config.WORLD_UNIT );
 
             worldRenderer.drawObstacles(batch);
             worldRenderer.dropCoin(batch);

@@ -1,5 +1,6 @@
 package com.octavian.game.datamodel;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.octavian.game.util.Utils;
 
 import java.util.List;
@@ -10,23 +11,31 @@ import java.util.List;
 
 public class Skin{
 
-    private List<String> skins_values;
+    private String skinName;
+    private Texture texture;
+    private int cost;
+    private boolean isUnlocked;
 
-    public Skin(){
-        skins_values = Utils.getSkinsStatus();
+    public Skin(String name, Texture texture, int cost, boolean isUnlocked){
+        skinName = name;
+        this.texture = texture;
+        this.cost = cost;
+        this.isUnlocked = isUnlocked;
     }
 
-    public Skin(List<String> args){
-        this.skins_values = args;
+    public String getName(){
+        return skinName;
     }
 
-    public List<String> readValues(){
-        skins_values = Utils.getSkinsStatus();
-        return skins_values;
+    public Texture getTexture(){
+        return texture;
     }
 
-    public void writeValues(){
-        Utils.setSkinsStatus(skins_values);
+    public int getCost(){
+        return cost;
     }
 
+    public boolean isUnlocked(){
+        return isUnlocked;
+    }
 }
