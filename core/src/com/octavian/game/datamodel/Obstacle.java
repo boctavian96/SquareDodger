@@ -58,6 +58,7 @@ public class Obstacle {
 
     protected void updateCollisionRectangle(){
         collisionRectangle.setY(y);
+        collisionRectangle.setX(x);
     }
 
 }

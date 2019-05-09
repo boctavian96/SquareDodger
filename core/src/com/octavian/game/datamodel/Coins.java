@@ -1,5 +1,6 @@
 package com.octavian.game.datamodel;
 
+import com.badlogic.gdx.Gdx;
 import com.octavian.game.config.Config;
 
 /**
@@ -30,16 +31,14 @@ public class Coins {
         this.coins = c;
     }
 
-    public void payCoins(long value){
-        if(value > 0) {
-            if (value >= this.coins) {
-                this.coins -= value;
-            }
+    public boolean payCoins(long value){
+        if(coins >= value && value > 0){
+            coins -= value;
+            Gdx.app.log("INFO", "Purchase successful!");
+            return true;
         }else{
-            if(-value >= this.coins){
-                this.coins += value;
-            }
+            Gdx.app.log("COINS", "Not enough coins or the value is negative!");
+            return false;
         }
-
     }
 }

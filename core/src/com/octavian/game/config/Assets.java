@@ -31,6 +31,12 @@ public final class Assets {
     public static Texture backPressTexture;
     public static Texture buyTexture;
     public static Texture buyPressTexture;
+    public static Texture resetTexture;
+    public static Texture resetPressTexture;
+    public static Texture soundTexture;
+    public static Texture soundPressTexture;
+    public static Texture soundMuteTexture;
+    public static Texture soundMutePressTexture;
 
     public static Texture lockTexture;
     public static Texture lockTexturePress;
@@ -46,20 +52,13 @@ public final class Assets {
     public static ImageButton back;
     public static ImageButton buy;
     public static ImageButton lock;
-    public static ImageButton skinUI1;
-    public static ImageButton skinUI2;
-    public static ImageButton skinUI3;
-    public static ImageButton skinUI4;
-    public static ImageButton skinUI5;
-    public static ImageButton skinUI6;
-    public static ImageButton skinUI7;
-    public static ImageButton skinUI8;
-    public static ImageButton skinUI9;
+    public static ImageButton reset;
+    public static ImageButton sound;
+    public static ImageButton soundMute;
 
     public static Array<Texture> obstacleTextures = new Array<Texture>();
     public static Array<Texture> skinTextures = new Array<Texture>();
     public static Texture coinTexture;
-
 
     private static Texture loadTexture (String file) {
         return new Texture(file);
@@ -83,8 +82,9 @@ public final class Assets {
 
     }
 
-
     public static void load(){
+
+        //============TEXTURES============================
         playTexture = loadTexture(Config.PLAY);
         playPressTexture = loadTexture(Config.PLAY_PRESS);
         aboutTexture = loadTexture(Config.ABOUT);
@@ -99,15 +99,21 @@ public final class Assets {
         buyPressTexture = loadTexture(Config.BUY_PRESS);
         lockTexture = loadTexture(Config.LOCK);
         lockTexturePress = loadTexture(Config.LOCK_PRESS);
-        gameover = loadTexture(Config.GAMEOVER);
-
+        resetTexture = loadTexture(Config.RESET);
+        resetPressTexture = loadTexture(Config.RESET_PRESS);
+        soundTexture = loadTexture(Config.SOUND);
+        soundPressTexture = loadTexture(Config.SOUND_PRESS);
+        soundMuteTexture = loadTexture(Config.SOUND_MUTE);
+        soundMutePressTexture = loadTexture(Config.SOUND_MUTE_PRESS);
         obstacleTextures.addAll(loadTexture(Config.SQUARES));
         skinTextures.addAll(loadTexture(Config.SKINS_ARRAY));
         coinTexture = loadTexture(Config.COIN);
 
+        //==================MUSIC & SOUNDS=================
         music = loadMusic(Config.MUSIC1);
         music.setLooping(true);
 
+        //==================BUTTONS========================
         play = loadButton(playTexture, playPressTexture);
         about = loadButton(aboutTexture, aboutPressTexture);
         skins = loadButton(skinsTexture,skinsPressTexture);
@@ -115,16 +121,20 @@ public final class Assets {
         back = loadButton(backTexture, backPressTexture);
         buy = loadButton(buyTexture, buyPressTexture);
         lock = loadButton(exitTexture, exitPressTexture);
+        reset = loadButton(resetTexture, resetPressTexture);
+        sound = loadButton(soundTexture, soundPressTexture);
+        soundMute = loadButton(soundMuteTexture, soundMutePressTexture);
+    }
 
-        //Skins UI
-        skinUI1 = loadButton(skinTextures.get(0), skinTextures.get(0));
-        skinUI2 = loadButton(skinTextures.get(1), skinTextures.get(1));
-        skinUI3 = loadButton(skinTextures.get(2), skinTextures.get(2));
-        skinUI4 = loadButton(skinTextures.get(3), skinTextures.get(3));
-        skinUI5 = loadButton(skinTextures.get(4), skinTextures.get(4));
-        skinUI6 = loadButton(skinTextures.get(5), skinTextures.get(5));
-        skinUI7 = loadButton(skinTextures.get(6), skinTextures.get(6));
-        skinUI8 = loadButton(skinTextures.get(7), skinTextures.get(7));
-        skinUI9 = loadButton(skinTextures.get(8), skinTextures.get(8));
+    public static void playMusic(Music music){
+        if(Settings.isSoundEnabled) {
+            music.play();
+        }else{
+            music.pause();
+        }
+    }
+
+    public static void stopMusic(Music music){
+        music.pause();
     }
 }

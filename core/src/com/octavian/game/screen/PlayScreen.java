@@ -36,6 +36,7 @@ public class PlayScreen extends AbstractGameScreen {
     private Player player;
     private Vector3 touchPoint;
     private Coins coins;
+    private int collectedCoins;
 
     private BitmapFont font32;
 
@@ -54,6 +55,7 @@ public class PlayScreen extends AbstractGameScreen {
         player = new Player(Assets.skinTextures.get(Assets.selectedTexture), 100, 100);
         touchPoint = new Vector3(0, 0,0);
         coins = new Coins(0);
+        collectedCoins = 0;
 
         Gdx.input.setInputProcessor(stage);
         instantiateHUD();
@@ -65,10 +67,8 @@ public class PlayScreen extends AbstractGameScreen {
         camera.update();
         if(Gdx.input.isTouched()){
             touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+            camera.unproject(touchPoint);
             player.update(touchPoint);
-
-            Gdx.app.log("Touch X", "" + touchPoint.x);
-            Gdx.app.log("Touch Y", "" + touchPoint.y);
         }
 
         worldRenderer.createCoin();
@@ -77,11 +77,14 @@ public class PlayScreen extends AbstractGameScreen {
         worldRenderer.checkIfObstacleIsNeeded();
 
         if(worldRenderer.isPlayerColliding(player)){
-            //game.setScreen(new MainMenuScreen(game));
+            game.setScreen(new GameOverScreen(game, collectedCoins, worldRenderer.getScore()));
+            Gdx.app.log("SWITCH", "Player is dead Switch to GameOver");
+            dispose();
         }
 
         if(worldRenderer.isCoinColliding(player)){
             coins.addCoins();
+            collectedCoins++;
         }
 
         Utils.clearScreen();
@@ -118,5 +121,9 @@ public class PlayScreen extends AbstractGameScreen {
         table.pack();
 
         stage.addActor(table);
+    }
+
+    public void dispose(){
+        stage.dispose();
     }
 }

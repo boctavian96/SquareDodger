@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.octavian.game.DodgerMain;
 import com.octavian.game.config.Assets;
 import com.octavian.game.config.Config;
+import com.octavian.game.datamodel.Coins;
 import com.octavian.game.datamodel.Skin;
 import com.octavian.game.util.FontFactory;
 import com.octavian.game.util.GameInput;
@@ -37,13 +38,17 @@ public class SkinsScreen extends AbstractGameScreen {
     private BitmapFont font32;
     private BitmapFont font16Yellow;
 
+    private Coins availableCoins;
+
     private boolean isTouchReleased;
 
     public SkinsScreen(DodgerMain game){
+        super();
         this.game = game;
         batch = new SpriteBatch();
         factory = FontFactory.getInstance();
         touchInput = new GameInput();
+        skins = Utils.getDummySkins();
 
         camera = new OrthographicCamera(Config.WORLD_WIDTH, Config.WORLD_HEIGHT);
         viewport = new FitViewport(Config.WORLD_WIDTH, Config.WORLD_HEIGHT, camera);
@@ -53,7 +58,10 @@ public class SkinsScreen extends AbstractGameScreen {
 
         stage = new Stage(viewport, batch);
         Gdx.input.setInputProcessor(stage);
-        skins = Utils.getDummySkins();
+
+        //FIXME: Update after dovle's feature.
+        availableCoins = new Coins(10L);
+
         isTouchReleased = true;
 
         instantiateUI();
@@ -101,12 +109,17 @@ public class SkinsScreen extends AbstractGameScreen {
 
         batch.begin();
             font32.draw(batch, "Buy new Skins", Config.WORLD_WIDTH/4, Config.WORLD_HEIGHT - Config.WORLD_UNIT);
-            font32.draw(batch, "Coins: 500", Config.WORLD_WIDTH/4, Config.WORLD_HEIGHT - 3 * Config.WORLD_UNIT );
+            font32.draw(batch, "Coins: " + availableCoins.getCoins(), Config.WORLD_WIDTH/4, Config.WORLD_HEIGHT - 3 * Config.WORLD_UNIT );
 
             //Skin Details
-            font16Yellow.draw(batch, selectedSkin.getName(), Config.WORLD_WIDTH/3, Config.WORLD_HEIGHT/2 + 4 * Config.WORLD_UNIT);
-            batch.draw(selectedSkin.getTexture(), Config.WORLD_WIDTH/2, Config.WORLD_HEIGHT/2);
-            font16Yellow.draw(batch, "Cost: " + selectedSkin.getCost(), Config.WORLD_WIDTH/3, Config.WORLD_HEIGHT/2 - 2 * Config.WORLD_UNIT);
+            if(selectedSkin.isUnlocked()) {
+                batch.draw(selectedSkin.getTexture(), Config.WORLD_WIDTH / 2 - Config.WORLD_UNIT, Config.WORLD_HEIGHT / 2);
+                font16Yellow.draw(batch, "Selected skin: " + selectedSkin.getName(), Config.WORLD_WIDTH/4, Config.WORLD_HEIGHT/2 + 4 * Config.WORLD_UNIT);
+            }else{
+                batch.draw(Assets.lockTexture, Config.WORLD_WIDTH/2 - 2 * Config.WORLD_UNIT, Config.WORLD_HEIGHT/2);
+                font16Yellow.draw(batch, "Cost: " + selectedSkin.getCost(), Config.WORLD_WIDTH/2 - 2 * Config.WORLD_UNIT, Config.WORLD_HEIGHT/2 - 2 * Config.WORLD_UNIT);
+            }
+
         batch.end();
 
         stage.draw();
@@ -133,6 +146,15 @@ public class SkinsScreen extends AbstractGameScreen {
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button){
                 super.tap(event, x, y, count, button);
+                selectedSkin = skins.get(Assets.selectedTexture);
+                if(selectedSkin.isUnlocked()){
+                    Gdx.app.log("WARN", "Item already bought!");
+                }else {
+                    if(availableCoins.payCoins(selectedSkin.getCost())) {
+                        selectedSkin.unlock();
+                        Gdx.app.log("INFO", "Skin " + selectedSkin.getName() + " is unlocked");
+                    }
+                }
             }
         });
 
@@ -146,26 +168,15 @@ public class SkinsScreen extends AbstractGameScreen {
         uiTable.pad(Config.WORLD_UNIT);
         uiTable.align(Align.bottom);
         uiTable.pack();
-        uiTable.setDebug(true);
-
-        skinsTable.add(Assets.skinUI1);
-        skinsTable.add(Assets.skinUI2);
-        skinsTable.add(Assets.skinUI3).row();
-        skinsTable.add(Assets.skinUI4);
-        skinsTable.add(Assets.skinUI5);
-        skinsTable.add(Assets.skinUI6).row();
-        skinsTable.add(Assets.skinUI7);
-        skinsTable.add(Assets.skinUI8);
-        skinsTable.add(Assets.skinUI9).row();
-
-
-        skinsTable.setFillParent(true);
-        skinsTable.pad(Config.WORLD_UNIT);
-        skinsTable.align(Align.center);
-        skinsTable.pack();
-        skinsTable.setDebug(true);
+        uiTable.setDebug(false);
 
         stage.addActor(uiTable);
         //stage.addActor(skinsTable);
+    }
+
+    public void dispose(){
+        stage.dispose();
+        Assets.buy.clearListeners();
+        Assets.back.clearListeners();
     }
 }

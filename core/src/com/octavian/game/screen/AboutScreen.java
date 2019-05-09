@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.octavian.game.DodgerMain;
 import com.octavian.game.config.Assets;
 import com.octavian.game.config.Config;
+import com.octavian.game.config.Settings;
 import com.octavian.game.util.FontFactory;
 import com.octavian.game.util.Utils;
 
@@ -72,6 +73,8 @@ public class AboutScreen extends AbstractGameScreen{
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button){
                 super.tap(event, x, y, count, button);
+                dispose();
+                Gdx.app.log("SWITCH", "Changed to MainMenu");
                 game.setScreen(new MainMenuScreen(game));
             }
         });
@@ -79,5 +82,10 @@ public class AboutScreen extends AbstractGameScreen{
         Assets.back.setPosition(screenWidth/2 - Assets.back.getWidth()/2, 100);
 
         stage.addActor(Assets.back);
+    }
+
+    public void dispose(){
+        stage.dispose();
+        Assets.back.clearListeners();
     }
 }

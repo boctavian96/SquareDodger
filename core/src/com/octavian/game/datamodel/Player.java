@@ -30,22 +30,21 @@ public class Player {
     }
 
     public void update(float x, float y){
-        float virtualY = Config.WORLD_HEIGHT + 800 - y;
 
-        if(virtualY < Gdx.graphics.getHeight()) {
-            setY(virtualY);
+        if(y < Config.WORLD_HEIGHT - 100) {
+            setY(y);
         }else{
-            setY(Gdx.graphics.getHeight() - 500);
+            setY(Config.WORLD_HEIGHT - 100);
         }
 
-        if (virtualY < 100){
+        if (y < 100){
             setY(100);
         }
 
-        if (x < Gdx.graphics.getWidth()){
+        if (x < Config.WORLD_WIDTH - 50){
             setX(x);
         }else{
-            setX(Gdx.graphics.getWidth() - 50);
+            setX(Config.WORLD_WIDTH - 50);
         }
 
         if(x < 0){
@@ -55,7 +54,7 @@ public class Player {
     }
 
     public void update(Vector3 touchPoint){
-        update(touchPoint.x, touchPoint.y);
+        update(touchPoint.x, touchPoint.y + 100F);
     }
 
     public void draw(SpriteBatch sb){

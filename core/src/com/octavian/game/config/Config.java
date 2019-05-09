@@ -10,7 +10,7 @@ public final class Config {
    public static final float POINTS_PER_RECT = 5F;
 
     //Number of textures
-    public static int NUMBER_OF_TEXTURES = 48;
+    public static final int NUMBER_OF_TEXTURES = 48;
 
     public static final int MAXIMUM_OBSTACLES = 500;
 
@@ -85,9 +85,9 @@ public final class Config {
             "player/skin9.png"
     };
 
-    public static String COIN = "various/coin.png";
-    public static String LOCK = "various/lock.png";
-    public static String LOCK_PRESS = "various/lockPress.png";
+    public static final String COIN = "various/coin.png";
+    public static final String LOCK = "various/lock.png";
+    public static final String LOCK_PRESS = "various/lockPress.png";
 
     //UI
     public static String PLAY = "ui/play.png";
@@ -100,22 +100,32 @@ public final class Config {
     public static String EXIT_PRESS = "ui/exitPress.png";
     public static String BACK = "ui/back.png";
     public static String BACK_PRESS = "ui/backPress.png";
-    public static String BUY = "ui/pay.png";
-    public static String BUY_PRESS = "ui/payPress.png";
+    public static String BUY = "ui/buy.png";
+    public static String BUY_PRESS = "ui/buyPress.png";
+    public static String RESET = "ui/restart.png";
+    public static String RESET_PRESS = "ui/restartPress.png";
+    public static String SOUND = "ui/sound.png";
+    public static String SOUND_PRESS = "ui/soundPress.png";
+    public static String SOUND_MUTE = "ui/soundMuted.png";
+    public static String SOUND_MUTE_PRESS = "ui/soundMutedPress.png";
 
     //Screen
+    @Deprecated
     public static String GAMEOVER = "screen/gameover.png";
 
     //Highscore
     @Deprecated
     public static String HS_FILE = "highscore.txt";
 
+    @Deprecated
     public static String LOADFILE = "load.xml";
 
     //Coins file
+    @Deprecated
     public static String CN_FILE = "coins.txt";
 
     //Skins file
+    @Deprecated
     public static String SKINS_LIST = "skins.txt";
 
     private Config(){
