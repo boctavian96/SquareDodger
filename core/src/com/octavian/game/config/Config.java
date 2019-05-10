@@ -16,6 +16,8 @@ public final class Config {
 
     //Music
     public static final String MUSIC1 = "audio/PatakasWorld.mp3";
+    public static final String MUSIC2 = "audio/AboutTheme.mp3";
+    public static final String GOT_COIN = "audio/GotCoin.mp3";
 
     //About Text File
     public static final String ABOUT_TEXT_FILE = "common/about.txt";

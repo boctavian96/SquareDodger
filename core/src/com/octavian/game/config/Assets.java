@@ -2,6 +2,7 @@ package com.octavian.game.config;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -44,6 +45,8 @@ public final class Assets {
     //public static Texture selection; //Selected texture
 
     public static Music music;
+    public static Music aboutMusic;
+    public static Sound gotCoin;
 
     public static ImageButton play;
     public static ImageButton about;
@@ -66,6 +69,10 @@ public final class Assets {
 
     private static Music loadMusic(String file){
         return Gdx.audio.newMusic(Gdx.files.internal(file));
+    }
+
+    private static Sound loadSound(String file){
+        return Gdx.audio.newSound(Gdx.files.internal(file));
     }
 
     private static Array<Texture> loadTexture(String[] files){
@@ -111,7 +118,10 @@ public final class Assets {
 
         //==================MUSIC & SOUNDS=================
         music = loadMusic(Config.MUSIC1);
+        aboutMusic = loadMusic(Config.MUSIC2);
         music.setLooping(true);
+
+        gotCoin = loadSound(Config.GOT_COIN);
 
         //==================BUTTONS========================
         play = loadButton(playTexture, playPressTexture);
