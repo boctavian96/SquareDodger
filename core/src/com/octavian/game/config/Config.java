@@ -74,6 +74,9 @@ public final class Config {
             "obstacle/star12.png"
     };
 
+    //Animation
+    public static final String COIN_ANIMATION = "animation/coinAnimation.png";
+
     //Player Skins
     public static final String[] SKINS_ARRAY = {
             "player/skin1.png",

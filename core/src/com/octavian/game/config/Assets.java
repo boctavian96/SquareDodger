@@ -42,6 +42,7 @@ public final class Assets {
     public static Texture lockTexture;
     public static Texture lockTexturePress;
     public static Texture gameover;
+    public static Texture coinAnimation;
     //public static Texture selection; //Selected texture
 
     public static Music music;
@@ -115,6 +116,9 @@ public final class Assets {
         obstacleTextures.addAll(loadTexture(Config.SQUARES));
         skinTextures.addAll(loadTexture(Config.SKINS_ARRAY));
         coinTexture = loadTexture(Config.COIN);
+
+        //==================ANIMATIONS=====================
+        coinAnimation = loadTexture(Config.COIN_ANIMATION);
 
         //==================MUSIC & SOUNDS=================
         music = loadMusic(Config.MUSIC1);
