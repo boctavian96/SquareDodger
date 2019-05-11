@@ -91,7 +91,7 @@ public final class Config {
     };
 
     public static final String COIN = "various/coin.png";
-    public static final String LOCK = "various/lock.png";
+    public static final String LOCK = "various/lock2.png";
     public static final String LOCK_PRESS = "various/lockPress.png";
 
     //UI
