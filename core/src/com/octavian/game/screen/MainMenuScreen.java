@@ -60,8 +60,8 @@ public class MainMenuScreen extends AbstractGameScreen {
 
         batch.begin();
             //FIXME: Read score and coins from xml.
-            font32.draw(batch, "High Score: 1000", Config.WORLD_WIDTH / 6, 100);
-            font32.draw(batch, "Coins: " + "500", Config.WORLD_WIDTH / 3 - Config.WORLD_UNIT, Config.WORLD_HEIGHT - Config.WORLD_UNIT );
+            font32.draw(batch, "High Score: " + Utils.getHighScore(), Config.WORLD_WIDTH / 6, 100);
+            font32.draw(batch, "Coins: " + Utils.getCoins(), Config.WORLD_WIDTH / 3 - Config.WORLD_UNIT, Config.WORLD_HEIGHT - Config.WORLD_UNIT );
 
             worldRenderer.drawObstacles(batch);
         batch.end();

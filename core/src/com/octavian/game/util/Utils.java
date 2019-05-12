@@ -251,20 +251,34 @@ public class Utils {
     }
 
     public static String getHighScore(){
-        IDataSource dataSource = XMLDataSource.getInstance();
-        HighScore highScore = dataSource.getScores();
+        //IDataSource dataSource = XMLDataSource.getInstance();
+        //HighScore highScore = dataSource.getScores();
 
         //FIXME: Think about this...
-        return String.valueOf(highScore.getScore());
+        //return String.valueOf(highScore.getScore());
+
+        return "0";
     }
 
     public static String getCoins(){
-        IDataSource dataSource = XMLDataSource.getInstance();
-        Coins coins = dataSource.getCoins();
+        //IDataSource dataSource = XMLDataSource.getInstance();
+        //Coins coins = dataSource.getCoins();
 
         //FIXME: Think about this...
-        return String.valueOf(coins.getCoins());
+        //return String.valueOf(coins.getCoins());
+        return "0";
     }
+
+    public static void writeHighScore(String highScore){
+        Gdx.app.log("FILE", "Writing highscore.");
+        //TODO: Implement this.
+    }
+
+    public static void writeCoins(String coins){
+        Gdx.app.log("FILE", "Writing coins.");
+        //TODO: Implement this.
+    }
+
 
     /**
      * Little easter egg.
@@ -296,5 +310,6 @@ public class Utils {
 
         return skins;
     }
+
 
 }

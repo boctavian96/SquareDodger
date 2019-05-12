@@ -152,6 +152,7 @@ public class SkinsScreen extends AbstractGameScreen {
                 }else {
                     if(availableCoins.payCoins(selectedSkin.getCost())) {
                         selectedSkin.unlock();
+                        Utils.writeCoins(String.valueOf(availableCoins.getCoins()));
                         Gdx.app.log("INFO", "Skin " + selectedSkin.getName() + " is unlocked");
                     }
                 }

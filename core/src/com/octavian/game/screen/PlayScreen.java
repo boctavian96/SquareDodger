@@ -77,8 +77,11 @@ public class PlayScreen extends AbstractGameScreen {
         worldRenderer.updateObstacles(delta);
         worldRenderer.checkIfObstacleIsNeeded();
 
+        //Player is dead...
         if(worldRenderer.isPlayerColliding(player)){
             game.setScreen(new GameOverScreen(game, collectedCoins, worldRenderer.getScore()));
+            Utils.writeCoins(String.valueOf(collectedCoins));
+            Utils.writeHighScore(worldRenderer.getScore());
             Gdx.app.log("SWITCH", "Player is dead Switch to GameOver");
             dispose();
         }

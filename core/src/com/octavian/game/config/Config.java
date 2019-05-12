@@ -4,6 +4,7 @@ public final class Config {
 
     public static final float WORLD_HEIGHT = 1334F;
     public static final float WORLD_WIDTH = 750F;
+
     public static final float WORLD_UNIT = 32F;
 
     //Score
