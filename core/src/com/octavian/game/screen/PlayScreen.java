@@ -14,6 +14,7 @@ import com.octavian.game.DodgerMain;
 import com.octavian.game.Score;
 import com.octavian.game.config.Assets;
 import com.octavian.game.config.Config;
+import com.octavian.game.config.Settings;
 import com.octavian.game.datamodel.Coins;
 import com.octavian.game.datamodel.Player;
 import com.octavian.game.util.FontFactory;
@@ -85,7 +86,9 @@ public class PlayScreen extends AbstractGameScreen {
         if(worldRenderer.isCoinColliding(player)){
             coins.addCoins();
             collectedCoins++;
-            Assets.gotCoin.play();
+            if(Settings.isSoundEnabled) {
+                Assets.gotCoin.play();
+            }
         }
 
         Utils.clearScreen();

@@ -60,7 +60,7 @@ public class SkinsScreen extends AbstractGameScreen {
         Gdx.input.setInputProcessor(stage);
 
         //FIXME: Update after dovle's feature.
-        availableCoins = new Coins(10L);
+        availableCoins = new Coins(1000L);
 
         isTouchReleased = true;
 

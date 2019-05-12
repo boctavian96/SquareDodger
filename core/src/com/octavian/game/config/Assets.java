@@ -43,7 +43,6 @@ public final class Assets {
     public static Texture lockTexturePress;
     public static Texture gameover;
     public static Texture coinAnimation;
-    //public static Texture selection; //Selected texture
 
     public static Music music;
     public static Music aboutMusic;
@@ -124,6 +123,7 @@ public final class Assets {
         music = loadMusic(Config.MUSIC1);
         aboutMusic = loadMusic(Config.MUSIC2);
         music.setLooping(true);
+        aboutMusic.setLooping(true);
 
         gotCoin = loadSound(Config.GOT_COIN);
 
