@@ -85,6 +85,7 @@ public class PlayScreen extends AbstractGameScreen {
         if(worldRenderer.isCoinColliding(player)){
             coins.addCoins();
             collectedCoins++;
+            Assets.gotCoin.play();
         }
 
         Utils.clearScreen();

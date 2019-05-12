@@ -75,6 +75,7 @@ public class AboutScreen extends AbstractGameScreen{
                 super.tap(event, x, y, count, button);
                 dispose();
                 Gdx.app.log("SWITCH", "Changed to MainMenu");
+                Assets.aboutMusic.stop();
                 game.setScreen(new MainMenuScreen(game));
             }
         });

@@ -16,6 +16,8 @@ public final class Config {
 
     //Music
     public static final String MUSIC1 = "audio/PatakasWorld.mp3";
+    public static final String MUSIC2 = "audio/AboutTheme.mp3";
+    public static final String GOT_COIN = "audio/GotCoin.mp3";
 
     //About Text File
     public static final String ABOUT_TEXT_FILE = "common/about.txt";
@@ -72,6 +74,9 @@ public final class Config {
             "obstacle/star12.png"
     };
 
+    //Animation
+    public static final String COIN_ANIMATION = "animation/coinAnimation.png";
+
     //Player Skins
     public static final String[] SKINS_ARRAY = {
             "player/skin1.png",
@@ -86,7 +91,7 @@ public final class Config {
     };
 
     public static final String COIN = "various/coin.png";
-    public static final String LOCK = "various/lock.png";
+    public static final String LOCK = "various/lock2.png";
     public static final String LOCK_PRESS = "various/lockPress.png";
 
     //UI

@@ -31,7 +31,7 @@ public class WorldRenderer {
         obstacles = new Array<Obstacle>();
         obstaclesNumber = 8;
         obstaclesCreated = 0;
-        coin = new Coin(Assets.coinTexture);
+        coin = new Coin(Assets.coinAnimation);
     }
 
     private void createNewObstacle(){
@@ -92,7 +92,7 @@ public class WorldRenderer {
 
     public void createCoin(){
         if(coinPassed){
-            coin = new Coin(Assets.coinTexture);
+            coin = new Coin(Assets.coinAnimation);
         }
     }
 
