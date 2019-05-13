@@ -59,8 +59,8 @@ public final class Assets {
     public static ImageButton sound;
     public static ImageButton soundMute;
 
-    public static Array<Texture> obstacleTextures = new Array<Texture>();
-    public static Array<Texture> skinTextures = new Array<Texture>();
+    public static Array<Texture> obstacleTextures = new Array<>();
+    public static Array<Texture> skinTextures = new Array<>();
     public static Texture coinTexture;
 
     private static Texture loadTexture (String file) {
@@ -76,7 +76,7 @@ public final class Assets {
     }
 
     private static Array<Texture> loadTexture(String[] files){
-        Array<Texture> textures = new Array<Texture>();
+        Array<Texture> textures = new Array<>();
         for(int i = 0; i < files.length; i++){
             textures.add(loadTexture(files[i]));
         }

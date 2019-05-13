@@ -29,6 +29,7 @@ public class Score {
 
     public void pay(Long cost){ this.score -= cost; }
 
+    @Deprecated
     public boolean isScoreBetter(long score){
         if (Utils.getGameFile('h') < score)
             return true;
