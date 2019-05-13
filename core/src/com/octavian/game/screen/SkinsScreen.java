@@ -37,10 +37,12 @@ public class SkinsScreen extends AbstractGameScreen {
 
     private BitmapFont font32;
     private BitmapFont font16Yellow;
+    private BitmapFont font16Green;
 
     private Coins availableCoins;
 
     private boolean isTouchReleased;
+    private boolean isSwiped;
 
     public SkinsScreen(DodgerMain game){
         super();
@@ -55,6 +57,7 @@ public class SkinsScreen extends AbstractGameScreen {
 
         font32 = factory.generateFont(FontFactory.FONT_PRESS_START2P, 32, Color.WHITE);
         font16Yellow = factory.generateFont(FontFactory.FONT_PRESS_START2P, 16, Color.YELLOW);
+        font16Green = factory.generateFont(FontFactory.FONT_PRESS_START2P, 16, Color.GREEN);
 
         stage = new Stage(viewport, batch);
         Gdx.input.setInputProcessor(stage);
@@ -63,6 +66,7 @@ public class SkinsScreen extends AbstractGameScreen {
         availableCoins = new Coins(1000L);
 
         isTouchReleased = true;
+        isSwiped = false;
 
         instantiateUI();
     }
@@ -72,28 +76,7 @@ public class SkinsScreen extends AbstractGameScreen {
         Utils.clearScreen();
 
         selectedSkin = skins.get(Assets.selectedTexture);
-
-        if(touchInput.isSwipeLeft()){
-            Gdx.app.log("SWIPE", "Swiped left!");
-            if(Assets.selectedTexture < skins.size - 1 && isTouchReleased) {
-                Assets.selectedTexture++;
-                isTouchReleased = false;
-            }
-        }
-
-        if(touchInput.isSwipeRight()){
-            Gdx.app.log("SWIPE", "Swiped right!");
-            if(Assets.selectedTexture > 0 && isTouchReleased) {
-                Assets.selectedTexture--;
-                isTouchReleased = false;
-            }
-        }
-
-        if (!Gdx.input.isTouched()){
-            isTouchReleased = true;
-        }
-
-
+        swipe();
     }
 
     @Override
@@ -111,6 +94,10 @@ public class SkinsScreen extends AbstractGameScreen {
             font32.draw(batch, "Buy new Skins", Config.WORLD_WIDTH/4, Config.WORLD_HEIGHT - Config.WORLD_UNIT);
             font32.draw(batch, "Coins: " + availableCoins.getCoins(), Config.WORLD_WIDTH/4, Config.WORLD_HEIGHT - 3 * Config.WORLD_UNIT );
 
+            if(!isSwiped){
+                font16Green.draw(batch, "Swipe Right", Config.WORLD_WIDTH/4 + 2 * Config.WORLD_UNIT, Config.WORLD_HEIGHT / 2 + 6 * Config.WORLD_UNIT);
+            }
+
             //Skin Details
             if(selectedSkin.isUnlocked()) {
                 batch.draw(selectedSkin.getTexture(), Config.WORLD_WIDTH / 2 - Config.WORLD_UNIT, Config.WORLD_HEIGHT / 2);
@@ -123,6 +110,29 @@ public class SkinsScreen extends AbstractGameScreen {
         batch.end();
 
         stage.draw();
+    }
+
+    private void swipe(){
+        if(touchInput.isSwipeLeft()){
+            Gdx.app.log("SWIPE", "Swiped left!");
+            if(Assets.selectedTexture < skins.size - 1 && isTouchReleased) {
+                Assets.selectedTexture++;
+                isTouchReleased = false;
+                isSwiped = true;
+            }
+        }
+
+        if(touchInput.isSwipeRight()){
+            Gdx.app.log("SWIPE", "Swiped right!");
+            if(Assets.selectedTexture > 0 && isTouchReleased) {
+                Assets.selectedTexture--;
+                isTouchReleased = false;
+            }
+        }
+
+        if (!Gdx.input.isTouched()){
+            isTouchReleased = true;
+        }
     }
 
     private void instantiateUI(){
