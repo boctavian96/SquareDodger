@@ -8,7 +8,7 @@ public final class Config {
     public static final float WORLD_UNIT = 32F;
 
     //Score
-   public static final float POINTS_PER_RECT = 5F;
+    public static final float POINTS_PER_RECT = 5F;
 
     //Number of textures
     public static final int NUMBER_OF_TEXTURES = 48;

@@ -22,9 +22,13 @@ import com.octavian.game.datamodel.Player;
 import com.octavian.game.datamodel.Skin;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -255,12 +259,7 @@ public final class Utils {
     }
 
     public static String getHighScore(){
-        //IDataSource dataSource = XMLDataSource.getInstance();
-        //HighScore highScore = dataSource.getScores();
-
-        //FIXME: Think about this...
-        //return String.valueOf(highScore.getScore());
-
+        //TODO: Implement this.
         return "0";
     }
 
@@ -274,7 +273,6 @@ public final class Utils {
     }
 
     public static void writeHighScore(String highScore){
-        Gdx.app.log("FILE", "Writing highscore.");
         //TODO: Implement this.
     }
 
@@ -314,6 +312,4 @@ public final class Utils {
 
         return skins;
     }
-
-
 }

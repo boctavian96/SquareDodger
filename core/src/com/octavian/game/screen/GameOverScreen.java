@@ -104,8 +104,8 @@ public class GameOverScreen extends AbstractGameScreen {
         buttonsTable.defaults().space(Config.WORLD_UNIT);
         textTable.defaults().space(Config.WORLD_UNIT);
 
-        buttonsTable.add(Assets.reset);
         buttonsTable.add(Assets.back);
+        buttonsTable.add(Assets.reset);
 
         buttonsTable.setFillParent(true);
         buttonsTable.center();
