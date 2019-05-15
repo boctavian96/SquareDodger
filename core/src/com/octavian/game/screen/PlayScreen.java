@@ -59,6 +59,7 @@ public class PlayScreen extends AbstractGameScreen {
         collectedCoins = 0;
 
         Gdx.input.setInputProcessor(stage);
+        Gdx.input.setCatchBackKey(true);
         instantiateHUD();
 
     }
@@ -92,6 +93,11 @@ public class PlayScreen extends AbstractGameScreen {
             if(Settings.isSoundEnabled) {
                 Assets.gotCoin.play();
             }
+        }
+
+        if(Utils.checkBack()){
+            dispose();
+            game.setScreen(new MainMenuScreen(game));
         }
 
         Utils.clearScreen();

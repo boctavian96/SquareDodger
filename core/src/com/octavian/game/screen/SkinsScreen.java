@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.octavian.game.DodgerMain;
+import com.octavian.game.config.AbstractSwipe;
 import com.octavian.game.config.Assets;
 import com.octavian.game.config.Config;
 import com.octavian.game.datamodel.Coins;
@@ -44,6 +45,9 @@ public class SkinsScreen extends AbstractGameScreen {
     private boolean isTouchReleased;
     private boolean isSwiped;
 
+    private AbstractSwipe swipeLeft;
+    private AbstractSwipe swipeRight;
+
     public SkinsScreen(DodgerMain game){
         super();
         this.game = game;
@@ -61,6 +65,7 @@ public class SkinsScreen extends AbstractGameScreen {
 
         stage = new Stage(viewport, batch);
         Gdx.input.setInputProcessor(stage);
+        Gdx.input.setCatchBackKey(true);
 
         //FIXME: Update after dovle's feature.
         availableCoins = new Coins(1000L);
@@ -72,18 +77,23 @@ public class SkinsScreen extends AbstractGameScreen {
     }
 
     @Override
-    public void update(float delta) {
-        Utils.clearScreen();
-
-        selectedSkin = skins.get(Assets.selectedTexture);
-        swipe();
-    }
-
-    @Override
     public void render(float delta) {
         update(delta);
         draw();
         stage.act(delta);
+
+        if(Utils.checkBack()){
+            dispose();
+            game.setScreen(new MainMenuScreen(game));
+        }
+    }
+
+    @Override
+    public void update(float delta) {
+        Utils.clearScreen();
+
+        selectedSkin = skins.get(Assets.selectedTexture);
+        //swipe();
     }
 
     @Override

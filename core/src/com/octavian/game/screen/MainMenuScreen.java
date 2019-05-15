@@ -44,6 +44,7 @@ public class MainMenuScreen extends AbstractGameScreen {
 
         Assets.playMusic(Assets.music);
         Gdx.input.setInputProcessor(stage);
+        Gdx.input.setCatchBackKey(false);
     }
 
     @Override
