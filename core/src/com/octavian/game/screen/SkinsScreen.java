@@ -14,7 +14,6 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.octavian.game.DodgerMain;
-import com.octavian.game.config.AbstractSwipe;
 import com.octavian.game.config.Assets;
 import com.octavian.game.config.Config;
 import com.octavian.game.datamodel.Coins;
@@ -44,9 +43,6 @@ public class SkinsScreen extends AbstractGameScreen {
 
     private boolean isTouchReleased;
     private boolean isSwiped;
-
-    private AbstractSwipe swipeLeft;
-    private AbstractSwipe swipeRight;
 
     public SkinsScreen(DodgerMain game){
         super();
