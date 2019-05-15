@@ -258,30 +258,6 @@ public final class Utils {
         return bool_list;
     }
 
-    public static String getHighScore(){
-        //TODO: Implement this.
-        return "0";
-    }
-
-    public static String getCoins(){
-        //IDataSource dataSource = XMLDataSource.getInstance();
-        //Coins coins = dataSource.getCoins();
-
-        //FIXME: Think about this...
-        //return String.valueOf(coins.getCoins());
-        return "0";
-    }
-
-    public static void writeHighScore(String highScore){
-        //TODO: Implement this.
-    }
-
-    public static void writeCoins(String coins){
-        Gdx.app.log("FILE", "Writing coins.");
-        //TODO: Implement this.
-    }
-
-
     /**
      * Little easter egg.
      * @return TRUE
@@ -298,7 +274,7 @@ public final class Utils {
     }
 
     /**
-     * Dummy Skins generator
+     * Dummy Skins generator. Use only for debuging purposes.
      * @return 9 dummy skins.
      */
     public static Array<Skin> getDummySkins(){

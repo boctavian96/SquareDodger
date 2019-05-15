@@ -13,7 +13,12 @@ public class HighScore implements Serializable {
         this.score = Long.valueOf(score);
     }
 
+    public HighScore(){
+        score = 0L;
+    }
+
     public long getScore(){
         return score;
     }
+    public void setScore(long newScore) { score = newScore;}
 }

@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.octavian.game.DodgerMain;
 import com.octavian.game.config.Assets;
 import com.octavian.game.config.Config;
+import com.octavian.game.util.SaveState;
 import com.octavian.game.datamodel.Coins;
 import com.octavian.game.datamodel.Skin;
 import com.octavian.game.util.FontFactory;
@@ -64,7 +65,7 @@ public class SkinsScreen extends AbstractGameScreen {
         Gdx.input.setCatchBackKey(true);
 
         //FIXME: Update after dovle's feature.
-        availableCoins = new Coins(1000L);
+        availableCoins = SaveState.readCoins();
 
         isTouchReleased = true;
         isSwiped = false;
@@ -89,7 +90,7 @@ public class SkinsScreen extends AbstractGameScreen {
         Utils.clearScreen();
 
         selectedSkin = skins.get(Assets.selectedTexture);
-        //swipe();
+        swipe();
     }
 
     @Override
@@ -168,7 +169,8 @@ public class SkinsScreen extends AbstractGameScreen {
                 }else {
                     if(availableCoins.payCoins(selectedSkin.getCost())) {
                         selectedSkin.unlock();
-                        Utils.writeCoins(String.valueOf(availableCoins.getCoins()));
+                        SaveState.saveCoins(availableCoins, false);
+                        //Utils.writeCoins(String.valueOf(availableCoins.getCoins()));
                         Gdx.app.log("INFO", "Skin " + selectedSkin.getName() + " is unlocked");
                     }
                 }

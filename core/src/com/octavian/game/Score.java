@@ -23,6 +23,10 @@ public class Score {
         return score;
     }
 
+    public String getScoreString(){
+        return score + "";
+    }
+
     public void addScore(){
         this.score += Config.POINTS_PER_RECT;
     }

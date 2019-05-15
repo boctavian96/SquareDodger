@@ -86,8 +86,8 @@ public class WorldRenderer {
         }
     }
 
-    public String getScore(){
-        return "" + playerScore.getScore();
+    public Score getScore(){
+        return playerScore;
     }
 
     public void createCoin(){

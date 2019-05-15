@@ -2,7 +2,6 @@ package com.octavian.game.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -10,10 +9,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.Align;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.octavian.game.DodgerMain;
 import com.octavian.game.config.Assets;
 import com.octavian.game.config.Config;
+import com.octavian.game.util.SaveState;
 import com.octavian.game.config.Settings;
 import com.octavian.game.util.FontFactory;
 import com.octavian.game.util.Utils;
@@ -61,8 +60,8 @@ public class MainMenuScreen extends AbstractGameScreen {
 
         batch.begin();
             //FIXME: Read score and coins from xml.
-            font32.draw(batch, "High Score: " + Utils.getHighScore(), Config.WORLD_WIDTH / 6, 100);
-            font32.draw(batch, "Coins: " + Utils.getCoins(), Config.WORLD_WIDTH / 3 - Config.WORLD_UNIT, Config.WORLD_HEIGHT - Config.WORLD_UNIT );
+            font32.draw(batch, "High Score: " + SaveState.readHighscore().getScore(), Config.WORLD_WIDTH / 6, 100);
+            font32.draw(batch, "Coins: " + SaveState.readCoins().getCoins(), Config.WORLD_WIDTH / 3 - Config.WORLD_UNIT, Config.WORLD_HEIGHT - Config.WORLD_UNIT );
 
             worldRenderer.drawObstacles(batch);
         batch.end();
