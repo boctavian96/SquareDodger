@@ -115,7 +115,7 @@ public final class Config {
     //===========================SAVE FILES==================================
     public static String COINS_FILE = "database/coins.json";
     public static String HIGHSCORE_FILE = "database/highscore.json";
-    public static String SKINS_FILE = "skins.txt";
+    public static String SKINS_FILE = "database/skins.json";
 
 
     private Config(){

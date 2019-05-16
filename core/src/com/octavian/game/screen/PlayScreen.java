@@ -77,7 +77,7 @@ public class PlayScreen extends AbstractGameScreen {
         //Player is dead...
         if(worldRenderer.isPlayerColliding(player)){
             game.setScreen(new GameOverScreen(game, collectedCoins, worldRenderer.getScore().getScoreString()));
-            Utils.writeCoins(String.valueOf(collectedCoins));
+            //Utils.writeCoins(String.valueOf(collectedCoins));
             SaveState.saveCoins(coins, true);
             SaveState.saveHighscore(worldRenderer.getScore());
             Gdx.app.log("SWITCH", "Player is dead Switch to GameOver");

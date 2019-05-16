@@ -13,22 +13,10 @@ import com.badlogic.gdx.utils.Array;
 import com.octavian.game.config.Assets;
 import com.octavian.game.config.Config;
 import com.octavian.game.config.GameState;
-import com.octavian.game.database.IDataSource;
-import com.octavian.game.database.XMLDataSource;
-import com.octavian.game.datamodel.Coins;
-import com.octavian.game.datamodel.HighScore;
-import com.octavian.game.datamodel.Obstacle;
 import com.octavian.game.datamodel.Player;
 import com.octavian.game.datamodel.Skin;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -55,120 +43,6 @@ public final class Utils {
         return random.nextInt(max);
     }
 
-    /**
-     * Used for highscore and coin system
-     * @param value
-     * @param mode - c = COINS; h = HIGHSCORE
-     */
-    @Deprecated
-    public static void writeGameFile(long value, char mode){
-
-        FileHandle file = null;
-
-            switch (mode) {
-                case 'c':
-                    file = Gdx.files.local(Config.CN_FILE);
-                    break;
-                case 'h':
-                    file = Gdx.files.local(Config.HS_FILE);
-                    break;
-                default:
-            }
-
-        if(!file.exists()) {
-                try {
-                    file.file().createNewFile();
-                }catch (IOException e){
-                    e.printStackTrace();
-                }
-        }
-
-        file.writeString(String.valueOf(value), false);
-    }
-
-    /**
-     *
-     * @param mode h - highscore / c - coins
-     * @return
-     * @throws IOException
-     */
-    @Deprecated
-    public static long getGameFile(char mode) {
-
-        FileHandle file = null;
-
-        switch (mode) {
-            case 'h':
-                file = Gdx.files.local(Config.HS_FILE);
-                break;
-            case 'c':
-                file = Gdx.files.local(Config.CN_FILE);
-                break;
-            default:
-        }
-
-        if(!file.exists()){
-            writeGameFile(0, mode);
-        }
-        String result = file.readString();
-
-        if(result.isEmpty()){
-            return Long.valueOf("0");
-        }else{
-            return Long.valueOf(file.readString());
-        }
-    }
-
-    public static void setSkinsStatus(List<String> status){
-        FileHandle file;
-
-        file = Gdx.files.local(Config.SKINS_LIST);
-
-        if(!file.exists()){
-            try {
-                file.file().createNewFile();
-            }catch (IOException e){
-                e.printStackTrace();
-            }
-
-            for(int i = 0; i < status.size(); i++){
-                file.writeString(String.valueOf(i * 10), false);
-            }
-        }else{
-            for(String i : status)
-                file.writeString(i, false);
-        }
-    }
-
-    @Deprecated
-    public static List<String> getSkinsStatus(){
-        FileHandle file;
-        String[] result;
-        ArrayList<String> list = new ArrayList<>();
-
-        file = Gdx.files.local(Config.SKINS_LIST);
-
-        if(!file.exists()){
-            file = Gdx.files.internal("hard_skins.txt");
-            result = file.readString().split(" ");
-        }else{
-            result = file.readString().split(" ");
-        }
-
-        list.addAll(Arrays.asList(result));
-
-        return list;
-    }
-
-    @Deprecated
-    public static GameState checkBack(GameState state){
-        if (Gdx.input.isKeyJustPressed(Input.Keys.BACK)){
-            if(state.equals(GameState.SKINS) || state.equals(GameState.ABOUT))
-                return GameState.MENU;
-        }
-
-        return state;
-    }
 
     public static boolean checkBack(){
         return Gdx.input.isKeyJustPressed(Input.Keys.BACK);
@@ -221,17 +95,6 @@ public final class Utils {
             coords.draw(batch, result, 100, 100 );
     }
 
-    @Deprecated
-    public static int lowestSkinCost(){
-        List<String> dummy = Utils.getSkinsStatus();
-        List<Integer> lst = new ArrayList<>();
-
-        for(String i : dummy){
-            lst.add(Integer.valueOf(i));
-        }
-
-        return Utils.getMinimum(lst);
-    }
 
     private static int getMinimum(List<Integer> list){
         int minim = Integer.MAX_VALUE;
@@ -243,20 +106,6 @@ public final class Utils {
         return minim;
     }
 
-    @Deprecated
-    public static List<Boolean> availableSkins(){
-        List<String> skn_list = Utils.getSkinsStatus();
-        List<Boolean> bool_list = new ArrayList<>();
-
-        for(String i : skn_list){
-           if(i.equals("0")){
-                bool_list.add(true);
-            }else{
-                bool_list.add(false);
-            }
-        }
-        return bool_list;
-    }
 
     /**
      * Little easter egg.
@@ -283,7 +132,7 @@ public final class Utils {
 
         for(int i = 0; i < 9; i++){
             isEven = i % 2 == 0 ? true : false;
-            skins.add(new Skin("dummy" + i, Assets.skinTextures.get(i), i * 10, isEven));
+            skins.add(new Skin("dummy" + i, Config.SKINS_ARRAY[i], i * 10, isEven));
         }
 
         return skins;

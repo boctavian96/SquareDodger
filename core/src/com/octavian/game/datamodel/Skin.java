@@ -1,6 +1,7 @@
 package com.octavian.game.datamodel;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.octavian.game.config.Assets;
 import com.octavian.game.util.Utils;
 
 import java.util.List;
@@ -12,13 +13,17 @@ import java.util.List;
 public class Skin{
 
     private String skinName;
-    private Texture texture;
+    private String texturePath;
     private int cost;
     private boolean isUnlocked;
 
-    public Skin(String name, Texture texture, int cost, boolean isUnlocked){
+    public Skin(){
+
+    }
+
+    public Skin(String name, String texturePath, int cost, boolean isUnlocked){
         skinName = name;
-        this.texture = texture;
+        this.texturePath = texturePath;
         this.cost = cost;
         this.isUnlocked = isUnlocked;
     }
@@ -28,7 +33,7 @@ public class Skin{
     }
 
     public Texture getTexture(){
-        return texture;
+        return Assets.loadTexture(texturePath);
     }
 
     public int getCost(){

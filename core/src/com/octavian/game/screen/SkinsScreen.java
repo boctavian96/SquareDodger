@@ -48,10 +48,11 @@ public class SkinsScreen extends AbstractGameScreen {
     public SkinsScreen(DodgerMain game){
         super();
         this.game = game;
+        SaveState.create(false);
         batch = new SpriteBatch();
         factory = FontFactory.getInstance();
         touchInput = new GameInput();
-        skins = Utils.getDummySkins();
+        skins = SaveState.readSkins();
 
         camera = new OrthographicCamera(Config.WORLD_WIDTH, Config.WORLD_HEIGHT);
         viewport = new FitViewport(Config.WORLD_WIDTH, Config.WORLD_HEIGHT, camera);
@@ -170,6 +171,7 @@ public class SkinsScreen extends AbstractGameScreen {
                     if(availableCoins.payCoins(selectedSkin.getCost())) {
                         selectedSkin.unlock();
                         SaveState.saveCoins(availableCoins, false);
+                        SaveState.saveSkins(skins);
                         //Utils.writeCoins(String.valueOf(availableCoins.getCoins()));
                         Gdx.app.log("INFO", "Skin " + selectedSkin.getName() + " is unlocked");
                     }

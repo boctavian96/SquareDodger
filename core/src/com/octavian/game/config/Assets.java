@@ -63,7 +63,7 @@ public final class Assets {
     public static Array<Texture> skinTextures = new Array<>();
     public static Texture coinTexture;
 
-    private static Texture loadTexture (String file) {
+    public static Texture loadTexture (String file) {
         return new Texture(file);
     }
 
