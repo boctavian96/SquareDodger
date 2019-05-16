@@ -2,27 +2,24 @@ package com.octavian.game.config;
 
 public final class Config {
 
+    //==================SCREEN CONSTANTS==============================
     public static final float WORLD_HEIGHT = 1334F;
     public static final float WORLD_WIDTH = 750F;
     public static final float WORLD_UNIT = 32F;
 
-    //Score
-   public static final float POINTS_PER_RECT = 5F;
-
-    //Number of textures
+    //==================MISCELANOUS===================================
+    public static final float POINTS_PER_RECT = 5F;
     public static final int NUMBER_OF_TEXTURES = 48;
-
     public static final int MAXIMUM_OBSTACLES = 500;
+    public static final String ABOUT_TEXT_FILE = "common/about.txt";
 
-    //Music
+    //===================MUSIC========================================
     public static final String MUSIC1 = "audio/PatakasWorld.mp3";
     public static final String MUSIC2 = "audio/AboutTheme.mp3";
     public static final String GOT_COIN = "audio/GotCoin.mp3";
 
-    //About Text File
-    public static final String ABOUT_TEXT_FILE = "common/about.txt";
 
-    //Images
+    //==================OBSTACLES======================================
     public static final String[] SQUARES = {
             "obstacle/square1.png",
             "obstacle/square2.png",
@@ -74,10 +71,10 @@ public final class Config {
             "obstacle/star12.png"
     };
 
-    //Animation
+    //=======================ANIMATIONS======================================
     public static final String COIN_ANIMATION = "animation/coinAnimation.png";
 
-    //Player Skins
+    //=======================PLAYER SKINS====================================
     public static final String[] SKINS_ARRAY = {
             "player/skin1.png",
             "player/skin2.png",
@@ -94,7 +91,7 @@ public final class Config {
     public static final String LOCK = "various/lock2.png";
     public static final String LOCK_PRESS = "various/lockPress.png";
 
-    //UI
+    //==============================UI======================================
     public static String PLAY = "ui/play.png";
     public static String PLAY_PRESS = "ui/playPress.png";
     public static String ABOUT = "ui/about.png";
@@ -114,24 +111,12 @@ public final class Config {
     public static String SOUND_MUTE = "ui/soundMuted.png";
     public static String SOUND_MUTE_PRESS = "ui/soundMutedPress.png";
 
-    //Screen
-    @Deprecated
-    public static String GAMEOVER = "screen/gameover.png";
 
-    //Highscore
-    @Deprecated
-    public static String HS_FILE = "highscore.txt";
+    //===========================SAVE FILES==================================
+    public static String COINS_FILE = "database/coins.json";
+    public static String HIGHSCORE_FILE = "database/highscore.json";
+    public static String SKINS_FILE = "skins.txt";
 
-    @Deprecated
-    public static String LOADFILE = "load.xml";
-
-    //Coins file
-    @Deprecated
-    public static String CN_FILE = "coins.txt";
-
-    //Skins file
-    @Deprecated
-    public static String SKINS_LIST = "skins.txt";
 
     private Config(){
      //Do not instantiate.

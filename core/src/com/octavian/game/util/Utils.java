@@ -22,9 +22,13 @@ import com.octavian.game.datamodel.Player;
 import com.octavian.game.datamodel.Skin;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,7 +38,11 @@ import java.util.Random;
  * Created by octavian on 2/21/18.
  */
 
-public class Utils {
+public final class Utils {
+
+    private Utils(){
+        //Do not instantiate.
+    }
 
     public static void clearScreen(){
         //Black
@@ -136,7 +144,7 @@ public class Utils {
     public static List<String> getSkinsStatus(){
         FileHandle file;
         String[] result;
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<String> list = new ArrayList<>();
 
         file = Gdx.files.local(Config.SKINS_LIST);
 
@@ -168,7 +176,7 @@ public class Utils {
 
     @Deprecated
     public static List<Texture> loadTextures(String[] args) {
-        ArrayList<Texture> list = new ArrayList<Texture>();
+        ArrayList<Texture> list = new ArrayList<>();
 
         for (String i : args) {
             list.add(new Texture(i));
@@ -216,7 +224,7 @@ public class Utils {
     @Deprecated
     public static int lowestSkinCost(){
         List<String> dummy = Utils.getSkinsStatus();
-        List<Integer> lst = new ArrayList<Integer>();
+        List<Integer> lst = new ArrayList<>();
 
         for(String i : dummy){
             lst.add(Integer.valueOf(i));
@@ -238,7 +246,7 @@ public class Utils {
     @Deprecated
     public static List<Boolean> availableSkins(){
         List<String> skn_list = Utils.getSkinsStatus();
-        List<Boolean> bool_list = new ArrayList<Boolean>();
+        List<Boolean> bool_list = new ArrayList<>();
 
         for(String i : skn_list){
            if(i.equals("0")){
@@ -248,22 +256,6 @@ public class Utils {
             }
         }
         return bool_list;
-    }
-
-    public static String getHighScore(){
-        IDataSource dataSource = XMLDataSource.getInstance();
-        HighScore highScore = dataSource.getScores();
-
-        //FIXME: Think about this...
-        return String.valueOf(highScore.getScore());
-    }
-
-    public static String getCoins(){
-        IDataSource dataSource = XMLDataSource.getInstance();
-        Coins coins = dataSource.getCoins();
-
-        //FIXME: Think about this...
-        return String.valueOf(coins.getCoins());
     }
 
     /**
@@ -282,11 +274,11 @@ public class Utils {
     }
 
     /**
-     * Dummy Skins generator
+     * Dummy Skins generator. Use only for debuging purposes.
      * @return 9 dummy skins.
      */
     public static Array<Skin> getDummySkins(){
-        Array<Skin> skins = new Array<Skin>();
+        Array<Skin> skins = new Array<>();
         boolean isEven;
 
         for(int i = 0; i < 9; i++){
@@ -296,5 +288,4 @@ public class Utils {
 
         return skins;
     }
-
 }

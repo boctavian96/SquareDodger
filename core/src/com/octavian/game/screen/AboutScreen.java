@@ -42,6 +42,7 @@ public class AboutScreen extends AbstractGameScreen{
         thankYou = Utils.readAbout();
         loadUI();
         Gdx.input.setInputProcessor(stage);
+        Gdx.input.setCatchBackKey(true);
     }
 
     @Override
@@ -49,6 +50,11 @@ public class AboutScreen extends AbstractGameScreen{
         camera.update();
         stage.act(delta);
         Utils.clearScreen();
+
+        if(Utils.checkBack()){
+            dispose();
+            game.setScreen(new MainMenuScreen(game));
+        }
     }
 
     @Override

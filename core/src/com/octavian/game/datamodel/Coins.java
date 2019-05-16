@@ -1,7 +1,6 @@
 package com.octavian.game.datamodel;
 
 import com.badlogic.gdx.Gdx;
-import com.octavian.game.config.Config;
 
 /**
  * Created by octavian on 2/27/18.
@@ -15,6 +14,10 @@ public class Coins {
         this.coins = coins;
     }
 
+    public Coins(){
+        coins = 0L;
+    }
+
     public Coins(String coins){
         this.coins = Long.valueOf(coins);
     }
@@ -25,6 +28,10 @@ public class Coins {
 
     public void addCoins(){
         coins += 1L;
+    }
+
+    public void addCoins(long newCoins) {
+        coins += newCoins;
     }
 
     public void setCoins(long c){
@@ -41,4 +48,5 @@ public class Coins {
             return false;
         }
     }
+
 }

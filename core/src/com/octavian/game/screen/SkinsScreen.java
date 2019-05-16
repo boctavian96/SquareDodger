@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.octavian.game.DodgerMain;
 import com.octavian.game.config.Assets;
 import com.octavian.game.config.Config;
+import com.octavian.game.util.SaveState;
 import com.octavian.game.datamodel.Coins;
 import com.octavian.game.datamodel.Skin;
 import com.octavian.game.util.FontFactory;
@@ -37,10 +38,12 @@ public class SkinsScreen extends AbstractGameScreen {
 
     private BitmapFont font32;
     private BitmapFont font16Yellow;
+    private BitmapFont font16Green;
 
     private Coins availableCoins;
 
     private boolean isTouchReleased;
+    private boolean isSwiped;
 
     public SkinsScreen(DodgerMain game){
         super();
@@ -55,45 +58,19 @@ public class SkinsScreen extends AbstractGameScreen {
 
         font32 = factory.generateFont(FontFactory.FONT_PRESS_START2P, 32, Color.WHITE);
         font16Yellow = factory.generateFont(FontFactory.FONT_PRESS_START2P, 16, Color.YELLOW);
+        font16Green = factory.generateFont(FontFactory.FONT_PRESS_START2P, 16, Color.GREEN);
 
         stage = new Stage(viewport, batch);
         Gdx.input.setInputProcessor(stage);
+        Gdx.input.setCatchBackKey(true);
 
         //FIXME: Update after dovle's feature.
-        availableCoins = new Coins(10L);
+        availableCoins = SaveState.readCoins();
 
         isTouchReleased = true;
+        isSwiped = false;
 
         instantiateUI();
-    }
-
-    @Override
-    public void update(float delta) {
-        Utils.clearScreen();
-
-        selectedSkin = skins.get(Assets.selectedTexture);
-
-        if(touchInput.isSwipeLeft()){
-            Gdx.app.log("SWIPE", "Swiped left!");
-            if(Assets.selectedTexture < skins.size - 1 && isTouchReleased) {
-                Assets.selectedTexture++;
-                isTouchReleased = false;
-            }
-        }
-
-        if(touchInput.isSwipeRight()){
-            Gdx.app.log("SWIPE", "Swiped right!");
-            if(Assets.selectedTexture > 0 && isTouchReleased) {
-                Assets.selectedTexture--;
-                isTouchReleased = false;
-            }
-        }
-
-        if (!Gdx.input.isTouched()){
-            isTouchReleased = true;
-        }
-
-
     }
 
     @Override
@@ -101,6 +78,19 @@ public class SkinsScreen extends AbstractGameScreen {
         update(delta);
         draw();
         stage.act(delta);
+
+        if(Utils.checkBack()){
+            dispose();
+            game.setScreen(new MainMenuScreen(game));
+        }
+    }
+
+    @Override
+    public void update(float delta) {
+        Utils.clearScreen();
+
+        selectedSkin = skins.get(Assets.selectedTexture);
+        swipe();
     }
 
     @Override
@@ -110,6 +100,10 @@ public class SkinsScreen extends AbstractGameScreen {
         batch.begin();
             font32.draw(batch, "Buy new Skins", Config.WORLD_WIDTH/4, Config.WORLD_HEIGHT - Config.WORLD_UNIT);
             font32.draw(batch, "Coins: " + availableCoins.getCoins(), Config.WORLD_WIDTH/4, Config.WORLD_HEIGHT - 3 * Config.WORLD_UNIT );
+
+            if(!isSwiped){
+                font16Green.draw(batch, "Swipe Right", Config.WORLD_WIDTH/4 + 2 * Config.WORLD_UNIT, Config.WORLD_HEIGHT / 2 + 6 * Config.WORLD_UNIT);
+            }
 
             //Skin Details
             if(selectedSkin.isUnlocked()) {
@@ -125,6 +119,29 @@ public class SkinsScreen extends AbstractGameScreen {
         stage.draw();
     }
 
+    private void swipe(){
+        if(touchInput.isSwipeLeft()){
+            Gdx.app.log("SWIPE", "Swiped left!");
+            if(Assets.selectedTexture < skins.size - 1 && isTouchReleased) {
+                Assets.selectedTexture++;
+                isTouchReleased = false;
+                isSwiped = true;
+            }
+        }
+
+        if(touchInput.isSwipeRight()){
+            Gdx.app.log("SWIPE", "Swiped right!");
+            if(Assets.selectedTexture > 0 && isTouchReleased) {
+                Assets.selectedTexture--;
+                isTouchReleased = false;
+            }
+        }
+
+        if (!Gdx.input.isTouched()){
+            isTouchReleased = true;
+        }
+    }
+
     private void instantiateUI(){
         Table uiTable = new Table();
         Table skinsTable = new Table();
@@ -137,7 +154,7 @@ public class SkinsScreen extends AbstractGameScreen {
             public void tap(InputEvent event, float x, float y, int count, int button){
                 super.tap(event, x, y, count, button);
                 Assets.music.pause();
-                stage.dispose();
+                dispose();
                 game.setScreen(new MainMenuScreen(game));
             }
         });
@@ -152,6 +169,8 @@ public class SkinsScreen extends AbstractGameScreen {
                 }else {
                     if(availableCoins.payCoins(selectedSkin.getCost())) {
                         selectedSkin.unlock();
+                        SaveState.saveCoins(availableCoins, false);
+                        //Utils.writeCoins(String.valueOf(availableCoins.getCoins()));
                         Gdx.app.log("INFO", "Skin " + selectedSkin.getName() + " is unlocked");
                     }
                 }
