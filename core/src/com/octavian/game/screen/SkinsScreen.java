@@ -65,7 +65,6 @@ public class SkinsScreen extends AbstractGameScreen {
         Gdx.input.setInputProcessor(stage);
         Gdx.input.setCatchBackKey(true);
 
-        //FIXME: Update after dovle's feature.
         availableCoins = SaveState.readCoins();
 
         isTouchReleased = true;
@@ -172,7 +171,6 @@ public class SkinsScreen extends AbstractGameScreen {
                         selectedSkin.unlock();
                         SaveState.saveCoins(availableCoins, false);
                         SaveState.saveSkins(skins);
-                        //Utils.writeCoins(String.valueOf(availableCoins.getCoins()));
                         Gdx.app.log("INFO", "Skin " + selectedSkin.getName() + " is unlocked");
                     }
                 }

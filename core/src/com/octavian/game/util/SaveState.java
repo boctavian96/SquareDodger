@@ -17,6 +17,9 @@ import com.octavian.game.datamodel.SkinStatus;
 
 public class SaveState {
 
+    private SaveState(){
+        //Do not instantiate.
+    }
 
     /**
      * Use only on the game's first run.
@@ -107,6 +110,22 @@ public class SaveState {
         String skins = fileHandler.readString();
         SkinStatus skinStatus = json.fromJson(SkinStatus.class, skins);
         return skinStatus.getSkins();
+    }
+
+    public static void saveSelectedSkin(int selectedSkin){
+        FileHandle fileHandler = Gdx.files.local(Config.SELECT);
+        fileHandler.writeString(selectedSkin + "", false);
+    }
+
+    public static int readSelectedSkin(){
+        FileHandle fileHandler = Gdx.files.local(Config.SELECT);
+
+        if(fileHandler.exists()){
+            return Integer.parseInt(fileHandler.readString());
+        }else{
+            fileHandler.writeString("0", false);
+            return 0;
+        }
     }
 
 }

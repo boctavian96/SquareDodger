@@ -116,6 +116,7 @@ public final class Config {
     public static String COINS_FILE = "database/coins.json";
     public static String HIGHSCORE_FILE = "database/highscore.json";
     public static String SKINS_FILE = "database/skins.json";
+    public static String SELECT = "/database/select.txt";
 
 
     private Config(){

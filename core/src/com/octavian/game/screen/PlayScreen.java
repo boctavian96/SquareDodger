@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.octavian.game.DodgerMain;
 import com.octavian.game.config.Assets;
@@ -49,7 +50,7 @@ public class PlayScreen extends AbstractGameScreen {
         factory = FontFactory.getInstance();
         font32 = factory.generateFont(FontFactory.FONT_PRESS_START2P, 32, Color.WHITE);
         worldRenderer = new WorldRenderer();
-        player = new Player(Assets.skinTextures.get(Assets.selectedTexture), 100, 100);
+        player = new Player(Utils.generatePlayerSkin(Assets.selectedTexture), 200F, 200F);
         touchPoint = new Vector3(0, 0,0);
         coins = new Coins(0);
         collectedCoins = 0;

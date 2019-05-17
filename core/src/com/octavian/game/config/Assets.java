@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
+import com.octavian.game.util.SaveState;
 
 /**
  * Created by octavian on 4/14/19.
@@ -17,7 +18,7 @@ import com.badlogic.gdx.utils.Array;
 
 public final class Assets {
     //Selected Texture
-    public static int selectedTexture = 0;
+    public static int selectedTexture = SaveState.readSelectedSkin();
 
     //User interface
     public static Texture playTexture;

@@ -137,4 +137,18 @@ public final class Utils {
 
         return skins;
     }
+
+    public static Texture generatePlayerSkin(int selectedSkin){
+
+        Array<Skin> skins = SaveState.readSkins();
+
+        while(!skins.get(selectedSkin).isUnlocked()){
+            selectedSkin--;
+        }
+
+        SaveState.saveSelectedSkin(selectedSkin);
+
+        return skins.get(selectedSkin).getTexture();
+    }
+
 }

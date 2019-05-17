@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
+import com.octavian.game.config.Config;
 import com.octavian.game.util.Utils;
 
 /**
@@ -26,8 +27,8 @@ public class Obstacle {
 
     public Obstacle(Texture t){
         this.t = t;
-        x = Utils.randomNumber(Gdx.graphics.getWidth());
-        y = Gdx.graphics.getHeight();
+        x = Utils.randomNumber((int)Config.WORLD_WIDTH);
+        y = (int)Config.WORLD_HEIGHT;
         speed = Utils.randomNumber((int)MAXIMUM_SPEED) + MINIMUM_SPEED;
         collisionRectangle = new Rectangle(x, y, COLLISION_RECT_SIZE, COLLISION_RECT_SIZE);
     }
