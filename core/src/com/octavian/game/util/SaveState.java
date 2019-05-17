@@ -48,6 +48,13 @@ public class SaveState {
             Gdx.app.log("INFO", "Creating Skins.json");
             fileHandler.writeString(json.prettyPrint(json.toJson(new SkinStatus())), false);
         }
+
+        fileHandler = Gdx.files.local(Config.SELECT);
+
+        if(!fileHandler.exists() || forcePurge) {
+            Gdx.app.log("INFO", "Creating selected skins.");
+            fileHandler.writeString("0", false);
+        }
     }
 
     public static void saveCoins(Coins obj, boolean isFromGame){
