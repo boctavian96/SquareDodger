@@ -99,7 +99,7 @@ public class SkinsScreen extends AbstractGameScreen {
 
         batch.begin();
             font32.draw(batch, "Buy new Skins", Config.WORLD_WIDTH/4, Config.WORLD_HEIGHT - Config.WORLD_UNIT);
-            font32.draw(batch, "Coins: " + availableCoins.getCoins(), Config.WORLD_WIDTH/4, Config.WORLD_HEIGHT - 3 * Config.WORLD_UNIT );
+            font32.draw(batch, "Coins: " + availableCoins.getCoins(), Config.WORLD_WIDTH/4 + Config.WORLD_UNIT, Config.WORLD_HEIGHT - 3 * Config.WORLD_UNIT );
 
             if(!isSwiped){
                 font16Green.draw(batch, "Swipe Right", Config.WORLD_WIDTH/4 + 2 * Config.WORLD_UNIT, Config.WORLD_HEIGHT / 2 + 6 * Config.WORLD_UNIT);
@@ -111,7 +111,7 @@ public class SkinsScreen extends AbstractGameScreen {
                 font16Yellow.draw(batch, "Selected skin: " + selectedSkin.getName(), Config.WORLD_WIDTH/4, Config.WORLD_HEIGHT/2 + 4 * Config.WORLD_UNIT);
             }else{
                 batch.draw(Assets.lockTexture, Config.WORLD_WIDTH/2 - 2 * Config.WORLD_UNIT, Config.WORLD_HEIGHT/2);
-                font16Yellow.draw(batch, "Cost: " + selectedSkin.getCost(), Config.WORLD_WIDTH/2 - 2 * Config.WORLD_UNIT, Config.WORLD_HEIGHT/2 - 2 * Config.WORLD_UNIT);
+                font16Yellow.draw(batch, "Cost: " + selectedSkin.getCost(), Config.WORLD_WIDTH/2 - 3 * Config.WORLD_UNIT, Config.WORLD_HEIGHT/2 - 2 * Config.WORLD_UNIT);
             }
 
         batch.end();
