@@ -10,15 +10,11 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
-import com.octavian.game.config.Assets;
 import com.octavian.game.config.Config;
-import com.octavian.game.config.GameState;
 import com.octavian.game.datamodel.Player;
 import com.octavian.game.datamodel.Skin;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 

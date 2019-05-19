@@ -48,6 +48,7 @@ public final class Assets {
     public static Music music;
     public static Music aboutMusic;
     public static Sound gotCoin;
+    public static Sound buySkin;
 
     public static ImageButton play;
     public static ImageButton about;
@@ -127,6 +128,7 @@ public final class Assets {
         aboutMusic.setLooping(true);
 
         gotCoin = loadSound(Config.GOT_COIN);
+        buySkin = loadSound(Config.BUY_SOUND);
 
         //==================BUTTONS========================
         play = loadButton(playTexture, playPressTexture);

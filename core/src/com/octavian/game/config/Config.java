@@ -17,6 +17,7 @@ public final class Config {
     public static final String MUSIC1 = "audio/PatakasWorld.mp3";
     public static final String MUSIC2 = "audio/AboutTheme.mp3";
     public static final String GOT_COIN = "audio/GotCoin.mp3";
+    public static final String BUY_SOUND = "audio/Coins.mp3";
 
 
     //==================OBSTACLES======================================

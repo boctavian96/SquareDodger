@@ -169,6 +169,7 @@ public class SkinsScreen extends AbstractGameScreen {
                 }else {
                     if(availableCoins.payCoins(selectedSkin.getCost())) {
                         selectedSkin.unlock();
+                        Assets.buySkin.play();git
                         SaveState.saveCoins(availableCoins, false);
                         SaveState.saveSkins(skins);
                         Gdx.app.log("INFO", "Skin " + selectedSkin.getName() + " is unlocked");
@@ -190,7 +191,6 @@ public class SkinsScreen extends AbstractGameScreen {
         uiTable.setDebug(false);
 
         stage.addActor(uiTable);
-        //stage.addActor(skinsTable);
     }
 
     public void dispose(){
