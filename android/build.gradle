@@ -21,8 +21,8 @@ android {
         applicationId "com.octavian.game"
         minSdkVersion 9
         targetSdkVersion 27
-        versionCode 17
-        versionName "1.3.020"
+        versionCode 19
+        versionName "1.3.100"
     }
     buildTypes {
         release {
@@ -93,8 +93,8 @@ eclipse {
     }
 
     jdt {
-        sourceCompatibility = 1.6
-        targetCompatibility = 1.6
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
     }
 
     classpath {

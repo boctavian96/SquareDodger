@@ -1,10 +1,6 @@
 [
     {
-        "merged": "/home/octavian/AndroidStudioProjects/SpaceDodger/squaredodger/android/build/intermediates/res/merged/debug/drawable-mdpi/ic_launcher.png",
-        "source": "/home/octavian/AndroidStudioProjects/SpaceDodger/squaredodger/android/res/drawable-mdpi/ic_launcher.png"
-    },
-    {
-        "merged": "/home/octavian/AndroidStudioProjects/SpaceDodger/android/build/intermediates/res/merged/debug/drawable-mdpi/ic_launcher.png",
-        "source": "/home/octavian/AndroidStudioProjects/SpaceDodger/android/res/drawable-mdpi/ic_launcher.png"
+        "merged": "/home/octavian/git/squaredodger/android/build/intermediates/res/merged/debug/drawable-mdpi/ic_launcher.png",
+        "source": "/home/octavian/git/squaredodger/android/res/drawable-mdpi/ic_launcher.png"
     }
 ]

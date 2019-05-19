@@ -1,4 +1,4 @@
-#Wed Mar 07 18:11:32 EET 2018
-base.0=/home/octavian/AndroidStudioProjects/SpaceDodger/squaredodger/android/build/intermediates/transforms/dex/debug/folders/1000/1f/main
+#Sun May 19 14:38:32 EEST 2019
+base.0=/home/octavian/git/squaredodger/android/build/intermediates/transforms/dex/debug/folders/1000/1f/main
 renamed.0=classes.dex
-file.0=/home/octavian/AndroidStudioProjects/SpaceDodger/squaredodger/android/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex
+file.0=/home/octavian/git/squaredodger/android/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex

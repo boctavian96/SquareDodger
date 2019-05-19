@@ -23,17 +23,15 @@ public class Score {
         return score;
     }
 
+    public String getScoreString(){
+        return score + "";
+    }
+
     public void addScore(){
         this.score += Config.POINTS_PER_RECT;
     }
 
     public void pay(Long cost){ this.score -= cost; }
 
-    public boolean isScoreBetter(long score){
-        if (Utils.getGameFile('h') < score)
-            return true;
-        else
-            return false;
-    }
 
 }
