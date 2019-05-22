@@ -21,8 +21,8 @@ android {
         applicationId "com.octavian.game"
         minSdkVersion 9
         targetSdkVersion 27
-        versionCode 21
-        versionName "1.3.101"
+        versionCode 22
+        versionName "1.3.102"
     }
     buildTypes {
         release {

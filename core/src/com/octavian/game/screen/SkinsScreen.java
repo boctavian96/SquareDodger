@@ -6,6 +6,10 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -16,6 +20,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.octavian.game.DodgerMain;
 import com.octavian.game.config.Assets;
 import com.octavian.game.config.Config;
+import com.octavian.game.config.Settings;
 import com.octavian.game.util.SaveState;
 import com.octavian.game.datamodel.Coins;
 import com.octavian.game.datamodel.Skin;
@@ -42,6 +47,10 @@ public class SkinsScreen extends AbstractGameScreen {
 
     private Coins availableCoins;
 
+    private Rectangle touchCollision;
+    private ShapeRenderer debugRenderer;
+
+    private Vector2 touchPoint;
     private boolean isTouchReleased;
     private boolean isSwiped;
 
@@ -66,6 +75,9 @@ public class SkinsScreen extends AbstractGameScreen {
         Gdx.input.setCatchBackKey(true);
 
         availableCoins = SaveState.readCoins();
+
+        touchCollision = new Rectangle(0, 200, Gdx.app.getGraphics().getWidth(), Config.WORLD_HEIGHT);
+        debugRenderer = new ShapeRenderer();
 
         isTouchReleased = true;
         isSwiped = false;
@@ -117,29 +129,36 @@ public class SkinsScreen extends AbstractGameScreen {
         batch.end();
 
         stage.draw();
+
+        //drawDebug();
     }
 
     private void swipe(){
-        if(touchInput.isSwipeLeft()){
-            Gdx.app.log("SWIPE", "Swiped left!");
-            if(Assets.selectedTexture < skins.size - 1 && isTouchReleased) {
-                Assets.selectedTexture++;
-                isTouchReleased = false;
-                isSwiped = true;
+
+        if(touchCollision.contains(Gdx.input.getX(), Gdx.input.getY())) {
+
+            if (touchInput.isSwipeLeft()) {
+                Gdx.app.log("SWIPE", "Swiped left!");
+                if (Assets.selectedTexture < skins.size - 1 && isTouchReleased) {
+                    Assets.selectedTexture++;
+                    isTouchReleased = false;
+                    isSwiped = true;
+                }
+            }
+
+            if (touchInput.isSwipeRight()) {
+                Gdx.app.log("SWIPE", "Swiped right!");
+                if (Assets.selectedTexture > 0 && isTouchReleased) {
+                    Assets.selectedTexture--;
+                    isTouchReleased = false;
+                }
             }
         }
 
-        if(touchInput.isSwipeRight()){
-            Gdx.app.log("SWIPE", "Swiped right!");
-            if(Assets.selectedTexture > 0 && isTouchReleased) {
-                Assets.selectedTexture--;
-                isTouchReleased = false;
+            if (!Gdx.input.isTouched()) {
+                isTouchReleased = true;
             }
-        }
 
-        if (!Gdx.input.isTouched()){
-            isTouchReleased = true;
-        }
     }
 
     private void instantiateUI(){
@@ -169,7 +188,9 @@ public class SkinsScreen extends AbstractGameScreen {
                 }else {
                     if(availableCoins.payCoins(selectedSkin.getCost())) {
                         selectedSkin.unlock();
-                        Assets.buySkin.play();
+                        if(Settings.isSoundEnabled) {
+                            Assets.buySkin.play();
+                        }
                         SaveState.saveCoins(availableCoins, false);
                         SaveState.saveSkins(skins);
                         Gdx.app.log("INFO", "Skin " + selectedSkin.getName() + " is unlocked");
@@ -191,6 +212,12 @@ public class SkinsScreen extends AbstractGameScreen {
         uiTable.setDebug(false);
 
         stage.addActor(uiTable);
+    }
+
+    private void drawDebug(){
+        debugRenderer.begin(ShapeRenderer.ShapeType.Line);
+            debugRenderer.rect(touchCollision.getX(), touchCollision.getY(), touchCollision.width, touchCollision.height);
+        debugRenderer.end();
     }
 
     public void dispose(){
