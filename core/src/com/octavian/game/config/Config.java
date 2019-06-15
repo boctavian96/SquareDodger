@@ -85,7 +85,10 @@ public final class Config {
             "player/skin6.png",
             "player/skin7.png",
             "player/skin8.png",
-            "player/skin9.png"
+            "player/skin9.png",
+            "player/skin10.png",
+            "player/skin11.png",
+
     };
 
     public static final String COIN = "various/coin.png";

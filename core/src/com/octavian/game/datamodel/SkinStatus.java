@@ -21,6 +21,9 @@ public class SkinStatus {
         skins.add(new Skin("Dovle", Config.SKINS_ARRAY[6], 60, false));
         skins.add(new Skin("Smash Mouth", Config.SKINS_ARRAY[7], 70, false));
         skins.add(new Skin("Shawn", Config.SKINS_ARRAY[8], 150, false));/*aka Adeleena oitza*/
+        skins.add(new Skin("Horica", Config.SKINS_ARRAY[9], 170, false));
+        skins.add(new Skin("Piggy", Config.SKINS_ARRAY[10], 190, false));
+       // skins.add(new Skin("Egg", Config.SKINS_ARRAY[11], 200, false));
     }
     public SkinStatus(Array<Skin> inSkins){
       this.skins = inSkins;
