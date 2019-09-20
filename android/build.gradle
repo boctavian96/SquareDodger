@@ -20,9 +20,9 @@ android {
     defaultConfig {
         applicationId "com.octavian.game"
         minSdkVersion 9
-        targetSdkVersion 27
-        versionCode 23
-        versionName "1.3.103"
+        targetSdkVersion 29
+        versionCode 24
+        versionName "1.4.000"
     }
     buildTypes {
         release {

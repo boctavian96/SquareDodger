@@ -34,7 +34,7 @@ public class GameOverScreen extends AbstractGameScreen {
         this.game = game;
 
         FontFactory factory = FontFactory.getInstance();
-        font16 = factory.generateFont(FontFactory.FONT_PRESS_START2P, 16, Color.WHITE);
+        font16 = factory.generateFont(FontFactory.FONT_OPEN_SANS_BOLD, 16, Color.WHITE);
 
         batch = new SpriteBatch();
         stage = new Stage(viewport, batch);

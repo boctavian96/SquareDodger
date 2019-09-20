@@ -11,6 +11,9 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
 public final class FontFactory {
     public static final String FONT_PRESS_START2P = "fonts/PressStart2P.ttf";
+    public static final String FONT_OPEN_SANS = "fonts/OpenSans-Light.ttf";
+    public static final String FONT_OPEN_SANS_BOLD = "fonts/OpenSans-Bold.ttf";
+
 
     private static FontFactory instance;
 

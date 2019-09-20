@@ -3,6 +3,7 @@ package com.octavian.game.screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -17,6 +18,7 @@ public abstract class AbstractGameScreen extends ScreenAdapter{
     protected Camera camera;
     protected FitViewport viewport;
     protected Stage stage;
+    protected ShapeRenderer shapeRenderer; //Only for debug mode.
 
     protected float screenHeight;
     protected float screenWidth;
@@ -28,6 +30,10 @@ public abstract class AbstractGameScreen extends ScreenAdapter{
         camera = new OrthographicCamera();
         camera.position.set(0, 0, 0);
         viewport = new FitViewport(Config.WORLD_WIDTH, Config.WORLD_HEIGHT, camera);
+
+        if(Config.DEBUG_MODE){
+            shapeRenderer = new ShapeRenderer();
+        }
     }
 
     public abstract void update(float delta);

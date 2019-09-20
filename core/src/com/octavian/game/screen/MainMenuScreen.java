@@ -17,6 +17,7 @@ import com.octavian.game.config.Settings;
 import com.octavian.game.util.FontFactory;
 import com.octavian.game.util.Utils;
 import com.octavian.game.world.WorldRenderer;
+import com.octavian.tools.DebugGrid;
 
 /**
  * Created by octavian on 4/9/19.
@@ -35,7 +36,7 @@ public class MainMenuScreen extends AbstractGameScreen {
         this.game = game;
         batch = new SpriteBatch();
         factory = FontFactory.getInstance();
-        font32 = factory.generateFont(FontFactory.FONT_PRESS_START2P, 32, Color.WHITE);
+        font32 = factory.generateFont(FontFactory.FONT_OPEN_SANS, 32, Color.WHITE);
         stage = new Stage(viewport, batch);
         worldRenderer = new WorldRenderer();
 
@@ -60,8 +61,8 @@ public class MainMenuScreen extends AbstractGameScreen {
 
         batch.begin();
             //FIXME: Read score and coins from xml.
-            font32.draw(batch, "High Score: " + SaveState.readHighscore().getScore(), Config.WORLD_WIDTH / 6, 100);
-            font32.draw(batch, "Coins: " + SaveState.readCoins().getCoins(), Config.WORLD_WIDTH / 3 - Config.WORLD_UNIT, Config.WORLD_HEIGHT - Config.WORLD_UNIT );
+            font32.draw(batch, "High Score: " + SaveState.readHighscore().getScore(), Config.WORLD_WIDTH / 3 + Config.WORLD_UNIT, 100);
+            font32.draw(batch, "Coins: " + SaveState.readCoins().getCoins(), Config.WORLD_WIDTH / 3 + 2 * Config.WORLD_UNIT, Config.WORLD_HEIGHT - Config.WORLD_UNIT );
 
             worldRenderer.drawObstacles(batch);
         batch.end();
@@ -70,11 +71,19 @@ public class MainMenuScreen extends AbstractGameScreen {
 
     }
 
+    public void drawDebug(){
+        DebugGrid.render(shapeRenderer);
+    }
+
     @Override
     public void render(float delta){
         update(delta);
         draw();
         stage.act(delta);
+
+        if(Config.DEBUG_MODE){
+            drawDebug();
+        }
     }
 
     private void instantiateUI(){

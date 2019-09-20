@@ -30,7 +30,9 @@ public final class Utils {
 
     public static void clearScreen(){
         //Black
-        Gdx.gl.glClearColor(Color.BLACK.r, Color.BLACK.g, Color.BLACK.b, Color.BLACK.a);
+        //Gdx.gl.glClearColor(Color.BLACK.r, Color.BLACK.g, Color.BLACK.b, Color.BLACK.a);
+        //Gdx.gl.glClearColor(0f, .23f, .12f, 1);
+        Gdx.gl.glClearColor(0f, .16f, .09f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
 

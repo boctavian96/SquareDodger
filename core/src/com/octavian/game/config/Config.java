@@ -2,12 +2,15 @@ package com.octavian.game.config;
 
 public final class Config {
 
+    //==================DEBUG MODE====================================
+    public static final boolean DEBUG_MODE = false;
+
     //==================SCREEN CONSTANTS==============================
     public static final float WORLD_HEIGHT = 1334F;
     public static final float WORLD_WIDTH = 750F;
     public static final float WORLD_UNIT = 32F;
 
-    //==================MISCELANOUS===================================
+    //==================MISCELLANEOUS===================================
     public static final float POINTS_PER_RECT = 5F;
     public static final int NUMBER_OF_TEXTURES = 48;
     public static final int MAXIMUM_OBSTACLES = 500;
@@ -18,7 +21,6 @@ public final class Config {
     public static final String MUSIC2 = "audio/AboutTheme.mp3";
     public static final String GOT_COIN = "audio/GotCoin.mp3";
     public static final String BUY_SOUND = "audio/Coins.mp3";
-
 
     //==================OBSTACLES======================================
     public static final String[] SQUARES = {
@@ -88,7 +90,7 @@ public final class Config {
             "player/skin9.png",
             "player/skin10.png",
             "player/skin11.png",
-
+            "player/skin12.png"
     };
 
     public static final String COIN = "various/coin.png";
@@ -115,14 +117,12 @@ public final class Config {
     public static String SOUND_MUTE = "ui/soundMuted.png";
     public static String SOUND_MUTE_PRESS = "ui/soundMutedPress.png";
 
-
     //===========================SAVE FILES==================================
     public static String COINS_FILE = "database/coins.json";
     public static String HIGHSCORE_FILE = "database/highscore.json";
     public static String SKINS_FILE = "database/skins.json";
     public static String SELECT = "/database/select.txt";
-
-
+    
     private Config(){
      //Do not instantiate.
     }

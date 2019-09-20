@@ -116,6 +116,18 @@ public class SaveState {
 
         String skins = fileHandler.readString();
         SkinStatus skinStatus = json.fromJson(SkinStatus.class, skins);
+
+        if(skinStatus.getSkins().size < Config.SKINS_ARRAY.length){
+            Gdx.app.error("ERROR","DIFFERENT SKINS");
+            Gdx.app.log("Reconfiguring", "Adding the skins");
+
+            SkinStatus newSkins = new SkinStatus();
+
+            for(int i = skinStatus.getSkins().size; i < newSkins.getSkins().size; i++){
+                skinStatus.getSkins().add(newSkins.getSkins().get(i));
+            }
+        }
+
         return skinStatus.getSkins();
     }
 
